@@ -26,10 +26,6 @@
 
     <div class="space-y-5 sm:space-y-6">
         <div class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
-            <button id="openModal"
-                class="inline-flex items-center gap-2 px-4 py-3 text-sm font-medium text-white transition rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600">
-                Open Modal
-            </button>
 
             <div class="p-5 border-t border-gray-100 dark:border-gray-800 sm:p-6">
                 <!-- ====== Table Six Start -->
@@ -372,48 +368,4 @@
             </div>
         </div>
     </div>
-
-    <!-- ====== Modal Start -->
-    <div id="modalBackdrop" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-        <!-- Modal content -->
-        <div class="bg-white rounded-2xl shadow-xl max-w-md w-full p-6">
-            <h2 class="text-xl font-semibold mb-4">Modal Title</h2>
-            <p class="mb-4">This is the content of the modal. You can place anything here.</p>
-            <div class="flex justify-end space-x-2">
-                <button id="closeModal" class="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400">
-                    Close
-                </button>
-                <button class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-                    Confirm
-                </button>
-            </div>
-        </div>
-    </div>
-    <!-- ====== Modal End -->
-
-    @push('scripts')
-        <script>
-            const openBtn = document.getElementById('openModal');
-            const closeBtn = document.getElementById('closeModal');
-            const modal = document.getElementById('modalBackdrop');
-
-            openBtn.addEventListener('click', () => {
-                modal.classList.remove('hidden');
-                modal.classList.add('flex');
-            });
-
-            closeBtn.addEventListener('click', () => {
-                modal.classList.remove('flex');
-                modal.classList.add('hidden');
-            });
-
-            // Optional: Close modal when clicking outside
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.classList.remove('flex');
-                    modal.classList.add('hidden');
-                }
-            });
-        </script>
-    @endpush
 </x-layout>
