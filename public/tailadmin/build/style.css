@@ -448,9 +448,6 @@ svg{-ms-touch-action:none;touch-action:none}image,text,.jvm-zoomin,.jvm-zoomout{
   .right-0 {
     right: calc(var(--spacing) * 0);
   }
-  .right-2 {
-    right: calc(var(--spacing) * 2);
-  }
   .right-2\.5 {
     right: calc(var(--spacing) * 2.5);
   }
@@ -536,14 +533,8 @@ svg{-ms-touch-action:none;touch-action:none}image,text,.jvm-zoomin,.jvm-zoomout{
         -ms-flex-order: 3;
             order: 3;
   }
-  .col-span-1 {
-    grid-column: span 1 / span 1;
-  }
   .col-span-2 {
     grid-column: span 2 / span 2;
-  }
-  .col-span-3 {
-    grid-column: span 3 / span 3;
   }
   .col-span-12 {
     grid-column: span 12 / span 12;
@@ -611,9 +602,6 @@ svg{-ms-touch-action:none;touch-action:none}image,text,.jvm-zoomin,.jvm-zoomout{
   .mr-2 {
     margin-right: calc(var(--spacing) * 2);
   }
-  .mr-2\.5 {
-    margin-right: calc(var(--spacing) * 2.5);
-  }
   .mr-3 {
     margin-right: calc(var(--spacing) * 3);
   }
@@ -655,9 +643,6 @@ svg{-ms-touch-action:none;touch-action:none}image,text,.jvm-zoomin,.jvm-zoomout{
   }
   .-ml-5 {
     margin-left: calc(var(--spacing) * -5);
-  }
-  .ml-2\.5 {
-    margin-left: calc(var(--spacing) * 2.5);
   }
   .menu-dropdown-badge {
     display: block;
@@ -768,9 +753,6 @@ svg{-ms-touch-action:none;touch-action:none}image,text,.jvm-zoomin,.jvm-zoomout{
   .h-8 {
     height: calc(var(--spacing) * 8);
   }
-  .h-9 {
-    height: calc(var(--spacing) * 9);
-  }
   .h-10 {
     height: calc(var(--spacing) * 10);
   }
@@ -835,9 +817,6 @@ svg{-ms-touch-action:none;touch-action:none}image,text,.jvm-zoomin,.jvm-zoomout{
   }
   .w-2 {
     width: calc(var(--spacing) * 2);
-  }
-  .w-4 {
-    width: calc(var(--spacing) * 4);
   }
   .w-5 {
     width: calc(var(--spacing) * 5);
@@ -1002,9 +981,6 @@ svg{-ms-touch-action:none;touch-action:none}image,text,.jvm-zoomin,.jvm-zoomout{
   }
   .min-w-\[1000px\] {
     min-width: 1000px;
-  }
-  .min-w-\[1102px\] {
-    min-width: 1102px;
   }
   .min-w-full {
     min-width: 100%;
@@ -1588,9 +1564,6 @@ svg{-ms-touch-action:none;touch-action:none}image,text,.jvm-zoomin,.jvm-zoomout{
   .fill-current {
     fill: currentColor;
   }
-  .fill-gray-300 {
-    fill: var(--color-gray-300);
-  }
   .fill-gray-500 {
     fill: var(--color-gray-500);
   }
@@ -1729,15 +1702,6 @@ svg{-ms-touch-action:none;touch-action:none}image,text,.jvm-zoomin,.jvm-zoomout{
   .py-\[4\.5px\] {
     padding-block: 4.5px;
   }
-  .py-\[11px\] {
-    padding-block: 11px;
-  }
-  .py-\[17\.5px\] {
-    padding-block: 17.5px;
-  }
-  .pt-3 {
-    padding-top: calc(var(--spacing) * 3);
-  }
   .pt-4 {
     padding-top: calc(var(--spacing) * 4);
   }
@@ -1827,9 +1791,6 @@ svg{-ms-touch-action:none;touch-action:none}image,text,.jvm-zoomin,.jvm-zoomout{
   }
   .pl-12 {
     padding-left: calc(var(--spacing) * 12);
-  }
-  .pl-\[18px\] {
-    padding-left: 18px;
   }
   .pl-\[34px\] {
     padding-left: 34px;
@@ -2063,14 +2024,6 @@ svg{-ms-touch-action:none;touch-action:none}image,text,.jvm-zoomin,.jvm-zoomout{
   }
   .transition {
     transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, backdrop-filter;
-    -webkit-transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
-            transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
-    -webkit-transition-duration: var(--tw-duration, var(--default-transition-duration));
-            transition-duration: var(--tw-duration, var(--default-transition-duration));
-  }
-  .transition-all {
-    -webkit-transition-property: all;
-    transition-property: all;
     -webkit-transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
             transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
     -webkit-transition-duration: var(--tw-duration, var(--default-transition-duration));
@@ -2314,13 +2267,6 @@ svg{-ms-touch-action:none;touch-action:none}image,text,.jvm-zoomin,.jvm-zoomout{
       }
     }
   }
-  .hover\:bg-blue-500\/\[0\.08\] {
-    &:hover {
-      @media (hover: hover) {
-        background-color: color-mix(in oklab, var(--color-blue-500) 8%, transparent);
-      }
-    }
-  }
   .hover\:bg-brand-600 {
     &:hover {
       @media (hover: hover) {
@@ -2349,24 +2295,10 @@ svg{-ms-touch-action:none;touch-action:none}image,text,.jvm-zoomin,.jvm-zoomout{
       }
     }
   }
-  .hover\:text-brand-500 {
-    &:hover {
-      @media (hover: hover) {
-        color: var(--color-brand-500);
-      }
-    }
-  }
   .hover\:text-brand-600 {
     &:hover {
       @media (hover: hover) {
         color: var(--color-brand-600);
-      }
-    }
-  }
-  .hover\:text-error-500 {
-    &:hover {
-      @media (hover: hover) {
-        color: var(--color-error-500);
       }
     }
   }
@@ -2503,11 +2435,6 @@ svg{-ms-touch-action:none;touch-action:none}image,text,.jvm-zoomin,.jvm-zoomout{
   .disabled\:bg-gray-50 {
     &:disabled {
       background-color: var(--color-gray-50);
-    }
-  }
-  .disabled\:opacity-50 {
-    &:disabled {
-      opacity: 50%;
     }
   }
   .disabled\:placeholder\:text-gray-300 {
@@ -3068,28 +2995,9 @@ svg{-ms-touch-action:none;touch-action:none}image,text,.jvm-zoomin,.jvm-zoomout{
               justify-content: flex-end;
     }
   }
-  .xl\:justify-normal {
-    @media (width >= 1280px) {
-      -webkit-box-pack: normal;
-          -ms-flex-pack: normal;
-              justify-content: normal;
-    }
-  }
   .xl\:gap-3 {
     @media (width >= 1280px) {
       gap: calc(var(--spacing) * 3);
-    }
-  }
-  .xl\:border-t-0 {
-    @media (width >= 1280px) {
-      border-top-style: var(--tw-border-style);
-      border-top-width: 0px;
-    }
-  }
-  .xl\:border-b-0 {
-    @media (width >= 1280px) {
-      border-bottom-style: var(--tw-border-style);
-      border-bottom-width: 0px;
     }
   }
   .xl\:p-10 {
@@ -3107,19 +3015,9 @@ svg{-ms-touch-action:none;touch-action:none}image,text,.jvm-zoomin,.jvm-zoomout{
       padding-block: calc(var(--spacing) * 12);
     }
   }
-  .xl\:pt-0 {
-    @media (width >= 1280px) {
-      padding-top: calc(var(--spacing) * 0);
-    }
-  }
   .xl\:pr-5 {
     @media (width >= 1280px) {
       padding-right: calc(var(--spacing) * 5);
-    }
-  }
-  .xl\:pb-0 {
-    @media (width >= 1280px) {
-      padding-bottom: calc(var(--spacing) * 0);
     }
   }
   .xl\:pl-11 {
@@ -3320,11 +3218,6 @@ svg{-ms-touch-action:none;touch-action:none}image,text,.jvm-zoomin,.jvm-zoomout{
   .dark\:fill-gray-400 {
     &:is(.dark *) {
       fill: var(--color-gray-400);
-    }
-  }
-  .dark\:fill-gray-700 {
-    &:is(.dark *) {
-      fill: var(--color-gray-700);
     }
   }
   .dark\:fill-gray-800 {
@@ -3581,24 +3474,6 @@ svg{-ms-touch-action:none;touch-action:none}image,text,.jvm-zoomin,.jvm-zoomout{
       &:hover {
         @media (hover: hover) {
           background-color: color-mix(in oklab, var(--color-white) 7.000000000000001%, transparent);
-        }
-      }
-    }
-  }
-  .dark\:hover\:text-brand-500 {
-    &:is(.dark *) {
-      &:hover {
-        @media (hover: hover) {
-          color: var(--color-brand-500);
-        }
-      }
-    }
-  }
-  .dark\:hover\:text-error-500 {
-    &:is(.dark *) {
-      &:hover {
-        @media (hover: hover) {
-          color: var(--color-error-500);
         }
       }
     }
