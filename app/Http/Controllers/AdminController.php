@@ -15,4 +15,13 @@ class AdminController extends Controller
     {
         return view('admin.cashier.index');
     }
+    public function pill()
+    {
+        return view('admin.pill.index');
+    }
+    public function history()
+    {
+        return view('admin.history.index');
+    }
 }
+
