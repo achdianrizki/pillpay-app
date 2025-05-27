@@ -6,11 +6,11 @@
         class="sidebar-header flex items-center gap-2 pb-7 pt-8">
         <a href="index.html">
             <span class="logo" :class="sidebarToggle ? 'hidden' : ''">
-                <img class="dark:hidden" src="./images/logo/logo.svg" alt="Logo" />
-                <img class="hidden dark:block" src="./images/logo/logo-dark.svg" alt="Logo" />
+                <img class="h-10 w-auto dark:hidden" src="{{ asset('tailadmin/build/src/images/logo/logo.svg') }}" alt="Logo" />
+                <img class="h-10 w-auto hidden dark:block" src="{{ asset('tailadmin/build/src/images/logo/logo-dark.svg') }}" alt="Logo" />
             </span>
 
-            <img class="logo-icon" :class="sidebarToggle ? 'lg:block' : 'hidden'" src="./images/logo/logo-icon.svg"
+            <img class="h-10 w-auto logo-icon" :class="sidebarToggle ? 'lg:block' : 'hidden'" src="{{ asset('tailadmin/build/src/images/logo/logo-icon.svg') }}"
                 alt="Logo" />
         </a>
     </div>
