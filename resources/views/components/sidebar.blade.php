@@ -32,7 +32,7 @@
                 <ul class="flex flex-col">
                     <li>
                         <a href="/" class="menu-item group {{ request()->routeIs('dashboard') ? 'menu-item-active' : 'menu-item-inactive' }}">
-                            <i class="fas fa-tachometer-alt-slow"></i>
+                            <i class="fas fa-tachometer-alt-slow fa-lg"></i>
                             <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">Dashboard</span>
                         </a>
                     </li>
@@ -50,7 +50,7 @@
                 <ul class="flex flex-col">
                     <li>
                         <a href="/cashiers" class="menu-item group {{ request()->routeIs('cashiers') ? 'menu-item-active' : 'menu-item-inactive' }}">
-                            <i class="fad fa-regular fa-users"></i>
+                            <i class="fad fa-regular fa-users fa-lg"></i>
                             <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">Cashiers</span>
                         </a>
                     </li>
@@ -68,7 +68,7 @@
                 <ul class="flex flex-col">
                     <li>
                         <a href="/pill" class="menu-item group {{ request()->routeIs('pill') ? 'menu-item-active' : 'menu-item-inactive' }}">
-                            <i class="fas fa-pills"></i>
+                            <i class="fas fa-pills fa-lg"></i>
                             <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">Obat</span>
                         </a>
                     </li>
@@ -86,7 +86,7 @@
                 <ul class="flex flex-col">
                     <li>
                         <a href="/history" class="menu-item group {{ request()->routeIs('history') ? 'menu-item-active' : 'menu-item-inactive' }}">
-                            <i class="fas fa-history"></i>
+                            <i class="fas fa-history fa-lg"></i>
                             <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">History</span>
                         </a>
                     </li>

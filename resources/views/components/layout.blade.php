@@ -38,6 +38,7 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
     <!-- ===== Page Wrapper End ===== -->
     <script defer src="{{ asset('tailadmin/build/bundle.js') }}"></script>
     <script defer src="{{ asset('fontawesome/pro.min.js') }}"></script>
+    @stack('scripts')
 </body>
 
 </html>
