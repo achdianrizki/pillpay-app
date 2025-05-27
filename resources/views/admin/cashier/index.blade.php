@@ -12,8 +12,8 @@
                             Home
                             <svg class="stroke-current" width="17" height="16" viewBox="0 0 17 16" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6.0765 12.667L10.2432 8.50033L6.0765 4.33366" stroke=""
-                                    stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M6.0765 12.667L10.2432 8.50033L6.0765 4.33366" stroke="" stroke-width="1.2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </a>
                     </li>
@@ -36,37 +36,38 @@
                             <tr class="border-b border-gray-100 dark:border-gray-800">
                                 <th class="px-5 py-3 sm:px-6">
                                     <div class="flex items-center">
-                                        <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
-                                            User
-                                        </p>
+                                        <span
+                                        class="block font-medium text-gray-800 text-theme-sm dark:text-white/90">No</span>
                                     </div>
                                 </th>
                                 <th class="px-5 py-3 sm:px-6">
                                     <div class="flex items-center">
-                                        <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
-                                            Project Name
-                                        </p>
+                                        <span
+                                        class="block font-medium text-gray-800 text-theme-sm dark:text-white/90">Nama kasir</span>
                                     </div>
                                 </th>
                                 <th class="px-5 py-3 sm:px-6">
                                     <div class="flex items-center">
-                                        <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
-                                            Team
-                                        </p>
+                                        <span
+                                        class="block font-medium text-gray-800 text-theme-sm dark:text-white/90">Shift</span>
                                     </div>
                                 </th>
                                 <th class="px-5 py-3 sm:px-6">
                                     <div class="flex items-center">
-                                        <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
-                                            Status
-                                        </p>
+                                        <span
+                                        class="block font-medium text-gray-800 text-theme-sm dark:text-white/90">Jumlah Transaksi</span>
                                     </div>
                                 </th>
                                 <th class="px-5 py-3 sm:px-6">
                                     <div class="flex items-center">
-                                        <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
-                                            Budget
-                                        </p>
+                                        <span
+                                        class="block font-medium text-gray-800 text-theme-sm dark:text-white/90">Total Penjualan</span>
+                                    </div>
+                                </th>
+                                <th class="px-5 py-3 sm:px-6">
+                                    <div class="flex items-center">
+                                        <span
+                                        class="block font-medium text-gray-800 text-theme-sm dark:text-white/90">Status</span>
                                     </div>
                                 </th>
                             </tr>
@@ -75,294 +76,71 @@
                         <!-- table body start -->
                         <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
                             <tr>
+                                <td class="px-5 py-4 sm:px-6">1</td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <div class="flex items-center">
-                                        <div class="flex items-center gap-3">
-                                            <div class="w-10 h-10 overflow-hidden rounded-full">
-                                                <img src="src/images/user/user-17.jpg" alt="brand" />
-                                            </div>
-
-                                            <div>
-                                                <span
-                                                    class="block font-medium text-gray-800 text-theme-sm dark:text-white/90">
-                                                    Lindsey Curtis
-                                                </span>
-                                                <span class="block text-gray-500 text-theme-xs dark:text-gray-400">
-                                                    Web Designer
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">Hirzan</p>
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <div class="flex items-center">
-                                        <p class="text-gray-500 text-theme-sm dark:text-gray-400">
-                                            Agency Website
-                                        </p>
-                                    </div>
+                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">Pagi</p>
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <div class="flex items-center">
-                                        <div class="flex -space-x-2">
-                                            <div
-                                                class="w-6 h-6 overflow-hidden border-2 border-white rounded-full dark:border-gray-900">
-                                                <img src="src/images/user/user-22.jpg" alt="user" />
-                                            </div>
-                                            <div
-                                                class="w-6 h-6 overflow-hidden border-2 border-white rounded-full dark:border-gray-900">
-                                                <img src="src/images/user/user-23.jpg" alt="user" />
-                                            </div>
-                                            <div
-                                                class="w-6 h-6 overflow-hidden border-2 border-white rounded-full dark:border-gray-900">
-                                                <img src="src/images/user/user-24.jpg" alt="user" />
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">120</p>
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <div class="flex items-center">
-                                        <p
-                                            class="rounded-full bg-success-50 px-2 py-0.5 text-theme-xs font-medium text-success-700 dark:bg-success-500/15 dark:text-success-500">
-                                            Active
-                                        </p>
-                                    </div>
+                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">Rp 12.000.000</p>
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <div class="flex items-center">
-                                        <p class="text-gray-500 text-theme-sm dark:text-gray-400">3.9K</p>
-                                    </div>
+                                    <span class="bg-success-500 text-white text-xs font-medium px-2 py-0.5 rounded">
+                                        Online
+                                    </span>
                                 </td>
                             </tr>
                             <tr>
+                                <td class="px-5 py-4 sm:px-6">2</td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <div class="flex items-center">
-                                        <div class="flex items-center gap-3">
-                                            <div class="w-10 h-10 overflow-hidden rounded-full">
-                                                <img src="src/images/user/user-18.jpg" alt="brand" />
-                                            </div>
-
-                                            <div>
-                                                <span
-                                                    class="block font-medium text-gray-800 text-theme-sm dark:text-white/90">
-                                                    Kaiya George
-                                                </span>
-                                                <span class="block text-gray-500 text-theme-xs dark:text-gray-400">
-                                                    Project Manager
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">Raddit</p>
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <div class="flex items-center">
-                                        <p class="text-gray-500 text-theme-sm dark:text-gray-400">
-                                            Technology
-                                        </p>
-                                    </div>
+                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">Siang</p>
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <div class="flex items-center">
-                                        <div class="flex -space-x-2">
-                                            <div
-                                                class="w-6 h-6 overflow-hidden border-2 border-white rounded-full dark:border-gray-900">
-                                                <img src="src/images/user/user-25.jpg" alt="user" />
-                                            </div>
-                                            <div
-                                                class="w-6 h-6 overflow-hidden border-2 border-white rounded-full dark:border-gray-900">
-                                                <img src="src/images/user/user-26.jpg" alt="user" />
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">95</p>
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <div class="flex items-center">
-                                        <p
-                                            class="rounded-full bg-warning-50 px-2 py-0.5 text-theme-xs font-medium text-warning-700 dark:bg-warning-500/15 dark:text-warning-400">
-                                            Pending
-                                        </p>
-                                    </div>
+                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">Rp 9.500.000</p>
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <div class="flex items-center">
-                                        <p class="text-gray-500 text-theme-sm dark:text-gray-400">
-                                            24.9K
-                                        </p>
-                                    </div>
+                                    <span class="bg-warning-500 text-white text-xs font-medium px-2 py-0.5 rounded">
+                                        Offline
+                                    </span>
                                 </td>
                             </tr>
                             <tr>
+                                <td class="px-5 py-4 sm:px-6">3</td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <div class="flex items-center">
-                                        <div class="flex items-center gap-3">
-                                            <div class="w-10 h-10 overflow-hidden rounded-full">
-                                                <img src="src/images/user/user-19.jpg" alt="brand" />
-                                            </div>
-
-                                            <div>
-                                                <span
-                                                    class="block font-medium text-gray-800 text-theme-sm dark:text-white/90">
-                                                    Zain Geidt
-                                                </span>
-                                                <span class="block text-gray-500 text-theme-xs dark:text-gray-400">
-                                                    Content Writer
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">Rizal</p>
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <div class="flex items-center">
-                                        <p class="text-gray-500 text-theme-sm dark:text-gray-400">
-                                            Blog Writing
-                                        </p>
-                                    </div>
+                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">Malam</p>
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <div class="flex items-center">
-                                        <div class="flex -space-x-2">
-                                            <div
-                                                class="w-6 h-6 overflow-hidden border-2 border-white rounded-full dark:border-gray-900">
-                                                <img src="src/images/user/user-27.jpg" alt="user" />
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">70</p>
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <div class="flex items-center">
-                                        <p
-                                            class="rounded-full bg-success-50 px-2 py-0.5 text-theme-xs font-medium text-success-700 dark:bg-success-500/15 dark:text-success-500">
-                                            Active
-                                        </p>
-                                    </div>
+                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">Rp 7.000.000</p>
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <div class="flex items-center">
-                                        <p class="text-gray-500 text-theme-sm dark:text-gray-400">
-                                            12.7K
-                                        </p>
-                                    </div>
+                                    <span class="bg-success-500 text-white text-xs font-medium px-2 py-0.5 rounded">
+                                        Online
+                                    </span>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="px-5 py-4 sm:px-6">
-                                    <div class="flex items-center">
-                                        <div class="flex items-center gap-3">
-                                            <div class="w-10 h-10 overflow-hidden rounded-full">
-                                                <img src="src/images/user/user-20.jpg" alt="brand" />
-                                            </div>
-
-                                            <div>
-                                                <span
-                                                    class="block font-medium text-gray-800 text-theme-sm dark:text-white/90">
-                                                    Abram Schleifer
-                                                </span>
-                                                <span class="block text-gray-500 text-theme-xs dark:text-gray-400">
-                                                    Digital Marketer
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-5 py-4 sm:px-6">
-                                    <div class="flex items-center">
-                                        <p class="text-gray-500 text-theme-sm dark:text-gray-400">
-                                            Social Media
-                                        </p>
-                                    </div>
-                                </td>
-                                <td class="px-5 py-4 sm:px-6">
-                                    <div class="flex items-center">
-                                        <div class="flex -space-x-2">
-                                            <div
-                                                class="w-6 h-6 overflow-hidden border-2 border-white rounded-full dark:border-gray-900">
-                                                <img src="src/images/user/user-28.jpg" alt="user" />
-                                            </div>
-                                            <div
-                                                class="w-6 h-6 overflow-hidden border-2 border-white rounded-full dark:border-gray-900">
-                                                <img src="src/images/user/user-29.jpg" alt="user" />
-                                            </div>
-                                            <div
-                                                class="w-6 h-6 overflow-hidden border-2 border-white rounded-full dark:border-gray-900">
-                                                <img src="src/images/user/user-30.jpg" alt="user" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-5 py-4 sm:px-6">
-                                    <div class="flex items-center">
-                                        <p
-                                            class="rounded-full bg-error-50 px-2 py-0.5 text-theme-xs font-medium text-error-700 dark:bg-error-500/15 dark:text-error-500">
-                                            Cancel
-                                        </p>
-                                    </div>
-                                </td>
-                                <td class="px-5 py-4 sm:px-6">
-                                    <div class="flex items-center">
-                                        <p class="text-gray-500 text-theme-sm dark:text-gray-400">2.8K</p>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="px-5 py-4 sm:px-6">
-                                    <div class="flex items-center">
-                                        <div class="flex items-center gap-3">
-                                            <div class="w-10 h-10 overflow-hidden rounded-full">
-                                                <img src="src/images/user/user-21.jpg" alt="brand" />
-                                            </div>
-
-                                            <div>
-                                                <span
-                                                    class="block font-medium text-gray-800 text-theme-sm dark:text-white/90">
-                                                    Carla George
-                                                </span>
-                                                <span class="block text-gray-500 text-theme-xs dark:text-gray-400">
-                                                    Front-end Developer
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-5 py-4 sm:px-6">
-                                    <div class="flex items-center">
-                                        <p class="text-gray-500 text-theme-sm dark:text-gray-400">
-                                            Website
-                                        </p>
-                                    </div>
-                                </td>
-                                <td class="px-5 py-4 sm:px-6">
-                                    <div class="flex items-center">
-                                        <div class="flex -space-x-2">
-                                            <div
-                                                class="w-6 h-6 overflow-hidden border-2 border-white rounded-full dark:border-gray-900">
-                                                <img src="src/images/user/user-31.jpg" alt="user" />
-                                            </div>
-                                            <div
-                                                class="w-6 h-6 overflow-hidden border-2 border-white rounded-full dark:border-gray-900">
-                                                <img src="src/images/user/user-32.jpg" alt="user" />
-                                            </div>
-                                            <div
-                                                class="w-6 h-6 overflow-hidden border-2 border-white rounded-full dark:border-gray-900">
-                                                <img src="src/images/user/user-33.jpg" alt="user" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-5 py-4 sm:px-6">
-                                    <div class="flex items-center">
-                                        <p
-                                            class="rounded-full bg-success-50 px-2 py-0.5 text-theme-xs font-medium text-success-700 dark:bg-success-500/15 dark:text-success-500">
-                                            Active
-                                        </p>
-                                    </div>
-                                </td>
-                                <td class="px-5 py-4 sm:px-6">
-                                    <div class="flex items-center">
-                                        <p class="text-gray-500 text-theme-sm dark:text-gray-400">4,5K</p>
-                                    </div>
-                                </td>
-                            </tr>
+                            <!-- Tambahkan baris data kasir lainnya sesuai kebutuhan -->
                         </tbody>
                     </table>
+
+
+
                 </div>
                 <!-- ====== Table Six End -->
             </div>
