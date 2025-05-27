@@ -10,3 +10,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [AdminController::class, 'index'])->name('dashboard');
 Route::get('/cashiers', [AdminController::class, 'cashiers'])->name('cashiers');
+Route::get('/pill', [AdminController::class, 'pill'])->name('pill');
+Route::get('/history', [AdminController::class, 'history'])->name('history');
