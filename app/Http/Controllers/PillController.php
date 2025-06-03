@@ -7,9 +7,5 @@ use Illuminate\Http\Request;
 
 class Pillcontroller extends Controller
 {
-    public function index()
-    {
-        $pills = Medicines::all();
-        return view('admin.pill.index', compact('pills'));
-    }
+    
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PillController;
 use App\Http\Controllers\CashierController;
@@ -32,7 +33,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/pill/{id}', [MedicinesController::class, 'show'])->name('pill.show');
 
         // Route Admin cashier
-        Route::get('cashier', [CashierController::class, 'index'])->name('cashier.index');
+        Route::get('cashier', [AdminController::class, 'cashiers'])->name('cashier.index');
         Route::get('cashier/create', [CashierController::class, 'create'])->name('cashier.create');
         Route::post('cashier', [CashierController::class, 'store'])->name('cashier.store');
         Route::get('cashier/{id}/edit', [CashierController::class, 'edit'])->name('cashier.edit');

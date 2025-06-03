@@ -49,7 +49,7 @@
                 </h3>
                 <ul class="flex flex-col">
                     <li>
-                        <a href="/cashiers" class="menu-item group {{ request()->routeIs('cashiers') ? 'menu-item-active' : 'menu-item-inactive' }}">
+                        <a href="{{ route('admin.cashier.index') }}" class="menu-item group {{ request()->routeIs('admin.cashier.*') ? 'menu-item-active' : 'menu-item-inactive' }}">
                             <i class="fad fa-regular fa-users fa-lg"></i>
                             <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">Cashiers</span>
                         </a>
