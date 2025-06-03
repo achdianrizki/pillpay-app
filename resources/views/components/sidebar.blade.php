@@ -1,5 +1,5 @@
 <aside :class="sidebarToggle ? 'translate-x-0 lg:w-[90px]' : '-translate-x-full'"
-    class="sidebar fixed left-0 top-0 z-9999 flex h-screen w-[290px] flex-col overflow-y-hidden border-r border-gray-200 bg-white px-5 duration-300 ease-linear dark:border-gray-800 dark:bg-black lg:static lg:translate-x-0"
+    class="sidebar fixed left-0 top-0 z-9999 flex h-screen w-[290px] flex-col overflow-y-hidden border-r border-gray-200 bg-white px-5 duration-300 ease-linear lg:static lg:translate-x-0"
     @click.outside="sidebarToggle = false">
     
     <!-- SIDEBAR HEADER -->
@@ -7,8 +7,8 @@
         class="sidebar-header flex items-center gap-2 pb-7 pt-8">
         <a href="index.html">
             <span class="logo" :class="sidebarToggle ? 'hidden' : ''">
-                <img class="h-10 w-auto dark:hidden" src="{{ asset('tailadmin/build/src/images/logo/logo.svg') }}" alt="Logo" />
-                <img class="h-10 w-auto hidden dark:block" src="{{ asset('tailadmin/build/src/images/logo/logo-dark.svg') }}" alt="Logo" />
+                <img class="h-10 w-auto" src="{{ asset('tailadmin/build/src/images/logo/logo.svg') }}" alt="Logo" />
+                <img class="h-10 w-auto hidden" src="{{ asset('tailadmin/build/src/images/logo/logo-dark.svg') }}" alt="Logo" />
             </span>
 
             <img class="h-10 w-auto logo-icon" :class="sidebarToggle ? 'lg:block' : 'hidden'" src="{{ asset('tailadmin/build/src/images/logo/logo-icon.svg') }}"
@@ -31,7 +31,7 @@
                 </h3>
                 <ul class="flex flex-col">
                     <li>
-                        <a href="/" class="menu-item group {{ request()->routeIs('dashboard') ? 'menu-item-active' : 'menu-item-inactive' }}">
+                        <a href="{{ route('dashboard') }}" class="menu-item group {{ request()->routeIs('dashboard') ? 'menu-item-active' : 'menu-item-inactive' }}">
                             <i class="fas fa-tachometer-alt-slow fa-lg"></i>
                             <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">Dashboard</span>
                         </a>
