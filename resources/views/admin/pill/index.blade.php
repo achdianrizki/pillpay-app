@@ -37,48 +37,14 @@
                         <!-- table header start -->
                         <thead>
                             <tr class="border-b border-gray-100 dark:border-gray-800">
-                                <th class="px-5 py-3 sm:px-6">
-                                    <div class="flex items-center">
-                                        <span
-                                        class="block font-medium text-gray-800 text-theme-sm dark:text-white/90">No</span>
-                                    </div>
-                                </th>
-                                <th class="px-5 py-3 sm:px-6">
-                                    <div class="flex items-center">
-                                        <span
-                                        class="block font-medium text-gray-800 text-theme-sm dark:text-white/90">Nama obat</span>
-                                    </div>
-                                </th>
-                                <th class="px-5 py-3 sm:px-6">
-                                    <div class="flex items-center">
-                                        <span
-                                        class="block font-medium text-gray-800 text-theme-sm dark:text-white/90">Kategori</span>
-                                    </div>
-                                </th>
-                                <th class="px-5 py-3 sm:px-6">
-                                    <div class="flex items-center">
-                                        <span
-                                        class="block font-medium text-gray-800 text-theme-sm dark:text-white/90">Stok</span>
-                                    </div>
-                                </th>
-                                <th class="px-5 py-3 sm:px-6">
-                                    <div class="flex items-center">
-                                        <span
-                                        class="block font-medium text-gray-800 text-theme-sm dark:text-white/90">Harga</span>
-                                    </div>
-                                </th>
-                                <th class="px-5 py-3 sm:px-6">
-                                    <div class="flex items-center">
-                                        <span
-                                        class="block font-medium text-gray-800 text-theme-sm dark:text-white/90">Status</span>
-                                    </div>
-                                </th>
-                                <th class="px-5 py-3 sm:px-6">
-                                    <div class="flex items-center">
-                                        <span
-                                        class="block font-medium text-gray-800 text-theme-sm dark:text-white/90">Tanggal kadaluwarsa</span>
-                                    </div>
-                                </th>
+                                <th class="px-5 py-3 sm:px-6">No</th>
+                                <th class="px-5 py-3 sm:px-6">Nama obat</th>
+                                <th class="px-5 py-3 sm:px-6">Kategori</th>
+                                <th class="px-5 py-3 sm:px-6">Stok</th>
+                                <th class="px-5 py-3 sm:px-6">Harga</th>
+                                <th class="px-5 py-3 sm:px-6">Status</th>
+                                <th class="px-5 py-3 sm:px-6">Tanggal kadaluwarsa</th>
+                                <th class="px-5 py-3 sm:px-6 text-center" colspan="2">Action</th>
                             </tr>
                         </thead>
                         <!-- table header end -->
@@ -87,65 +53,47 @@
                         <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
                             <tr>
                                 <td class="px-5 py-4 sm:px-6">1</td>
+                                <td class="px-5 py-4 sm:px-6">Paracetamol</td>
+                                <td class="px-5 py-4 sm:px-6">Analgesik</td>
+                                <td class="px-5 py-4 sm:px-6">120</td>
+                                <td class="px-5 py-4 sm:px-6">Rp 5.000</td>
+                                <td class="px-5 py-4 sm:px-6">Tersedia</td>
+                                <td class="px-5 py-4 sm:px-6">2026-12-31</td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">Paracetamol</p>
+                                    <button class="text-sm text-blue-600 hover:underline">Edit</button>
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">Analgesik</p>
-                                </td>
-                                <td class="px-5 py-4 sm:px-6">
-                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">120</p>
-                                </td>
-                                <td class="px-5 py-4 sm:px-6">
-                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">Rp 5.000</p>
-                                </td>
-                                <td class="px-5 py-4 sm:px-6">
-                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">Tersedia</p>
-                                </td>
-                                <td class="px-5 py-4 sm:px-6">
-                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">2026-12-31</p>
+                                    <button class="text-sm text-red-600 hover:underline">Delete</button>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="px-5 py-4 sm:px-6">2</td>
+                                <td class="px-5 py-4 sm:px-6">Amoxicillin</td>
+                                <td class="px-5 py-4 sm:px-6">Antibiotik</td>
+                                <td class="px-5 py-4 sm:px-6">8</td>
+                                <td class="px-5 py-4 sm:px-6">Rp 12.000</td>
+                                <td class="px-5 py-4 sm:px-6">Hampir Habis</td>
+                                <td class="px-5 py-4 sm:px-6">2025-10-15</td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">Amoxicillin</p>
+                                    <button class="text-sm text-blue-600 hover:underline">Edit</button>
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">Antibiotik</p>
-                                </td>
-                                <td class="px-5 py-4 sm:px-6">
-                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">8</p>
-                                </td>
-                                <td class="px-5 py-4 sm:px-6">
-                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">Rp 12.000</p>
-                                </td>
-                                <td class="px-5 py-4 sm:px-6">
-                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">Hampir Habis</p>
-                                </td>
-                                <td class="px-5 py-4 sm:px-6">
-                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">2025-10-15</p>
+                                    <button class="text-sm text-red-600 hover:underline">Delete</button>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="px-5 py-4 sm:px-6">3</td>
+                                <td class="px-5 py-4 sm:px-6">Cetirizine</td>
+                                <td class="px-5 py-4 sm:px-6">Antihistamin</td>
+                                <td class="px-5 py-4 sm:px-6">0</td>
+                                <td class="px-5 py-4 sm:px-6">Rp 7.500</td>
+                                <td class="px-5 py-4 sm:px-6">Habis</td>
+                                <td class="px-5 py-4 sm:px-6">2024-04-10</td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">Cetirizine</p>
+                                    <button class="text-sm text-blue-600 hover:underline">Edit</button>
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">Antihistamin</p>
-                                </td>
-                                <td class="px-5 py-4 sm:px-6">
-                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">0</p>
-                                </td>
-                                <td class="px-5 py-4 sm:px-6">
-                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">Rp 7.500</p>
-                                </td>
-                                <td class="px-5 py-4 sm:px-6">
-                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">Habis</p>
-                                </td>
-                                <td class="px-5 py-4 sm:px-6">
-                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">2024-04-10</p>
+                                    <button class="text-sm text-red-600 hover:underline">Delete</button>
                                 </td>
                             </tr>
                         </tbody>

@@ -34,110 +34,74 @@
                         <!-- table header start -->
                         <thead>
                             <tr class="border-b border-gray-100 dark:border-gray-800">
-                                <th class="px-5 py-3 sm:px-6">
-                                    <div class="flex items-center">
-                                        <span
-                                        class="block font-medium text-gray-800 text-theme-sm dark:text-white/90">No</span>
-                                    </div>
-                                </th>
-                                <th class="px-5 py-3 sm:px-6">
-                                    <div class="flex items-center">
-                                        <span
-                                        class="block font-medium text-gray-800 text-theme-sm dark:text-white/90">Nama kasir</span>
-                                    </div>
-                                </th>
-                                <th class="px-5 py-3 sm:px-6">
-                                    <div class="flex items-center">
-                                        <span
-                                        class="block font-medium text-gray-800 text-theme-sm dark:text-white/90">Shift</span>
-                                    </div>
-                                </th>
-                                <th class="px-5 py-3 sm:px-6">
-                                    <div class="flex items-center">
-                                        <span
-                                        class="block font-medium text-gray-800 text-theme-sm dark:text-white/90">Jumlah Transaksi</span>
-                                    </div>
-                                </th>
-                                <th class="px-5 py-3 sm:px-6">
-                                    <div class="flex items-center">
-                                        <span
-                                        class="block font-medium text-gray-800 text-theme-sm dark:text-white/90">Total Penjualan</span>
-                                    </div>
-                                </th>
-                                <th class="px-5 py-3 sm:px-6">
-                                    <div class="flex items-center">
-                                        <span
-                                        class="block font-medium text-gray-800 text-theme-sm dark:text-white/90">Status</span>
-                                    </div>
-                                </th>
+                                <th class="px-5 py-3 sm:px-6">No</th>
+                                <th class="px-5 py-3 sm:px-6">Nama kasir</th>
+                                <th class="px-5 py-3 sm:px-6">Shift</th>
+                                <th class="px-5 py-3 sm:px-6">Jumlah Transaksi</th>
+                                <th class="px-5 py-3 sm:px-6">Total Penjualan</th>
+                                <th class="px-5 py-3 sm:px-6">Status</th>
+                                <th class="px-5 py-3 sm:px-6 text-center" colspan="2">Action</th>
                             </tr>
                         </thead>
                         <!-- table header end -->
+
                         <!-- table body start -->
                         <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
                             <tr>
                                 <td class="px-5 py-4 sm:px-6">1</td>
+                                <td class="px-5 py-4 sm:px-6">Hirzan</td>
+                                <td class="px-5 py-4 sm:px-6">Pagi</td>
+                                <td class="px-5 py-4 sm:px-6">120</td>
+                                <td class="px-5 py-4 sm:px-6">Rp 12.000.000</td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">Hirzan</p>
+                                    <span
+                                        class="bg-success-500 text-white text-xs font-medium px-2 py-0.5 rounded">Online</span>
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">Pagi</p>
+                                    <button class="text-sm text-blue-600 hover:underline">Edit</button>
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">120</p>
-                                </td>
-                                <td class="px-5 py-4 sm:px-6">
-                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">Rp 12.000.000</p>
-                                </td>
-                                <td class="px-5 py-4 sm:px-6">
-                                    <span class="bg-success-500 text-white text-xs font-medium px-2 py-0.5 rounded">
-                                        Online
-                                    </span>
+                                    <button class="text-sm text-red-600 hover:underline">Delete</button>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="px-5 py-4 sm:px-6">2</td>
+                                <td class="px-5 py-4 sm:px-6">Raddit</td>
+                                <td class="px-5 py-4 sm:px-6">Siang</td>
+                                <td class="px-5 py-4 sm:px-6">95</td>
+                                <td class="px-5 py-4 sm:px-6">Rp 9.500.000</td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">Raddit</p>
+                                    <span
+                                        class="bg-warning-500 text-white text-xs font-medium px-2 py-0.5 rounded">Offline</span>
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">Siang</p>
+                                    <button class="text-sm text-blue-600 hover:underline">Edit</button>
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">95</p>
-                                </td>
-                                <td class="px-5 py-4 sm:px-6">
-                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">Rp 9.500.000</p>
-                                </td>
-                                <td class="px-5 py-4 sm:px-6">
-                                    <span class="bg-warning-500 text-white text-xs font-medium px-2 py-0.5 rounded">
-                                        Offline
-                                    </span>
+                                    <button class="text-sm text-red-600 hover:underline">Delete</button>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="px-5 py-4 sm:px-6">3</td>
+                                <td class="px-5 py-4 sm:px-6">Rizal</td>
+                                <td class="px-5 py-4 sm:px-6">Malam</td>
+                                <td class="px-5 py-4 sm:px-6">70</td>
+                                <td class="px-5 py-4 sm:px-6">Rp 7.000.000</td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">Rizal</p>
+                                    <span
+                                        class="bg-success-500 text-white text-xs font-medium px-2 py-0.5 rounded">Online</span>
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">Malam</p>
+                                    <button class="text-sm text-blue-600 hover:underline">Edit</button>
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">70</p>
-                                </td>
-                                <td class="px-5 py-4 sm:px-6">
-                                    <p class="text-gray-500 text-theme-sm dark:text-gray-400">Rp 7.000.000</p>
-                                </td>
-                                <td class="px-5 py-4 sm:px-6">
-                                    <span class="bg-success-500 text-white text-xs font-medium px-2 py-0.5 rounded">
-                                        Online
-                                    </span>
+                                    <button class="text-sm text-red-600 hover:underline">Delete</button>
                                 </td>
                             </tr>
-                            <!-- Tambahkan baris data kasir lainnya sesuai kebutuhan -->
                         </tbody>
+                        <!-- table body end -->
                     </table>
+
 
 
 
