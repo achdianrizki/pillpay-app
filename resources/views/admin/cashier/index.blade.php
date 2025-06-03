@@ -73,10 +73,15 @@
                             </tr>
                         </thead>
                         <!-- table header end -->
+
                         <!-- table body start -->
                         <tbody class="divide-y divide-gray-100">
                             <tr>
                                 <td class="px-5 py-4 sm:px-6">1</td>
+                                <td class="px-5 py-4 sm:px-6">Hirzan</td>
+                                <td class="px-5 py-4 sm:px-6">Pagi</td>
+                                <td class="px-5 py-4 sm:px-6">120</td>
+                                <td class="px-5 py-4 sm:px-6">Rp 12.000.000</td>
                                 <td class="px-5 py-4 sm:px-6">
                                     <p class="text-gray-500 text-theme-sm">Hirzan</p>
                                 </td>
@@ -97,6 +102,10 @@
                             </tr>
                             <tr>
                                 <td class="px-5 py-4 sm:px-6">2</td>
+                                <td class="px-5 py-4 sm:px-6">Raddit</td>
+                                <td class="px-5 py-4 sm:px-6">Siang</td>
+                                <td class="px-5 py-4 sm:px-6">95</td>
+                                <td class="px-5 py-4 sm:px-6">Rp 9.500.000</td>
                                 <td class="px-5 py-4 sm:px-6">
                                     <p class="text-gray-500 text-theme-sm">Raddit</p>
                                 </td>
@@ -117,6 +126,10 @@
                             </tr>
                             <tr>
                                 <td class="px-5 py-4 sm:px-6">3</td>
+                                <td class="px-5 py-4 sm:px-6">Rizal</td>
+                                <td class="px-5 py-4 sm:px-6">Malam</td>
+                                <td class="px-5 py-4 sm:px-6">70</td>
+                                <td class="px-5 py-4 sm:px-6">Rp 7.000.000</td>
                                 <td class="px-5 py-4 sm:px-6">
                                     <p class="text-gray-500 text-theme-sm">Rizal</p>
                                 </td>
@@ -135,9 +148,10 @@
                                     </span>
                                 </td>
                             </tr>
-                            <!-- Tambahkan baris data kasir lainnya sesuai kebutuhan -->
                         </tbody>
+                        <!-- table body end -->
                     </table>
+
 
 
 
