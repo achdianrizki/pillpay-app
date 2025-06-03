@@ -9,36 +9,19 @@
 
             <div class="mt-4">
                 <!-- Tombol untuk membuka modal -->
-                <button class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-                    x-on:click="$dispatch('open-modal', 'example-modal')">
+                <button x-data x-on:click="$dispatch('open-modal', 'example-modal')"
+                    class="px-4 py-2 bg-blue-600 text-white rounded">
                     Buka Modal
                 </button>
-
-                <button class="..."
-                    x-on:click="
-        console.log('dispatch modal...');
-        $dispatch('open-modal', 'example-modal')">
-                    Buka Modal
-                </button>
-                
 
                 <x-modal name="example-modal" :show="false" maxWidth="lg">
                     <div class="p-6">
                         <h2 class="text-lg font-semibold text-gray-800">Judul Modal</h2>
-                        <p class="mt-2 text-gray-600">
-                            Ini adalah konten dari modal. Anda bisa menambahkan formulir, teks, atau elemen lain di
-                            sini.
-                        </p>
-
-                        <div class="mt-4 flex justify-end">
-                            <button class="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400 mr-2"
-                                x-on:click="$dispatch('close-modal', 'example-modal')">
-                                Tutup
-                            </button>
-                            <button class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-                                Simpan
-                            </button>
-                        </div>
+                        <p>Ini adalah konten modal.</p>
+                        <button class="mt-4 px-4 py-2 bg-gray-300 rounded"
+                            x-on:click="$dispatch('close-modal', 'example-modal')">
+                            Tutup
+                        </button>
                     </div>
                 </x-modal>
 
@@ -71,25 +54,22 @@
                                 <button class="tambah-barang h-auto w-32 bg-blue-500 text-white px-2 py-1 rounded"
                                     data-nama="{{ $item->name }}">+
                                 </button>
-                                <!-- Trigger Button -->
-                                <button
-                                    x-on:click="
-    console.log('Triggering modal: detail-modal-{{ $item->id }}');
-    $dispatch('open-modal', 'detail-modal-{{ $item->id }}')">
+                                <button x-data x-on:click="$dispatch('open-modal', 'detail-modal-{{ $item->id }}')">
                                     <i class="far fa-exclamation-circle"></i>
                                 </button>
 
-
-                                <!-- Modal Component -->
-                                <x-modal name="detail-modal-{{ $item->id }}" :show="false" maxWidth="md">
+                                <x-modal name="detail-modal-{{ $item->id }}" :show="false" maxWidth="sm">
                                     <div class="p-6">
                                         <h2 class="text-lg font-medium text-gray-900 mb-2">{{ $item->name }}</h2>
-                                        <img src="{{ asset('product/' . $item->images) }}" alt="{{ $item->name }}"
-                                            class="w-full h-48 object-cover rounded mb-2">
-                                        <h4 class="text-md font-medium mb-1">
-                                            {{ 'Rp ' . number_format($item->selling_price, 0, ',', '.') }}
-                                        </h4>
-                                        <p class="text-gray-600 mb-2">{{ $item->description }}</p>
+                                        <div class="space-y-1">
+                                            <h5>Deskripsi</h5>
+                                            <p class="text-gray-600 my-2">{{ $item->description }}</p>
+                                        </div>
+                                        <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700">
+                                        <div class="space-y-1">
+                                            <h5>Aturan Pakai</h5>
+                                            <p class="text-gray-600 my-2">{{ $item->usage_instruction }}</p>
+                                        </div>
                                         <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded"
                                             x-on:click="$dispatch('close-modal', 'detail-modal-{{ $item->id }}')">Tutup</button>
                                     </div>

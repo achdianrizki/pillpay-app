@@ -67,7 +67,7 @@
                 </h3>
                 <ul class="flex flex-col">
                     <li>
-                        <a href="/pill" class="menu-item group {{ request()->routeIs('pill') ? 'menu-item-active' : 'menu-item-inactive' }}">
+                        <a href="{{ route('admin.pill.index') }}" class="menu-item group {{ request()->routeIs('admin.pill.*') ? 'menu-item-active' : 'menu-item-inactive' }}">
                             <i class="fas fa-pills fa-lg"></i>
                             <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">Obat</span>
                         </a>
