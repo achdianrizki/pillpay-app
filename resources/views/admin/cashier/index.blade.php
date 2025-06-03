@@ -2,12 +2,12 @@
     <!-- Breadcrumb Start -->
     <div x-data="{ pageName: `Basic Tables` }">
         <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
-            <h2 class="text-xl font-semibold text-gray-800 dark:text-white/90" x-text="pageName"></h2>
+            <h2 class="text-xl font-semibold text-gray-800" x-text="pageName"></h2>
 
             <nav>
                 <ol class="flex items-center gap-1.5">
                     <li>
-                        <a class="inline-flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400"
+                        <a class="inline-flex items-center gap-1.5 text-sm text-gray-500"
                             href="index.html">
                             Home
                             <svg class="stroke-current" width="17" height="16" viewBox="0 0 17 16" fill="none"
@@ -17,7 +17,7 @@
                             </svg>
                         </a>
                     </li>
-                    <li class="text-sm text-gray-800 dark:text-white/90" x-text="pageName"></li>
+                    <li class="text-sm text-gray-800" x-text="pageName"></li>
                 </ol>
             </nav>
         </div>
@@ -25,28 +25,57 @@
     <!-- Breadcrumb End -->
 
     <div class="space-y-5 sm:space-y-6">
-        <div class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
+        <div class="rounded-2xl border border-gray-200 bg-white">
 
-            <div class="p-5 border-t border-gray-100 dark:border-gray-800 sm:p-6">
+            <div class="p-5 border-t border-gray-100 sm:p-6">
                 <!-- ====== Table Six Start -->
                 <div class="max-w-full overflow-x-auto">
                     <table class="min-w-full">
                         <!-- table header start -->
                         <thead>
-                            <tr class="border-b border-gray-100 dark:border-gray-800">
-                                <th class="px-5 py-3 sm:px-6">No</th>
-                                <th class="px-5 py-3 sm:px-6">Nama kasir</th>
-                                <th class="px-5 py-3 sm:px-6">Shift</th>
-                                <th class="px-5 py-3 sm:px-6">Jumlah Transaksi</th>
-                                <th class="px-5 py-3 sm:px-6">Total Penjualan</th>
-                                <th class="px-5 py-3 sm:px-6">Status</th>
-                                <th class="px-5 py-3 sm:px-6 text-center" colspan="2">Action</th>
+                            <tr class="border-b border-gray-100">
+                                <th class="px-5 py-3 sm:px-6">
+                                    <div class="flex items-center">
+                                        <span
+                                        class="block font-medium text-gray-800 text-theme-sm">No</span>
+                                    </div>
+                                </th>
+                                <th class="px-5 py-3 sm:px-6">
+                                    <div class="flex items-center">
+                                        <span
+                                        class="block font-medium text-gray-800 text-theme-sm">Nama kasir</span>
+                                    </div>
+                                </th>
+                                <th class="px-5 py-3 sm:px-6">
+                                    <div class="flex items-center">
+                                        <span
+                                        class="block font-medium text-gray-800 text-theme-sm">Shift</span>
+                                    </div>
+                                </th>
+                                <th class="px-5 py-3 sm:px-6">
+                                    <div class="flex items-center">
+                                        <span
+                                        class="block font-medium text-gray-800 text-theme-sm">Jumlah Transaksi</span>
+                                    </div>
+                                </th>
+                                <th class="px-5 py-3 sm:px-6">
+                                    <div class="flex items-center">
+                                        <span
+                                        class="block font-medium text-gray-800 text-theme-sm">Total Penjualan</span>
+                                    </div>
+                                </th>
+                                <th class="px-5 py-3 sm:px-6">
+                                    <div class="flex items-center">
+                                        <span
+                                        class="block font-medium text-gray-800 text-theme-sm">Status</span>
+                                    </div>
+                                </th>
                             </tr>
                         </thead>
                         <!-- table header end -->
 
                         <!-- table body start -->
-                        <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+                        <tbody class="divide-y divide-gray-100">
                             <tr>
                                 <td class="px-5 py-4 sm:px-6">1</td>
                                 <td class="px-5 py-4 sm:px-6">Hirzan</td>
@@ -54,14 +83,21 @@
                                 <td class="px-5 py-4 sm:px-6">120</td>
                                 <td class="px-5 py-4 sm:px-6">Rp 12.000.000</td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <span
-                                        class="bg-success-500 text-white text-xs font-medium px-2 py-0.5 rounded">Online</span>
+                                    <p class="text-gray-500 text-theme-sm">Hirzan</p>
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <button class="text-sm text-blue-600 hover:underline">Edit</button>
+                                    <p class="text-gray-500 text-theme-sm">Pagi</p>
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <button class="text-sm text-red-600 hover:underline">Delete</button>
+                                    <p class="text-gray-500 text-theme-sm">120</p>
+                                </td>
+                                <td class="px-5 py-4 sm:px-6">
+                                    <p class="text-gray-500 text-theme-sm">Rp 12.000.000</p>
+                                </td>
+                                <td class="px-5 py-4 sm:px-6">
+                                    <span class="bg-success-500 text-white text-xs font-medium px-2 py-0.5 rounded">
+                                        Online
+                                    </span>
                                 </td>
                             </tr>
                             <tr>
@@ -71,14 +107,21 @@
                                 <td class="px-5 py-4 sm:px-6">95</td>
                                 <td class="px-5 py-4 sm:px-6">Rp 9.500.000</td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <span
-                                        class="bg-warning-500 text-white text-xs font-medium px-2 py-0.5 rounded">Offline</span>
+                                    <p class="text-gray-500 text-theme-sm">Raddit</p>
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <button class="text-sm text-blue-600 hover:underline">Edit</button>
+                                    <p class="text-gray-500 text-theme-sm">Siang</p>
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <button class="text-sm text-red-600 hover:underline">Delete</button>
+                                    <p class="text-gray-500 text-theme-sm">95</p>
+                                </td>
+                                <td class="px-5 py-4 sm:px-6">
+                                    <p class="text-gray-500 text-theme-sm">Rp 9.500.000</p>
+                                </td>
+                                <td class="px-5 py-4 sm:px-6">
+                                    <span class="bg-warning-500 text-white text-xs font-medium px-2 py-0.5 rounded">
+                                        Offline
+                                    </span>
                                 </td>
                             </tr>
                             <tr>
@@ -88,14 +131,21 @@
                                 <td class="px-5 py-4 sm:px-6">70</td>
                                 <td class="px-5 py-4 sm:px-6">Rp 7.000.000</td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <span
-                                        class="bg-success-500 text-white text-xs font-medium px-2 py-0.5 rounded">Online</span>
+                                    <p class="text-gray-500 text-theme-sm">Rizal</p>
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <button class="text-sm text-blue-600 hover:underline">Edit</button>
+                                    <p class="text-gray-500 text-theme-sm">Malam</p>
                                 </td>
                                 <td class="px-5 py-4 sm:px-6">
-                                    <button class="text-sm text-red-600 hover:underline">Delete</button>
+                                    <p class="text-gray-500 text-theme-sm">70</p>
+                                </td>
+                                <td class="px-5 py-4 sm:px-6">
+                                    <p class="text-gray-500 text-theme-sm">Rp 7.000.000</p>
+                                </td>
+                                <td class="px-5 py-4 sm:px-6">
+                                    <span class="bg-success-500 text-white text-xs font-medium px-2 py-0.5 rounded">
+                                        Online
+                                    </span>
                                 </td>
                             </tr>
                         </tbody>
