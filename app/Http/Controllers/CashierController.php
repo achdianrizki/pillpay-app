@@ -12,4 +12,6 @@ class CashierController extends Controller
         $medicines = Medicines::all();
         return view('cashier.index', compact('medicines'));
     }
+
+    
 }

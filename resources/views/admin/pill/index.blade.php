@@ -1,6 +1,6 @@
 <x-app-layout>
     <!-- Breadcrumb Start -->
-    <div x-data="{ pageName: `Basic Tables` }">
+    <div x-data="{ pageName: `List Obat` }">
         <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
             <h2 class="text-xl font-semibold text-gray-800" x-text="pageName"></h2>
 
@@ -8,7 +8,7 @@
                 <ol class="flex items-center gap-1.5">
                     <li>
                         <a class="inline-flex items-center gap-1.5 text-sm text-gray-500" href="index.html">
-                            Home
+                            Dashboard
                             <svg class="stroke-current" width="17" height="16" viewBox="0 0 17 16" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path d="M6.0765 12.667L10.2432 8.50033L6.0765 4.33366" stroke=""
@@ -29,7 +29,7 @@
                 class="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-white transition rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600">
                 Tambah Stok
             </button>
-            <a href="/pill/create"
+            <a href="{{ route('admin.pill.create') }}"
                 class="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-white transition rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600">
                 Tambah Obat Baru +
             </a>

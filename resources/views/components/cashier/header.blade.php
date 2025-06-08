@@ -1,4 +1,4 @@
-<header class="sticky top-0 z-[99999] flex w-full p-3  border-gray-200 bg-white lg:border-b shadow-sm">
+<header class="sticky top-0 z-30 flex w-full p-3  border-gray-200 bg-white lg:border-b shadow-sm">
     <div class="flex grow flex-col items-center justify-between lg:flex-row lg:px-6">
         <div
             class="flex w-full items-center justify-between gap-2 border-b border-gray-200 px-1 py-1 sm:gap-4 lg:justify-normal lg:border-b-0 lg:px-0 lg:py-1">

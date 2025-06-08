@@ -51,7 +51,7 @@
                     <li>
                         <a href="{{ route('admin.cashier.index') }}" class="menu-item group {{ request()->routeIs('admin.cashier.*') ? 'menu-item-active' : 'menu-item-inactive' }}">
                             <i class="fad fa-regular fa-users fa-lg"></i>
-                            <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">Cashiers</span>
+                            <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">Kasir</span>
                         </a>
                     </li>
                 </ul>
