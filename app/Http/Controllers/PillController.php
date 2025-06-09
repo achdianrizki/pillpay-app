@@ -7,7 +7,5 @@ use Illuminate\Http\Request;
 
 class Pillcontroller extends Controller
 {
-    public function create(){
-        return view('admin.pill.create');
-    }
+    
 }

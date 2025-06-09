@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PillController;
 use App\Http\Controllers\CashierController;
 use App\Http\Controllers\MedicinesController;
 use App\Http\Controllers\ProfileController;
@@ -22,15 +21,17 @@ Route::get('/cashier/dashboard', [CashierController::class, 'index'])
 
 
 Route::middleware('auth')->group(function () {
+
+    // Route Admin
     Route::prefix('admin')->name('admin.')->group(function () {
-        // Route Admin Pill
-        Route::get('/pill', [MedicinesController::class, 'index'])->name('pill.index');
-        Route::get('/pill/create', [PillController::class, 'create'])->name('pill.create');
-        Route::post('/pill', [MedicinesController::class, 'store'])->name('pill.store');
-        Route::get('/pill/{id}/edit', [MedicinesController::class, 'edit'])->name('pill.edit');
-        Route::put('/pill/{id}', [MedicinesController::class, 'update'])->name('pill.update');
-        Route::delete('/pill/{id}', [MedicinesController::class, 'destroy'])->name('pill.destroy');
-        Route::get('/pill/{id}', [MedicinesController::class, 'show'])->name('pill.show');
+        // Route Admin medicine
+        Route::get('/medicine', [MedicinesController::class, 'index'])->name('medicine.index');
+        Route::get('/medicine/create', [MedicinesController::class, 'create'])->name('medicine.create');
+        Route::post('/medicine', [MedicinesController::class, 'store'])->name('medicine.store');
+        Route::get('/medicine/{id}/edit', [MedicinesController::class, 'edit'])->name('medicine.edit');
+        Route::put('/medicine/{id}', [MedicinesController::class, 'update'])->name('medicine.update');
+        Route::delete('/medicine/{id}', [MedicinesController::class, 'destroy'])->name('medicine.destroy');
+        Route::get('/medicine/{id}', [MedicinesController::class, 'show'])->name('medicine.show');
 
         // Route Admin cashier
         Route::get('cashier', [AdminController::class, 'cashiers'])->name('cashier.index');
@@ -40,15 +41,25 @@ Route::middleware('auth')->group(function () {
         Route::put('/cashier/{id}', [CashierController::class, 'update'])->name('cashier.update');
         Route::delete('/cashier/{id}', [CashierController::class, 'destroy'])->name('cashier.destroy');
         Route::get('/cashier/{id}', [CashierController::class, 'show'])->name('cashier.show');
+
+        
     });
 
+    // Route Cashier
     Route::prefix('cashier')->name('cashier.')->group(function () {
-        Route::get('/pill', [PillController::class, 'index'])->name('pill.index');
-        Route::get('/pill/{id}', [PillController::class, 'show'])->name('pill.show');
+        Route::get('/medicine', [MedicinesController::class, 'index'])->name('medicine.index');
+        Route::get('/medicine/{id}', [MedicinesController::class, 'show'])->name('medicine.show');
     });
+
+    // Route Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Route Api
+    Route::prefix('api')->name('api.')->group(function () {
+        Route::get('/medicine/data', [MedicinesController::class, 'fecthMedicines'])->name('medicine.fetch');
+    });
 });
 
 require __DIR__ . '/auth.php';

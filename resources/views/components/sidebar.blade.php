@@ -44,7 +44,7 @@
                 <h3 class="mb-4 text-xs uppercase leading-[20px] text-gray-400">
                     <span class="menu-group-title" :class="sidebarToggle ? 'lg:hidden' : ''">Cashiers</span>
                     <svg :class="sidebarToggle ? 'lg:block hidden' : 'hidden'" class="menu-group-icon mx-auto fill-current" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="..."/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" />
                     </svg>
                 </h3>
                 <ul class="flex flex-col">
@@ -57,17 +57,17 @@
                 </ul>
             </div>
 
-            <!-- Pill Section -->
+            <!-- medicine Section -->
             <div>
                 <h3 class="mb-4 text-xs uppercase leading-[20px] text-gray-400">
-                    <span class="menu-group-title" :class="sidebarToggle ? 'lg:hidden' : ''">Pill</span>
+                    <span class="menu-group-title" :class="sidebarToggle ? 'lg:hidden' : ''">medicine</span>
                     <svg :class="sidebarToggle ? 'lg:block hidden' : 'hidden'" class="menu-group-icon mx-auto fill-current" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="..."/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" />
                     </svg>
                 </h3>
                 <ul class="flex flex-col">
                     <li>
-                        <a href="{{ route('admin.pill.index') }}" class="menu-item group {{ request()->routeIs('admin.pill.*') ? 'menu-item-active' : 'menu-item-inactive' }}">
+                        <a href="{{ route('admin.medicine.index') }}" class="menu-item group {{ request()->routeIs('admin.medicine.*') ? 'menu-item-active' : 'menu-item-inactive' }}">
                             <i class="fas fa-pills fa-lg"></i>
                             <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">Obat</span>
                         </a>
@@ -80,7 +80,7 @@
                 <h3 class="mb-4 text-xs uppercase leading-[20px] text-gray-400">
                     <span class="menu-group-title" :class="sidebarToggle ? 'lg:hidden' : ''">Others</span>
                     <svg :class="sidebarToggle ? 'lg:block hidden' : 'hidden'" class="menu-group-icon mx-auto fill-current" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="..."/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" />
                     </svg>
                 </h3>
                 <ul class="flex flex-col">
