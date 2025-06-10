@@ -15,7 +15,7 @@ $(document).ready(function () {
                     <li class="p-2 bg-gray-200 rounded flex justify-between items-center" data-nama="${nama}" data-jumlah="1">
                         <span>${nama}</span>
                         <div class="flex items-center space-x-2">
-                        <button class="kurangi-barang bg-red-500 text-white px-2 py-1 rounded" data-nama="${nama}">-</button>
+                        <button class="kurangi-barang bg-blue-500 text-white px-2 py-1 rounded" data-nama="${nama}">-</button>
                         <input class="jumlah-span font-bold w-10 text-center p-1 rounded" value="1">
                         <button class="tambah-barang-daftar bg-blue-500 text-white px-2 py-1 rounded" data-nama="${nama}">+</button>
                         </div>

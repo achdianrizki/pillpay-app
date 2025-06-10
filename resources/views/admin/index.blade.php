@@ -13,9 +13,9 @@
 
             <div class="mt-5 flex items-end justify-between">
                 <div>
-                    <span class="text-sm text-gray-500">Customers</span>
+                    <span class="text-sm text-gray-500">Cashier</span>
                     <h4 class="mt-2 text-title-sm font-bold text-gray-800">
-                        3,782
+                        {{ $cashier }}
                     </h4>
                 </div>
 

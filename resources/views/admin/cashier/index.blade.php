@@ -1,6 +1,6 @@
 <x-app-layout>
     <!-- Breadcrumb Start -->
-    <div x-data="{ pageName: `Basic Tables` }">
+    <div x-data="{ pageName: `List Kasir` }">
         <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
             <h2 class="text-xl font-semibold text-gray-800" x-text="pageName"></h2>
 
@@ -11,8 +11,8 @@
                             Home
                             <svg class="stroke-current" width="17" height="16" viewBox="0 0 17 16" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6.0765 12.667L10.2432 8.50033L6.0765 4.33366" stroke="" stroke-width="1.2"
-                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M6.0765 12.667L10.2432 8.50033L6.0765 4.33366" stroke=""
+                                    stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </a>
                     </li>

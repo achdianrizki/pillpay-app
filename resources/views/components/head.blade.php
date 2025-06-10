@@ -6,6 +6,6 @@
         PillPay
     </title>
     <link rel="icon" href="{{ asset('tailadmin/build/favicon.ico') }}">
-    <link href="{{ asset('tailadmin/build/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('tailadmin/build/style1.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('fontawesome/all.min.css') }}">
 </head>
