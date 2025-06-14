@@ -6,13 +6,14 @@ use App\Models\User;
 use App\Models\Medicines;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Role;
 
 class CashierController extends Controller
 {
 
     public function index()
     {
-        $cashiers = User::all();
+        $cashiers = User::role('cashier')->get();
         return view('admin.cashier.index', compact('cashiers'));
     }
 
@@ -54,17 +55,21 @@ class CashierController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:users,username',
-            'password' => 'required|string|min:6',
-        ]);
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'username' => 'required|string|max:255|unique:users,username',
+        'password' => 'required|string|min:6',
+        'shift' => 'required|in:siang,malam',
+    ]);
 
-        $cashier = User::create([
-            'name' => $request->name,
-            'username' => $request->username,
-            'password' => bcrypt($request->password)
-        ]);
+    $user = User::create([
+        'name' => $request->name,
+        'username' => $request->username,
+        'password' => bcrypt($request->password),
+        'shift' => $request->shift,
+    ]);
+
+    $user->assignRole('cashier');
 
         $role = Role::find(2);
         $cashier->assignRole($role);
@@ -80,14 +85,16 @@ class CashierController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:users,username,' . $id,
-            'password' => 'nullable|string|min:6',
-        ]);
+        'name' => 'required|string|max:255',
+        'username' => 'required|string|max:255|unique:users,username,' . $id,
+        'password' => 'nullable|string|min:6',
+        'shift' => 'required|in:siang,malam',
+    ]);
 
-        $cashier = User::findOrFail($id);
-        $cashier->name = $request->name;
-        $cashier->username = $request->username;
+    $cashier = User::findOrFail($id);
+    $cashier->name = $request->name;
+    $cashier->username = $request->username;
+    $cashier->shift = $request->shift;
 
         if ($request->password) {
             $cashier->password = bcrypt($request->password);

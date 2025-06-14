@@ -28,6 +28,7 @@ class UserSeeder extends Seeder
             'name' => 'Guntur',
             'username' => 'cashier',
             'password' => bcrypt('password'),
+            'shift' => 'siang',
         ]);
         $cashier->assignRole($cashierRole);
 
