@@ -15,6 +15,7 @@ class Sale extends Model
         'user_id',
         'total_price',
         'payment_method',
+        'change'
     ];
 
     /**

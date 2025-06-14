@@ -7,13 +7,12 @@
             <nav>
                 <ol class="flex items-center gap-1.5">
                     <li>
-                        <a class="inline-flex items-center gap-1.5 text-sm text-gray-500"
-                            href="{{ route('dashboard') }}">
+                        <a class="inline-flex items-center gap-1.5 text-sm text-gray-500" href="{{ route('dashboard') }}">
                             Dashboard
                             <svg class="stroke-current" width="17" height="16" viewBox="0 0 17 16" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6.0765 12.667L10.2432 8.50033L6.0765 4.33366" stroke="" stroke-width="1.2"
-                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M6.0765 12.667L10.2432 8.50033L6.0765 4.33366" stroke=""
+                                    stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </a>
                     </li>
@@ -38,8 +37,7 @@
 
         <div class="rounded-2xl border border-gray-200 bg-white sm:p-6">
             <!-- DataTable Three -->
-            <div x-data="dataTableThree()"
-                class="overflow-hidden rounded-xl bg-white pt-4">
+            <div x-data="dataTableThree()" class="overflow-hidden rounded-xl bg-white pt-4">
                 <div class="mb-4 flex flex-col gap-2 px-4 sm:flex-row sm:items-center sm:justify-between">
                     <div class="flex items-center gap-3">
                         <span class="text-gray-500 dark:text-gray-400"> Show </span>
@@ -101,7 +99,8 @@
                                                     <input type="checkbox" class="sr-only"
                                                         @change="checkboxToggle = !checkboxToggle">
                                                     <span
-                                                        :class="checkboxToggle ? 'border-brand-500 bg-brand-500' : 'bg-transparent border-gray-300 dark:border-gray-700'"
+                                                        :class="checkboxToggle ? 'border-brand-500 bg-brand-500' :
+                                                            'bg-transparent border-gray-300 dark:border-gray-700'"
                                                         class="flex h-4 w-4 items-center justify-center rounded-sm border-[1.25px]">
                                                         <span :class="checkboxToggle ? '' : 'opacity-0'">
                                                             <i class="fas fa-check text-white/90 fa-sm"></i>
@@ -134,20 +133,19 @@
                                 </div>
                             </div>
                             <div
-                                class="col-span-1 flex items-center border-r border-gray-200 px-4 py-3 dark:border-gray-800">
+                                class="col-span-2 flex items-center border-r border-gray-200 px-4 py-3 dark:border-gray-800">
                                 <div class="flex w-full cursor-pointer items-center justify-between"
                                     @click="sortBy('selling_price')">
                                     <p class="text-theme-xs font-medium text-gray-700 dark:text-gray-400">
                                         Selling Price
                                     </p>
-
                                     <span class="flex flex-col gap-0.5">
                                         <i class="fal fa-sort"></i>
                                     </span>
                                 </div>
                             </div>
                             <div
-                                class="col-span-1 flex items-center border-r border-gray-200 px-4 py-3 dark:border-gray-800">
+                                class="col-span-2 flex items-center border-r border-gray-200 px-4 py-3 dark:border-gray-800">
                                 <div class="flex w-full cursor-pointer items-center justify-between"
                                     @click="sortBy('purchase_price')">
                                     <p class="text-theme-xs font-medium text-gray-700 dark:text-gray-400">
@@ -164,18 +162,6 @@
                                     @click="sortBy('stock')">
                                     <p class="text-theme-xs font-medium text-gray-700 dark:text-gray-400">
                                         Stock
-                                    </p>
-                                    <span class="flex flex-col gap-0.5">
-                                        <i class="fal fa-sort"></i>
-                                    </span>
-                                </div>
-                            </div>
-                            <div
-                                class="col-span-1 flex items-center border-r border-gray-200 px-4 py-3 dark:border-gray-800">
-                                <div class="flex w-full cursor-pointer items-center justify-between"
-                                    @click="sortBy('packaging')">
-                                    <p class="text-theme-xs font-medium text-gray-700 dark:text-gray-400">
-                                        Packaging
                                     </p>
                                     <span class="flex flex-col gap-0.5">
                                         <i class="fal fa-sort"></i>
@@ -208,18 +194,6 @@
                             </div>
                             <div
                                 class="col-span-1 flex items-center border-r border-gray-200 px-4 py-3 dark:border-gray-800">
-                                <div class="flex w-full cursor-pointer items-center justify-between"
-                                    @click="sortBy('standard_name')">
-                                    <p class="text-theme-xs font-medium text-gray-700 dark:text-gray-400">
-                                        Standard Name
-                                    </p>
-                                    <span class="flex flex-col gap-0.5">
-                                        <i class="fal fa-sort"></i>
-                                    </span>
-                                </div>
-                            </div>
-                            <div
-                                class="col-span-1 flex items-center border-r border-gray-200 px-4 py-3 dark:border-gray-800">
                                 <div class="flex w-full items-center justify-between">
                                     <p class="text-theme-xs font-medium text-gray-700 dark:text-gray-400">
                                         Action
@@ -242,7 +216,7 @@
                             <!-- table item -->
                             <div x-data="{ checkboxToggle: false }"
                                 class="grid grid-cols-12 border-t border-gray-100 dark:border-gray-800"
-                                :class="checkboxToggle ? 'bg-gray-50 dark:bg-gray-900' : '' ">
+                                :class="checkboxToggle ? 'bg-gray-50 dark:bg-gray-900' : ''">
                                 <div
                                     class="col-span-2 flex items-center border-r border-gray-100 px-4 py-3 dark:border-gray-800">
                                     <div class="flex gap-3">
@@ -253,7 +227,8 @@
                                                     <input type="checkbox" class="sr-only"
                                                         @change="checkboxToggle = !checkboxToggle" />
                                                     <span
-                                                        :class="checkboxToggle ? 'border-brand-500 bg-brand-500' : 'bg-transparent border-gray-300 dark:border-gray-700'"
+                                                        :class="checkboxToggle ? 'border-brand-500 bg-brand-500' :
+                                                            'bg-transparent border-gray-300 dark:border-gray-700'"
                                                         class="flex h-4 w-4 items-center justify-center rounded-sm border-[1.25px]">
                                                         <span :class="checkboxToggle ? '' : 'opacity-0'">
                                                             <i class="fas fa-check text-white/90 fa-sm"></i>
@@ -275,14 +250,24 @@
                                     </p>
                                 </div>
                                 <div
-                                    class="col-span-1 flex items-center border-r border-gray-100 px-4 py-3 dark:border-gray-800">
-                                    <p class="text-theme-sm text-gray-700 dark:text-gray-400"
-                                        x-text="product.selling_price"></p>
+                                    class="col-span-2 flex items-center border-r border-gray-100 px-4 py-3 dark:border-gray-800">
+                                    <div class="flex justify-start">
+                                        <p class="text-theme-sm text-gray-700 dark:text-gray-400">Rp. </p>
+                                        <p class="text-theme-sm text-gray-700 dark:text-gray-400"
+                                            x-text="formatRupiah(product.selling_price)"></p>/
+                                        <p class="text-theme-xs ml-2 text-gray-700 dark:text-gray-400"
+                                            x-text="product.packaging"></p>
+
+                                    </div>
                                 </div>
                                 <div
-                                    class="col-span-1 flex items-center border-r border-gray-100 px-4 py-3 dark:border-gray-800">
+                                    class="col-span-2 flex items-center border-r border-gray-100 px-4 py-3 dark:border-gray-800">
+                                    <p class="text-theme-sm text-gray-700 dark:text-gray-400">Rp. </p>
                                     <p class="text-theme-sm text-gray-700 dark:text-gray-400"
-                                        x-text="product.purchase_price"></p>
+                                        x-text="formatRupiah(product.purchase_price)"></p>/
+                                    <p class="text-theme-xs ml-2 text-gray-700 dark:text-gray-400"
+                                        x-text="product.packaging"></p>
+
                                 </div>
                                 <div
                                     class="col-span-1 flex items-center border-r border-gray-100 px-4 py-3 dark:border-gray-800">
@@ -292,34 +277,27 @@
                                 <div
                                     class="col-span-1 flex items-center border-r border-gray-100 px-4 py-3 dark:border-gray-800">
                                     <p class="text-theme-sm text-gray-700 dark:text-gray-400"
-                                        x-text="product.packaging"></p>
-                                </div>
-                                <div
-                                    class="col-span-1 flex items-center border-r border-gray-100 px-4 py-3 dark:border-gray-800">
-                                    <p class="text-theme-sm text-gray-700 dark:text-gray-400"
                                         x-text="product.expiration_date"></p>
                                 </div>
                                 <div
                                     class="col-span-2 flex items-center border-r border-gray-100 px-4 py-3 dark:border-gray-800">
-                                    <p :class="{ 'bg-success-50 dark:bg-success-500/15 text-success-700 dark:text-success-500': product.drug_class === 'Over-the-counter',
-                                            'bg-brand-50 dark:bg-brand-500/15 text-brand-700 dark:text-orange-400': product.drug_class === 'Limited OTC',
-                                            'bg-error-50 dark:bg-error-500/15 text-error-700 dark:text-error-500': product.drug_class === 'Prescription'
-                                            }" class="rounded-full px-2 py-0.5 text-theme-xs font-medium"
+                                    <p :class="{
+                                        'bg-success-50 text-success-700': product.drug_class === 'Over-the-counter',
+                                        'bg-brand-50 text-brand-700': product.drug_class === 'Limited OTC',
+                                        'bg-error-50 text-error-700': product.drug_class === 'Prescription'
+                                    }"
+                                        class="rounded-full px-2 py-0.5 text-theme-xs font-medium"
                                         x-text="product.drug_class"></p>
-                                </div>
-                                <div
-                                    class="col-span-1 flex items-center border-r border-gray-100 px-4 py-3 dark:border-gray-800">
-                                    <p class="text-theme-sm text-gray-700 dark:text-gray-400"
-                                        x-text="product.standard_name"></p>
                                 </div>
                                 <div class="col-span-1 flex items-center px-4 py-3">
                                     <div class="flex w-full items-center gap-5">
-                                        <button class="text-error-500 dark:text-gray-400 dark:hover:text-error-500">
+                                        <a class="text-error-500 dark:text-gray-400 dark:hover:text-error-500">
                                             <i class="fal fa-trash fa-lg"></i>
-                                        </button>
-                                        <button class="text-warning-500 dark:text-gray-400 dark:hover:text-white/90">
+                                        </a>
+                                        <a :href="`/admin/medicine/${product.id}/edit`"
+                                            class="text-warning-500 dark:text-gray-400 dark:hover:text-white/90">
                                             <i class="fal fa-pen fa-lg"></i>
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -345,7 +323,8 @@
                             </button>
 
                             <button @click="goToPage(1)"
-                                :class="currentPage === 1 ? 'bg-blue-500/[0.08] text-brand-500' : 'text-gray-700 dark:text-gray-400'"
+                                :class="currentPage === 1 ? 'bg-blue-500/[0.08] text-brand-500' :
+                                    'text-gray-700 dark:text-gray-400'"
                                 class="flex h-10 w-10 items-center justify-center rounded-lg text-sm font-medium hover:bg-blue-500/[0.08] hover:text-brand-500 dark:hover:text-brand-500">
                                 1
                             </button>
@@ -357,7 +336,8 @@
 
                             <template x-for="page in pagesAroundCurrent" :key="page">
                                 <button @click="goToPage(page)"
-                                    :class="currentPage === page ? 'bg-blue-500/[0.08] text-brand-500' : 'text-gray-700 dark:text-gray-400'"
+                                    :class="currentPage === page ? 'bg-blue-500/[0.08] text-brand-500' :
+                                        'text-gray-700 dark:text-gray-400'"
                                     class="flex h-10 w-10 items-center justify-center rounded-lg text-sm font-medium hover:bg-blue-500/[0.08] hover:text-brand-500 dark:hover:text-brand-500">
                                     <span x-text="page"></span>
                                 </button>
@@ -408,10 +388,10 @@
                             </option>
                         </select>
                         <span class="pointer-events-none absolute top-1/2 right-4 z-30 -translate-y-1/2 text-gray-700">
-                            <svg class="stroke-current" width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4.79175 7.396L10.0001 12.6043L15.2084 7.396" stroke="" stroke-width="1.5"
-                                    stroke-linecap="round" stroke-linejoin="round" />
+                            <svg class="stroke-current" width="20" height="20" viewBox="0 0 20 20"
+                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4.79175 7.396L10.0001 12.6043L15.2084 7.396" stroke=""
+                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </span>
                     </div>
@@ -439,8 +419,8 @@
     <!-- ====== Modal End -->
 
     @push('scripts')
-    <script>
-        const openBtn = document.getElementById('openModal');
+        <script>
+            const openBtn = document.getElementById('openModal');
             const closeBtn = document.getElementById('closeModal');
             const modal = document.getElementById('modalBackdrop');
 
@@ -461,7 +441,7 @@
                     modal.classList.add('hidden');
                 }
             });
-    </script>
-    @include('components.js.dtMedicines')
+        </script>
+        @include('components.js.dtMedicines')
     @endpush
     </x-app->

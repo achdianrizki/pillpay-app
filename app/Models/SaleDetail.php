@@ -15,7 +15,9 @@ class SaleDetail extends Model
         'sale_id',
         'medicine_id',
         'quantity',
-        'price',
+        'sub_total',
+        'unit_price',
+        'change'
     ];
 
     /**

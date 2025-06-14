@@ -1,5 +1,7 @@
 <x-app-layout>
-    <div x-data="{ pageName: `Tambah Obat` }">
+
+
+    <div x-data="{ pageName: `Edit Obat` }">
         <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
             <h2 class="text-xl font-semibold text-gray-800" x-text="pageName"></h2>
 
@@ -42,8 +44,9 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.medicine.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.medicine.update', $medicine->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
+        @method('PUT')
         <div class="rounded-2xl border border-gray-200 bg-white p-6 space-y-6 shadow-lg max-w-2xl mx-auto">
             <div class="grid grid-cols-2 md:grid-cols-2 gap-6">
                 <div class="col-span-6 md:col-span-2 space-y-3">
@@ -51,7 +54,7 @@
                         <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nama Obat</label>
                         <input type="text" name="name" id="name" placeholder="Nama Obat"
                             class="focus:border-brand-300 focus:ring-brand-500/10 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 focus:ring-3 focus:outline-hidden"
-                            value="{{ old('name') }}">
+                            value="{{ old('name', $medicine->name) }}">
                         @error('name')
                             <span class="text-error-500 text-sm">{{ $message }}</span>
                         @enderror
@@ -61,19 +64,25 @@
                         <label for="category" class="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
                         <select id="filter-kategori" name="category"
                             class="focus:border-brand-300 focus:ring-brand-500/10 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 focus:ring-3 focus:outline-hidden">
-                            <option value="" disabled {{ old('category') ? '' : 'selected' }}>Pilih Kategori Obat
+                            <option value="" disabled
+                                {{ old('category', $medicine->category) ? '' : 'selected' }}>Pilih Kategori Obat
                             </option>
-                            <option value="Antipiretik" {{ old('category') == 'Antipiretik' ? 'selected' : '' }}>
+                            <option value="Antipiretik"
+                                {{ old('category', $medicine->category) == 'Antipiretik' ? 'selected' : '' }}>
                                 Antipiretik
                             </option>
-                            <option value="Antibiotik" {{ old('category') == 'Antibiotik' ? 'selected' : '' }}>
+                            <option value="Antibiotik"
+                                {{ old('category', $medicine->category) == 'Antibiotik' ? 'selected' : '' }}>
                                 Antibiotik
                             </option>
-                            <option value="Analgesik" {{ old('category') == 'Analgesik' ? 'selected' : '' }}>Analgesik
+                            <option value="Analgesik"
+                                {{ old('category', $medicine->category) == 'Analgesik' ? 'selected' : '' }}>Analgesik
                             </option>
-                            <option value="Antihistamin" {{ old('category') == 'Antihistamin' ? 'selected' : '' }}>
+                            <option value="Antihistamin"
+                                {{ old('category', $medicine->category) == 'Antihistamin' ? 'selected' : '' }}>
                                 Antihistamin</option>
-                            <option value="Antihipertensi" {{ old('category') == 'Antihipertensi' ? 'selected' : '' }}>
+                            <option value="Antihipertensi"
+                                {{ old('category', $medicine->category) == 'Antihipertensi' ? 'selected' : '' }}>
                                 Antihipertensi</option>
                         </select>
                         @error('category')
@@ -83,7 +92,7 @@
 
                     <div>
                         <label for="drug_class" class="block text-sm font-medium text-gray-700 mb-1">Kelas Obat</label>
-                        <ul x-data="{ drugClass: '{{ old('drug_class') }}' }"
+                        <ul x-data="{ drugClass: '{{ old('drug_class', $medicine->drug_class) }}' }"
                             class="items-center flex flex-col md:flex-row justify-between w-full text-sm font-medium text-gray-900 sm:flex gap-2">
                             <li class="w-full border p-3 rounded-lg"
                                 :class="drugClass === 'Over-the-counter' ? 'border-success-500' : 'border-gray-200'">
@@ -91,7 +100,7 @@
                                     <input id="over-the-counter" type="radio" value="Over-the-counter"
                                         name="drug_class" class="rounded-lg text-sm text-success-500 "
                                         x-model="drugClass"
-                                        {{ old('drug_class') == 'Over-the-counter' ? 'checked' : '' }}>
+                                        {{ old('drug_class', $medicine->drug_class) == 'Over-the-counter' ? 'checked' : '' }}>
                                     <label for="over-the-counter" class="w-full ms-2 text-sm font-medium text-gray-900">
                                         Over the counter
                                     </label>
@@ -102,7 +111,7 @@
                                 <div class="flex items-center ps-3 gap-3">
                                     <input id="Limited-OTC" type="radio" value="Limited OTC" name="drug_class"
                                         class="rounded-lg text-sm text-brand-800 " x-model="drugClass"
-                                        {{ old('drug_class') == 'Limited OTC' ? 'checked' : '' }}>
+                                        {{ old('drug_class', $medicine->drug_class) == 'Limited OTC' ? 'checked' : '' }}>
                                     <label for="Limited-OTC" class="w-full ms-2 text-sm font-medium text-gray-900">
                                         Limited OTC
                                     </label>
@@ -113,7 +122,7 @@
                                 <div class="flex items-center ps-3 gap-3">
                                     <input id="Prescription" type="radio" value="Prescription" name="drug_class"
                                         class="rounded-lg text-sm text-error-500 " x-model="drugClass"
-                                        {{ old('drug_class') == 'Prescription' ? 'checked' : '' }}>
+                                        {{ old('drug_class', $medicine->drug_class) == 'Prescription' ? 'checked' : '' }}>
                                     <label for="Prescription" class="w-full ms-2 text-sm font-medium text-gray-900">
                                         Prescription
                                     </label>
@@ -130,7 +139,7 @@
                             Jual</label>
                         <input type="number" name="selling_price" id="selling_price" placeholder="Harga Jual"
                             class="focus:border-brand-300 focus:ring-brand-500/10 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 focus:ring-3 focus:outline-hidden"
-                            value="{{ old('selling_price') }}">
+                            value="{{ old('selling_price', $medicine->selling_price) }}">
                         @error('selling_price')
                             <span class="text-error-500 text-sm">{{ $message }}</span>
                         @enderror
@@ -141,7 +150,7 @@
                             Beli</label>
                         <input type="number" name="purchase_price" id="purchase_price" placeholder="Harga Beli"
                             class="focus:border-brand-300 focus:ring-brand-500/10 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 focus:ring-3 focus:outline-hidden"
-                            value="{{ old('purchase_price') }}">
+                            value="{{ old('purchase_price', $medicine->purchase_price) }}">
                         @error('purchase_price')
                             <span class="text-error-500 text-sm">{{ $message }}</span>
                         @enderror
@@ -149,22 +158,28 @@
 
                     <div>
                         <label for="packaging" class="block text-sm font-medium text-gray-700 mb-1">Kemasan</label>
-                        <div x-data="{ isOptionSelected: {{ old('packaging') ? 'true' : 'false' }} }" class="relative z-20 bg-transparent">
+                        <div x-data="{ isOptionSelected: {{ old('packaging', $medicine->packaging) ? 'true' : 'false' }} }" class="relative z-20 bg-transparent">
                             <select
                                 class="shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 pr-11 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30"
                                 :class="isOptionSelected && 'text-gray-800 dark:text-white/90'"
                                 @change="isOptionSelected = true" name="packaging" id="packaging">
-                                <option value="" disabled {{ old('packaging') ? '' : 'selected' }}>Pilih Kemasan
+                                <option value="" disabled
+                                    {{ old('packaging', $medicine->packaging) ? '' : 'selected' }}>Pilih Kemasan
                                 </option>
-                                <option value="Strip" {{ old('packaging') == 'Strip' ? 'selected' : '' }}>Strip
+                                <option value="Strip"
+                                    {{ old('packaging', $medicine->packaging) == 'Strip' ? 'selected' : '' }}>Strip
                                 </option>
-                                <option value="Botol" {{ old('packaging') == 'Botol' ? 'selected' : '' }}>Botol
+                                <option value="Botol"
+                                    {{ old('packaging', $medicine->packaging) == 'Botol' ? 'selected' : '' }}>Botol
                                 </option>
-                                <option value="Box" {{ old('packaging') == 'Box' ? 'selected' : '' }}>Box (Dus)
+                                <option value="Box"
+                                    {{ old('packaging', $medicine->packaging) == 'Box' ? 'selected' : '' }}>Box (Dus)
                                 </option>
-                                <option value="Ampul" {{ old('packaging') == 'Ampul' ? 'selected' : '' }}>Ampul
+                                <option value="Ampul"
+                                    {{ old('packaging', $medicine->packaging) == 'Ampul' ? 'selected' : '' }}>Ampul
                                 </option>
-                                <option value="Tube" {{ old('packaging') == 'Tube' ? 'selected' : '' }}>Tube
+                                <option value="Tube"
+                                    {{ old('packaging', $medicine->packaging) == 'Tube' ? 'selected' : '' }}>Tube
                                 </option>
                             </select>
                             <span
@@ -190,7 +205,8 @@
                             <input type="date" name="expiration_date" id="expiration_date"
                                 placeholder="Select date"
                                 class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 pr-11 pl-4 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30"
-                                onclick="this.showPicker()" value="{{ old('expiration_date') }}" />
+                                onclick="this.showPicker()"
+                                value="{{ old('expiration_date', $medicine->expiration_date ? \Illuminate\Support\Carbon::parse($medicine->expiration_date)->format('Y-m-d') : null) }}" />
                             <span
                                 class="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 dark:text-gray-400">
                                 <svg class="fill-current" width="20" height="20" viewBox="0 0 20 20"
@@ -211,7 +227,7 @@
                             Standar <strong class="text-brand-500">(Opsional)</strong></label>
                         <input type="text" name="standard_name" id="standard_name" placeholder="Nama Standar"
                             class="focus:border-brand-300 focus:ring-brand-500/10 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 focus:ring-3 focus:outline-hidden"
-                            value="{{ old('standard_name') }}">
+                            value="{{ old('standard_name', $medicine->standard_name) }}">
                         @error('standard_name')
                             <span class="text-error-500 text-sm">{{ $message }}</span>
                         @enderror
@@ -222,7 +238,7 @@
                             <strong class="text-brand-500">(Opsional)</strong></label>
                         <textarea name="description" id="description" placeholder="Deskripsi"
                             class="focus:border-brand-300 focus:ring-brand-500/10 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 focus:ring-3 focus:outline-hidden"
-                            rows="3">{{ old('description') }}</textarea>
+                            rows="3">{{ old('description', $medicine->description) }}</textarea>
                         @error('description')
                             <span class="text-error-500 text-sm">{{ $message }}</span>
                         @enderror
@@ -233,7 +249,7 @@
                             Pakai</label>
                         <textarea name="usage_instruction" id="usage_instruction" placeholder="Aturan Pakai"
                             class="focus:border-brand-300 focus:ring-brand-500/10 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 focus:ring-3 focus:outline-hidden"
-                            rows="3">{{ old('usage_instruction') }}</textarea>
+                            rows="3">{{ old('usage_instruction', $medicine->usage_instruction) }}</textarea>
                         @error('usage_instruction')
                             <span class="text-error-500 text-sm">{{ $message }}</span>
                         @enderror
@@ -247,6 +263,15 @@
                         @error('images')
                             <span class="text-error-500 text-sm">{{ $message }}</span>
                         @enderror
+                        @if ($medicine->images)
+                            <div class="mt-2">
+                                <span class="text-xs text-gray-500">Gambar saat ini:</span>
+                                <div class="flex flex-wrap gap-2 mt-1">
+                                    <img src="{{ asset('storage/product/' . $medicine->images) }}" alt="Gambar Obat"
+                                        class="h-16 rounded border">
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

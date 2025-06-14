@@ -18,7 +18,8 @@ return new class extends Migration
             $table->integer('quantity');
             $table->decimal('unit_price', 10, 2);
             $table->decimal('sub_total', 10, 2);
-
+            $table->decimal('change', 10, 2);
+            
             $table->foreign('sale_id')->references('id')->on('sales')->onDelete('cascade');
             $table->foreign('medicine_id')->references('id')->on('medicines')->onDelete('cascade');
             $table->timestamps();

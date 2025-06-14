@@ -4,139 +4,145 @@ namespace App\Http\Controllers;
 
 use App\Models\Medicines;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MedicinesController extends Controller
 {
     public function index()
     {
-        $medicines = Medicines::all();
-        return view('admin.medicine.index', compact('medicines'));
+        $medicine = Medicines::all();
+        return view('admin.medicine.index', compact('medicine'));
     }
 
-    public function create(){
+    public function create()
+    {
         return view('admin.medicine.create');
     }
 
     public function fecthMedicines(Request $request)
     {
-        $medicines = Medicines::all();
-        return response()->json($medicines);
+        $medicine = Medicines::orderBy('created_at', 'desc')->get();
+        return response()->json($medicine);
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'name'              => 'required|string|max:255',
-            'code'              => 'required|string|max:50|unique:drugs,code',
-            'category'          => 'nullable|string|max:100',
+            'category'          => 'string|max:100',
             'selling_price'     => 'required|numeric',
             'purchase_price'    => 'required|numeric',
-            'stock'             => 'required|integer',
-            'packaging'         => 'nullable|string|max:100',
-            'expiration_date'   => 'nullable|date',
-            'drug_class'        => 'nullable|string|max:100',
+            'packaging'         => 'required|string|max:100',
+            'expiration_date'   => 'required|date',
+            'drug_class'        => 'required|string|max:100',
             'standard_name'     => 'nullable|string|max:255',
             'description'       => 'nullable|string',
-            'usage_instruction' => 'nullable|string',
-            'images.*'          => 'nullable|image|max:2048',
+            'usage_instruction' => 'required|string',
+            'images.*'          => 'nullable',
         ]);
 
-        $imagePaths = [];
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $imagePaths[] = $image->store('product', 'public');
-            }
+        $filename = 'default.png';
+        if ($request->hasFile('images') && count($request->file('images')) > 0) {
+            $image = $request->file('images')[0];
+            $filename = $image->hashName();
+            $image->storeAs('product', $filename, 'public');
         }
 
-        Drug::create([
+        $lastMedicine = Medicines::orderBy('id', 'desc')->first();
+        if ($lastMedicine && preg_match('/^OBT(\d{4})$/', $lastMedicine->code, $matches)) {
+            $nextNumber = intval($matches[1]) + 1;
+        } else {
+            $nextNumber = 1;
+        }
+        $code =  'OBT' . str_pad($nextNumber, 4, '0', STR_PAD_LEFT);
+
+
+        Medicines::create([
             'name'              => $request->name,
-            'code'              => $request->code,
+            'code'              => $code,
             'category'          => $request->category,
             'selling_price'     => $request->selling_price,
             'purchase_price'    => $request->purchase_price,
-            'stock'             => $request->stock,
+            'stock'             => 0,
             'packaging'         => $request->packaging,
             'expiration_date'   => $request->expiration_date,
             'drug_class'        => $request->drug_class,
             'standard_name'     => $request->standard_name,
             'description'       => $request->description,
             'usage_instruction' => $request->usage_instruction,
-            'images'            => json_encode($imagePaths),
+            'images'            => $filename ?? 'default.png',
         ]);
 
-        return redirect()->route('drugs.index')->with('success', 'Obat berhasil ditambahkan.');
+        // dd($request);
+
+        return redirect()->route('admin.medicine.index')->with('success', 'Obat berhasil ditambahkan.');
     }
 
-    public function show(Drug $drug)
+    public function show(Medicines $medicine)
     {
-        return view('drugs.show', compact('drug'));
+        return view('Mediciness.show', compact('Medicines'));
     }
 
-    public function edit(Drug $drug)
+    public function edit(Medicines $medicine)
     {
-        return view('drugs.edit', compact('drug'));
+        // dd($medicine);
+        return view('admin.medicine.edit', compact('medicine'));
     }
 
-    public function update(Request $request, Drug $drug)
+    public function update(Request $request, Medicines $medicine)
     {
         $request->validate([
             'name'              => 'required|string|max:255',
-            'code'              => 'required|string|max:50|unique:drugs,code,' . $drug->id,
-            'category'          => 'nullable|string|max:100',
+            'category'          => 'string|max:100',
             'selling_price'     => 'required|numeric',
             'purchase_price'    => 'required|numeric',
-            'stock'             => 'required|integer',
-            'packaging'         => 'nullable|string|max:100',
-            'expiration_date'   => 'nullable|date',
-            'drug_class'        => 'nullable|string|max:100',
+            'packaging'         => 'required|string|max:100',
+            'expiration_date'   => 'required|date',
+            'drug_class'        => 'required|string|max:100',
             'standard_name'     => 'nullable|string|max:255',
             'description'       => 'nullable|string',
-            'usage_instruction' => 'nullable|string',
-            'images.*'          => 'nullable|image|max:2048',
+            'usage_instruction' => 'required|string',
+            'images.*'          => 'nullable',
         ]);
 
-        $imagePaths = json_decode($drug->images ?? '[]', true);
-
+        $filename = 'default.png';
         if ($request->hasFile('images')) {
-            foreach ($imagePaths as $oldImage) {
-                Storage::disk('public')->delete($oldImage);
+            if ($medicine->images && $medicine->images !== 'default.png') {
+                Storage::disk('public')->delete('product/' . $medicine->images);
             }
 
-            $imagePaths = [];
-            foreach ($request->file('images') as $image) {
-                $imagePaths[] = $image->store('product', 'public');
-            }
+            $image = $request->file('images');
+            $filename = $image->hashName();
+            $image->storeAs('product', $filename, 'public');
         }
 
-        $drug->update([
+        $medicine->update([
             'name'              => $request->name,
-            'code'              => $request->code,
             'category'          => $request->category,
             'selling_price'     => $request->selling_price,
             'purchase_price'    => $request->purchase_price,
-            'stock'             => $request->stock,
             'packaging'         => $request->packaging,
             'expiration_date'   => $request->expiration_date,
             'drug_class'        => $request->drug_class,
             'standard_name'     => $request->standard_name,
             'description'       => $request->description,
             'usage_instruction' => $request->usage_instruction,
-            'images'            => json_encode($imagePaths),
+            'images'            => $filename,
         ]);
 
-        return redirect()->route('drugs.index')->with('success', 'Obat berhasil diperbarui.');
+        return redirect()->route('admin.medicine.index')->with('success', 'Obat berhasil diperbarui.');
     }
 
-    public function destroy(Drug $drug)
+    public function destroy(Medicines $medicine)
     {
-        if ($drug->images) {
-            foreach (json_decode($drug->images) as $image) {
+        if ($medicine->images) {
+            foreach (json_decode($medicine->images) as $image) {
                 Storage::disk('public')->delete($image);
             }
         }
 
-        $drug->delete();
+        $medicine->delete();
 
-        return redirect()->route('drugs.index')->with('success', 'Obat berhasil dihapus.');
+        return redirect()->route('Mediciness.index')->with('success', 'Obat berhasil dihapus.');
     }
 }

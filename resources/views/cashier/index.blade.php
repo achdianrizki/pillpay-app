@@ -4,21 +4,39 @@
         <div class="col-span-1 bg-white rounded shadow p-4 overflow-y-auto">
             <div class="overflow-y-auto" style="height: calc(90vh - 144px);">
                 <h2 class="text-xl font-bold mb-4">Barang Ditambahkan</h2>
-                <ul class="space-y-2" id="list-barang-ditambahkan"></ul>
+                <ul class="space-y-2" id="list-barang-ditambahkan">
+                    <li class="p-2 bg-gray-100 rounded text-center items-center" id="no-items">
+                        <span>Belum ada barang</span>
+                    </li>
+                </ul>
             </div>
 
             <div class="mt-4">
-                <button x-data x-on:click="$dispatch('open-modal', 'example-modal')"
-                    class="px-4 py-2 bg-blue-600 text-white rounded" id="bayar-button">
-                    Bayar
-                </button>
+                <div class="flex justify-between">
+
+                    <button x-data x-on:click="$dispatch('open-modal', 'example-modal')"
+                        class="px-4 py-2 text-white rounded bg-blue-600 disabled:cursor-not-allowed disabled:bg-blue-300"
+                        id="bayar-button" disabled>
+                        Bayar
+                    </button>
+                </div>
+
 
                 <!-- MODAL PEMBAYARAN -->
-                <x-modal name="example-modal" :show="false" maxWidth="lg">
+                <x-modal name="example-modal" :show="false" maxWidth="2xl">
                     <div class="p-6">
-                        <ul class="space-y-2" id="list-product"></ul>
+                        <p class="mb-3">Barang Ditambahkan :</p>
+                        <div class="max-h-52 overflow-y-auto">
+                            <ul class="space-y-2" id="list-product"></ul>
+                        </div>
 
                         <div class="mt-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Metode Pembayaran:</label>
+                            <select id="metode-pembayaran" class="w-full p-2 border border-gray-300 rounded mb-3">
+                                <option value="cash">Cash</option>
+                                <option value="qris">QRIS</option>
+                            </select>
+
                             <label class="block text-sm font-medium text-gray-700 mb-1">Total Bayar:</label>
                             <input type="text" id="total-bayar" readonly
                                 class="w-full p-2 border border-gray-300 rounded bg-gray-100 font-semibold mb-3"
@@ -38,6 +56,9 @@
                             x-on:click="$dispatch('close-modal', 'example-modal')">
                             Tutup
                         </button>
+                        <button class="mt-4 ml-2 px-4 py-2 bg-green-600 text-white rounded" id="konfirmasi-pembayaran">
+                            Konfirmasi Pembayaran
+                        </button>
                     </div>
                 </x-modal>
             </div>
@@ -47,8 +68,17 @@
         <div class="col-span-2 flex flex-col">
             <div class="bg-white p-4 rounded shadow mb-4">
                 <div class="flex items-center justify-between gap-1">
-                    <input type="text" id="search-produk" class="w-full p-2 border border-gray-300 rounded"
-                        placeholder="Cari produk...">
+                    <input type="text" id="search-produk" name="search"
+                        class="w-full p-2 border border-gray-300 rounded" placeholder="Cari produk...">
+                    <select id="filter-kategori" name="kategori"
+                        class="p-2 border border-gray-300 rounded bg-white ml-2">
+                        <option value="">Filter</option>
+                        <option value="Antipiretik">Antipiretik</option>
+                        <option value="Antibiotik">Antibiotik</option>
+                        <option value="Analgesik">Analgesik</option>
+                        <option value="Antihistamin">Antihistamin</option>
+                        <option value="Antihipertensi">Antihipertensi</option>
+                    </select>
                     <button id="reset-search" class="p-2 border w-11 rounded bg-gray-100 hover:bg-gray-200 ml-2"
                         type="button">
                         <i class="fal fa-times"></i>
@@ -56,47 +86,10 @@
                 </div>
             </div>
 
-            <div class="bg-white p-4 rounded shadow overflow-y-auto" style="height: calc(90vh - 144px);">
-                <div class="grid grid-cols-3 gap-4">
-                    @foreach ($medicines as $item)
-                        <div class="bg-gray-100 p-4 rounded shadow" data-produk="{{ $item->name }}">
-                            <img src="{{ asset('product/' . $item->images) }}" alt="{{ $item->name }}"
-                                class="w-full h-48 object-cover rounded mb-2">
-                            <h3 class="text-lg font-semibold mb-1">{{ $item->name }}</h3>
-                            <h4 class="text-md font-medium mb-1">
-                                {{ 'Rp ' . number_format($item->selling_price, 0, ',', '.') }}
-                            </h4>
-                            <p class="text-gray-600 mb-2">{{ Str::limit($item->description, 20, '...') }}</p>
-                            <div class="flex items-center space-x-2">
-                                <button class="tambah-barang h-auto w-32 bg-blue-500 text-white px-2 py-1 rounded"
-                                    data-nama="{{ $item->name }}">
-                                    +
-                                </button>
-                                <button x-data x-on:click="$dispatch('open-modal', 'detail-modal-{{ $item->id }}')">
-                                    <i class="far fa-exclamation-circle"></i>
-                                </button>
-
-                                <!-- Detail Modal -->
-                                <x-modal name="detail-modal-{{ $item->id }}" :show="false" maxWidth="sm">
-                                    <div class="p-6">
-                                        <h2 class="text-lg font-medium text-gray-900 mb-2">{{ $item->name }}</h2>
-                                        <div class="space-y-1">
-                                            <h5>Deskripsi</h5>
-                                            <p class="text-gray-600 my-2">{{ $item->description }}</p>
-                                        </div>
-                                        <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700">
-                                        <div class="space-y-1">
-                                            <h5>Aturan Pakai</h5>
-                                            <p class="text-gray-600 my-2">{{ $item->usage_instruction }}</p>
-                                        </div>
-                                        <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded"
-                                            x-on:click="$dispatch('close-modal', 'detail-modal-{{ $item->id }}')">Tutup</button>
-                                    </div>
-                                </x-modal>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
+            <div class="bg-white p-4 rounded shadow overflow-y-auto" style="height: calc(90vh - 144px);"
+                id="scroll-container">
+                <div class="grid grid-cols-3 gap-4" id="product-container"></div>
+                <div id="loading" class="text-center text-gray-500 mt-4 hidden">Loading...</div>
             </div>
         </div>
     </div>
@@ -118,71 +111,155 @@
             function hitungTotal() {
                 let total = 0;
                 $('#list-barang-ditambahkan li').each(function() {
-                    const nama = $(this).data('nama');
-                    const jumlah = parseInt($(this).data('jumlah'));
-                    const hargaText = $(`[data-produk="${nama}"]`).find('h4').text().replace(/[^\d]/g, '');
-                    const harga = parseInt(hargaText);
+                    const jumlah = parseInt($(this).find('.jumlah-span').val());
+                    const harga = parseInt($(this).data('harga'));
                     total += harga * jumlah;
                 });
                 $('#total-bayar').val(formatRupiah(total));
                 return total;
             }
 
+            let page = 1;
+            let loading = false;
+            let finished = false;
+
+            function loadProducts(keyword = '', kategori = '') {
+                if (loading || finished) return;
+                loading = true;
+                $('#loading').removeClass('hidden');
+
+                $.ajax({
+                    url: `/api/load-products`,
+                    method: 'GET',
+                    data: {
+                        page,
+                        keyword,
+                        kategori
+                    },
+                    success: function(data) {
+                        setTimeout(() => {
+                            if (data.trim() === '') {
+                                finished = true;
+                                if (page === 1) {
+                                    $('#product-container').html(
+                                        '<div class="col-span-3 text-center text-gray-500 py-8">Tidak ada produk ditemukan</div>'
+                                    );
+                                }
+                            } else {
+                                $('#product-container').append(data);
+                                page++;
+                            }
+                            $('#loading').addClass('hidden');
+                            loading = false;
+                        }, 1500);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Gagal memuat produk:', error);
+                        $('#loading').addClass('hidden');
+                        loading = false;
+                    }
+                });
+            }
+
+            function reloadProducts() {
+                page = 1;
+                finished = false;
+                $('#product-container').empty();
+                const search = $('#search-produk').val();
+                const kategori = $('#filter-kategori').val();
+                loadProducts(search, kategori);
+            }
+
             $(document).ready(function() {
-                // Tambah barang ke daftar
-                $('.tambah-barang').on('click', function() {
+                loadProducts();
+
+                $('#scroll-container').on('scroll', function() {
+                    if (this.scrollTop + this.clientHeight >= this.scrollHeight - 10) {
+                        const search = $('#search-produk').val();
+                        const kategori = $('#filter-kategori').val();
+                        loadProducts(search, kategori);
+                    }
+                });
+
+                $('#search-produk').on('keyup', reloadProducts);
+                $('#filter-kategori').on('change', reloadProducts);
+
+                $('#reset-search').on('click', function() {
+                    $('#search-produk').val('');
+                    $('#filter-kategori').val('');
+                    $('#product-container').empty();
+                    page = 1;
+                    finished = false;
+                    loadProducts();
+                });
+
+                $('#product-container').on('click', '.tambah-barang', function() {
                     const nama = $(this).data('nama');
+                    const parent = $(this).closest('[data-id]');
+                    const id = parent.data('id');
+                    const harga = parent.data('harga');
+
                     const list = $('#list-barang-ditambahkan');
-                    let existing = list.find(`li[data-nama="${nama}"]`);
+                    let existing = list.find(`li[data-id="${id}"]`);
+                    $('#no-items').remove();
+                    $('#bayar-button').prop('disabled', false);
 
                     if (existing.length > 0) {
-                        let jumlah = parseInt(existing.attr('data-jumlah'));
-                        jumlah++;
+                        let jumlah = parseInt(existing.attr('data-jumlah')) + 1;
                         existing.attr('data-jumlah', jumlah);
                         existing.find('.jumlah-span').val(jumlah);
                     } else {
                         list.append(`
-                            <li class="p-2 bg-gray-200 rounded flex justify-between items-center" data-nama="${nama}" data-jumlah="1">
-                                <span>${nama}</span>
-                                <div class="flex items-center space-x-2">
-                                    <button class="kurangi-barang bg-blue-500 text-white px-2 py-1 rounded" data-nama="${nama}">-</button>
-                                    <input class="jumlah-span font-bold w-10 text-center p-1 rounded" value="1" readonly>
-                                    <button class="tambah-barang-daftar bg-blue-500 text-white px-2 py-1 rounded" data-nama="${nama}">+</button>
-                                </div>
-                            </li>
-                        `);
+                    <li class="p-2 bg-gray-200 rounded flex justify-between items-center" 
+                        data-id="${id}" 
+                        data-nama="${nama}" 
+                        data-harga="${harga}" 
+                        data-jumlah="1">
+                        <span>${nama}</span>
+                        <div class="flex items-center space-x-2">
+                            <button class="kurangi-barang bg-red-500 text-white px-2 py-1 rounded" data-id="${id}">-</button>
+                            <input class="jumlah-span font-bold w-10 text-center p-1 rounded" value="1">
+                            <button class="tambah-barang-daftar bg-blue-500 text-white px-2 py-1 rounded" data-id="${id}">+</button>
+                        </div>
+                    </li>
+                `);
                     }
                 });
 
-                // Tambah/Kurang item dari daftar
                 $('#list-barang-ditambahkan').on('click', '.tambah-barang-daftar', function() {
-                    const nama = $(this).data('nama');
-                    let item = $(`li[data-nama="${nama}"]`);
+                    const id = $(this).data('id');
+                    let item = $(`li[data-id="${id}"]`);
                     let jumlah = parseInt(item.attr('data-jumlah')) + 1;
                     item.attr('data-jumlah', jumlah);
                     item.find('.jumlah-span').val(jumlah);
                 });
 
                 $('#list-barang-ditambahkan').on('click', '.kurangi-barang', function() {
-                    const nama = $(this).data('nama');
-                    let item = $(`li[data-nama="${nama}"]`);
+                    const id = $(this).data('id');
+                    let item = $(`li[data-id="${id}"]`);
                     let jumlah = parseInt(item.attr('data-jumlah')) - 1;
+
                     if (jumlah <= 0) {
                         item.remove();
+                        if ($('#list-barang-ditambahkan li').length === 0) {
+                            $('#list-barang-ditambahkan').append(
+                                '<li class="p-2 bg-gray-100 rounded text-center items-center" id="no-items"><span>Belum ada barang</span></li>'
+                            );
+                            $('#bayar-button').prop('disabled', true);
+                        }
                     } else {
                         item.attr('data-jumlah', jumlah);
                         item.find('.jumlah-span').val(jumlah);
                     }
                 });
 
-                // Saat tombol bayar diklik
                 $('#bayar-button').on('click', function() {
                     const list = $('#list-product');
                     list.empty();
 
                     $('#list-barang-ditambahkan li').each(function() {
                         const nama = $(this).data('nama');
-                        const jumlah = $(this).data('jumlah');
+                        const jumlah = parseInt($(this).find('.jumlah-span').val());
                         list.append(`<li class="bg-gray-100 p-2 rounded">${nama} x ${jumlah}</li>`);
                     });
 
@@ -191,12 +268,60 @@
                     $('#kembalian').val('Rp 0');
                 });
 
-                // Hitung kembalian
                 $('#uang-diberikan').on('input', function() {
                     const uang = parseInt($(this).val()) || 0;
                     const total = hitungTotal();
                     const kembali = uang - total;
-                    $('#kembalian').val(formatRupiah(kembali > 0 ? kembali : 0));
+
+                    if (uang < total) {
+                        $('#kembalian').val('Uang tidak cukup');
+                    } else {
+                        $('#kembalian').val(formatRupiah(kembali));
+                    }
+                });
+
+                $('#konfirmasi-pembayaran').on('click', function() {
+                    const metode = $('#metode-pembayaran').val();
+                    const uangDiberikan = parseInt($('#uang-diberikan').val()) || 0;
+                    const total = hitungTotal();
+                    const kembalian = uangDiberikan - total;
+
+                    const items = [];
+                    $('#list-barang-ditambahkan li').each(function() {
+                        const nama = $(this).data('nama');
+                        const jumlah = parseInt($(this).find('.jumlah-span').val());
+                        const harga = parseInt($(this).data('harga'));
+
+                        items.push({
+                            nama: nama,
+                            jumlah: jumlah,
+                            harga: harga
+                        });
+                    });
+
+                    $.ajax({
+                        url: '/api/payment',
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            items,
+                            metode,
+                            total,
+                            uang_diberikan: uangDiberikan,
+                            kembalian
+                        }),
+                        success: function(response) {
+                            window.notyf.success(response.success);
+                            window.location.reload();
+                        },
+                        error: function(xhr) {
+                            console.error(xhr.responseText);
+                            alert('Terjadi kesalahan saat melakukan pembayaran.');
+                        }
+                    });
                 });
             });
         </script>

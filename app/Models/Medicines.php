@@ -13,13 +13,18 @@ class Medicines extends Model
      */
     protected $fillable = [
         'name',
-        'generic_name',
-        'manufacturer',
-        'description',
-        'unit',
-        'purchase_price',
+        'code',
+        'category',
         'selling_price',
-        'stock_quantity',
+        'purchase_price',
+        'stock',
+        'packaging',
+        'expiration_date',
+        'drug_class',
+        'standard_name',
+        'description',
+        'usage_instruction',
+        'images',
     ];
 
     /**

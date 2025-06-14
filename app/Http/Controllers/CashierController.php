@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Medicines;
 use App\Models\User;
+use App\Models\Medicines;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class CashierController extends Controller
 {
@@ -13,28 +14,61 @@ class CashierController extends Controller
     {
         $cashiers = User::all();
         return view('admin.cashier.index', compact('cashiers'));
-    } 
+    }
+
+    // Data API 
+    public function loadProducts(Request $request)
+    {
+        $products = Medicines::query()
+            ->when($request->keyword, fn($q) => $q->where('name', 'like', '%' . $request->keyword . '%'))
+            ->when($request->kategori, fn($q) => $q->where('category', $request->kategori))
+            ->orderBy('name', 'asc')
+            ->paginate(6);
+
+        return $products->map(function ($product) {
+            return view('components.product-card', compact('product'))->render();
+        })->implode('');;
+    }
+
+    public function checkout(Request $request)
+    {
+        $validated = $request->validate([
+            'items' => 'required|array',
+            'uang_diberikan' => 'required|numeric',
+        ]);
+
+        return response()->json(['success' => true, 'message' => 'Transaksi berhasil!']);
+    }
+    // End Data API
+
+    public function cashierIndex()
+    {
+        $medicines = Medicines::all();
+        return view('cashier.index', compact('medicines'));
+    }
 
     public function create()
     {
-    return view('admin.cashier.create'); 
+        return view('admin.cashier.create');
     }
 
     public function store(Request $request)
     {
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'username' => 'required|string|max:255|unique:users,username',
-        'password' => 'required|string|min:6',
-    ]);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users,username',
+            'password' => 'required|string|min:6',
+        ]);
 
-    User::create([
-        'name' => $request->name,
-        'username' => $request->username,
-        'password' => bcrypt($request->password)
-    ]);
+        $cashier = User::create([
+            'name' => $request->name,
+            'username' => $request->username,
+            'password' => bcrypt($request->password)
+        ]);
 
-    return redirect()->route('admin.cashier.index')->with('success', 'Kasir berhasil dibuat.');
+        $role = Role::find(2);
+        $cashier->assignRole($role);
+        return redirect()->route('admin.cashier.index')->with('success', 'Kasir berhasil dibuat.');
     }
 
     public function edit($id)
@@ -46,22 +80,22 @@ class CashierController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-        'name' => 'required|string|max:255',
-        'username' => 'required|string|max:255|unique:users,username,' . $id,
-        'password' => 'nullable|string|min:6',
-    ]);
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users,username,' . $id,
+            'password' => 'nullable|string|min:6',
+        ]);
 
-    $cashier = User::findOrFail($id);
-    $cashier->name = $request->name;
-    $cashier->username = $request->username;
+        $cashier = User::findOrFail($id);
+        $cashier->name = $request->name;
+        $cashier->username = $request->username;
 
-    if ($request->password) {
-        $cashier->password = bcrypt($request->password);
-    }
+        if ($request->password) {
+            $cashier->password = bcrypt($request->password);
+        }
 
-    $cashier->save();
+        $cashier->save();
 
-    return redirect()->route('admin.cashier.index')->with('success', 'Kasir berhasil diperbarui.');
+        return redirect()->route('admin.cashier.index')->with('success', 'Kasir berhasil diperbarui.');
     }
 
 
@@ -71,6 +105,4 @@ class CashierController extends Controller
         $cashier->delete();
         return redirect()->route('admin.cashier.index')->with('success', 'Kasir berhasil dihapus.');
     }
-
-
 }
