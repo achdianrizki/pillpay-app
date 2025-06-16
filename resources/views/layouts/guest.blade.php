@@ -26,6 +26,7 @@
     <!-- ===== Page Wrapper End ===== -->
     <script src="{{ asset('tailadmin/build/bundle.js') }}"></script>
     <script src="{{ asset('fontawesome/pro.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <x-alert />
 </body>
 

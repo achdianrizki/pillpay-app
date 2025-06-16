@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\Auth;
 
 class SaleController extends Controller
 {
+    public function index()
+    {
+        $sales = Sale::with('users')->get();
+        return view('admin.sale.index', compact('sales'));
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -28,7 +34,7 @@ class SaleController extends Controller
 
         try {
             $sale = Sale::create([
-                'user_id' => Auth::id(), // pastikan user login
+                'user_id' => Auth::id(),
                 'total_price' => $validated['total'],
                 'payment_method' => $validated['metode'],
                 'change' => $validated['kembalian'],
@@ -45,6 +51,8 @@ class SaleController extends Controller
                     'sub_total' => $item['jumlah'] * $item['harga'],
                     'change' => $sale->change,
                 ]);
+
+                $medicine->decrement('stock', $item['jumlah']);
             }
 
             DB::commit();

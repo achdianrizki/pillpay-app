@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 
 class Medicines extends Model
@@ -14,11 +15,11 @@ class Medicines extends Model
     protected $fillable = [
         'name',
         'code',
-        'category',
+        'category_id',
         'selling_price',
         'purchase_price',
         'stock',
-        'packaging',
+        'packaging_id',
         'expiration_date',
         'drug_class',
         'standard_name',
@@ -41,5 +42,15 @@ class Medicines extends Model
     public function saleDetails()
     {
         return $this->hasMany(SaleDetail::class);
+    }
+
+    public function packaging()
+    {
+        return $this->belongsTo(Packaging::class, 'packaging_id');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
     }
 }

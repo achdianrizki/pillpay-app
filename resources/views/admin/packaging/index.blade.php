@@ -27,9 +27,9 @@
     <div class="space-y-5 sm:space-y-6">
         <div class="space-y-5 sm:space-y-6">
             <div class="flex items-center justify-between">
-                <a href="{{ route('admin.cashier.create') }}"
+                <a href="{{ route('admin.packaging.create') }}"
                     class="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-white transition rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600">
-                    Tambah Kasir
+                    Tambah Kemasan
                 </a>
             </div>
             <div class="rounded-2xl border border-gray-200 bg-white">
@@ -43,41 +43,21 @@
                             <thead>
                                 <tr class="border-b border-gray-100 text-left">
                                     <th class="px-5 py-3 sm:px-6">No</th>
-                                    <th class="px-5 py-3 sm:px-6">Foto</th>
-                                    <th class="px-5 py-3 sm:px-6">Nama kasir</th>
-                                    <th class="px-5 py-3 sm:px-6">Shift</th>
-                                    <th class="px-5 py-3 sm:px-6">Status</th>
+                                    <th class="px-5 py-3 sm:px-6">Nama</th>
                                     <th class="px-5 py-3 sm:px-6" colspan="2">Action</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-100">
-                                @foreach ($cashiers as $index => $cashier)
+                                @foreach ($packagings as $item)
                                     <tr>
-                                        <td class="px-5 py-4 sm:px-6">{{ $index + 1 }}</td>
+                                        <td class="px-5 py-4 sm:px-6">{{ $loop->iteration }}</td>
+                                        <td class="px-5 py-4 sm:px-6">{{ $item->name }}</td>    
                                         <td class="px-5 py-4 sm:px-6">
-                                            <img class="mr-3 w-11 h-11 rounded-full object-cover object-bottom"
-                                                src="{{ asset('storage/user/' . $cashier->images) }}"
-                                                alt="User" />
-                                        </td>
-                                        <td class="px-5 py-4 sm:px-6">
-                                            {{ $cashier->name }}
-                                        </td>
-                                        <td class="px-5 py-4 sm:px-6">{{ $cashier->shift }}</td>
-                                        <td class="px-5 py-4 sm:px-6">
-                                            @if ($cashier->status == 'online')
-                                                <span
-                                                    class="bg-success-500 text-white text-xs font-medium px-2 py-0.5 rounded">Online</span>
-                                            @else
-                                                <span
-                                                    class="bg-warning-500 text-white text-xs font-medium px-2 py-0.5 rounded">Offline</span>
-                                            @endif
-                                        </td>
-                                        <td class="px-5 py-4 sm:px-6">
-                                            <a href="{{ route('admin.cashier.edit', $cashier->id) }}"
+                                            <a href="{{ route('admin.packaging.edit', $item->id) }}"
                                                 class="text-blue-600 hover:underline">Edit</a>
                                         </td>
                                         <td class="px-5 py-4 sm:px-6">
-                                            <form action="{{ route('admin.cashier.destroy', $cashier->id) }}"
+                                            <form action="{{ route('admin.packaging.destroy', $item->id) }}"
                                                 method="POST"
                                                 onsubmit="return confirm('Yakin ingin menghapus kasir ini?');">
                                                 @csrf

@@ -1,4 +1,4 @@
-<x-layout>
+<x-app-layout>
     <!-- Breadcrumb Start -->
     <div x-data="{ pageName: `Basic Tables` }">
         <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
@@ -185,4 +185,4 @@
             </div>
         </div>
     </div>
-</x-layout>
+</x-app-layout>

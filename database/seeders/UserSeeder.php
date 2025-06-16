@@ -21,6 +21,8 @@ class UserSeeder extends Seeder
             'name' => 'admin',
             'username' => 'admin12',
             'password' => bcrypt('password'),
+            'shift' => 'Tiap Hari ON',
+            'images' => 'default.png'
         ]);
         $admin->assignRole($adminRole);
 
@@ -29,6 +31,7 @@ class UserSeeder extends Seeder
             'username' => 'cashier',
             'password' => bcrypt('password'),
             'shift' => 'siang',
+            'images' => 'default.png'
         ]);
         $cashier->assignRole($cashierRole);
 

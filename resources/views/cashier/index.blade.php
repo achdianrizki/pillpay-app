@@ -61,6 +61,21 @@
                         </button>
                     </div>
                 </x-modal>
+
+                {{-- Modal Struk --}}
+                <x-modal name="struk-modal" :show="false" maxWidth="2xl">
+                    <div class="p-4">
+                        <h2 class="text-lg font-semibold mb-4">Struk Pembayaran</h2>
+                        <iframe id="pdf-preview" class="w-full h-[500px] border" frameborder="0"></iframe>
+                        <div class="mt-4 flex justify-end space-x-2">
+                            <button class="px-4 py-2 bg-gray-300 rounded"
+                                x-on:click="$dispatch('close-modal', 'struk-modal')">Tutup</button>
+                            <button class="px-4 py-2 bg-blue-600 text-white rounded" id="download-struk">Download
+                                Struk</button>
+                        </div>
+                    </div>
+                </x-modal>
+
             </div>
         </div>
 
@@ -73,11 +88,9 @@
                     <select id="filter-kategori" name="kategori"
                         class="p-2 border border-gray-300 rounded bg-white ml-2">
                         <option value="">Filter</option>
-                        <option value="Antipiretik">Antipiretik</option>
-                        <option value="Antibiotik">Antibiotik</option>
-                        <option value="Analgesik">Analgesik</option>
-                        <option value="Antihistamin">Antihistamin</option>
-                        <option value="Antihipertensi">Antihipertensi</option>
+                        @foreach ($categories as $item)
+                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                        @endforeach
                     </select>
                     <button id="reset-search" class="p-2 border w-11 rounded bg-gray-100 hover:bg-gray-200 ml-2"
                         type="button">
@@ -183,6 +196,11 @@
 
                 $('#search-produk').on('keyup', reloadProducts);
                 $('#filter-kategori').on('change', reloadProducts);
+                if ($('#search-produk').val() == null) {
+                    reloadProducts
+                }
+
+
 
                 $('#reset-search').on('click', function() {
                     $('#search-produk').val('');
@@ -314,9 +332,88 @@
                             kembalian
                         }),
                         success: function(response) {
+                            // 1. Tampilkan notifikasi sukses
                             window.notyf.success(response.success);
-                            window.location.reload();
+
+                            // 2. Ambil data item untuk struk
+                            const items = [];
+                            $('#list-barang-ditambahkan li').each(function() {
+                                items.push({
+                                    nama: $(this).data('nama'),
+                                    jumlah: $(this).find('.jumlah-span').val(),
+                                    harga: $(this).data('harga')
+                                });
+                            });
+
+                            const total = hitungTotal();
+                            const uang = parseInt($('#uang-diberikan').val());
+                            const kembalian = uang - total;
+                            const metode = $('#metode-pembayaran').val();
+
+                            // 3. Generate PDF menggunakan jsPDF
+                            // const jsPDF = window.jspdf;
+                            const doc = new jsPDF();
+
+                            let y = 10;
+                            doc.setFontSize(14);
+                            doc.text("Struk Pembayaran", 80, y);
+                            y += 10;
+
+                            doc.setFontSize(10);
+                            items.forEach(item => {
+                                doc.text(
+                                    `${item.nama} x ${item.jumlah} = Rp ${(item.harga * item.jumlah).toLocaleString('id-ID')}`,
+                                    10, y);
+                                y += 6;
+                            });
+
+                            y += 4;
+                            doc.text(`Total: Rp ${total.toLocaleString('id-ID')}`, 10, y);
+                            y += 6;
+                            doc.text(`Uang Diberikan: Rp ${uang.toLocaleString('id-ID')}`, 10, y);
+                            y += 6;
+                            doc.text(`Kembalian: Rp ${kembalian.toLocaleString('id-ID')}`, 10, y);
+                            y += 6;
+                            doc.text(`Metode: ${metode}`, 10, y);
+
+                            // 4. Buat blob URL dan tampilkan di modal
+                            const pdfBlob = doc.output('blob');
+                            const pdfUrl = URL.createObjectURL(pdfBlob);
+                            $('#pdf-preview').attr('src', pdfUrl);
+
+                            // 5. Simpan untuk download
+                            $('#download-struk').off('click').on('click', function() {
+                                doc.save('struk-pembayaran.pdf');
+                            });
+
+                            // 6. Reset UI
+                            $('#list-barang-ditambahkan').html(
+                                `<li class="p-2 bg-gray-100 rounded text-center items-center" id="no-items"><span>Belum ada barang</span></li>`
+                                );
+                            $('#bayar-button').prop('disabled', true);
+                            $('#list-product').empty();
+                            $('#total-bayar').val('Rp 0');
+                            $('#uang-diberikan').val('');
+                            $('#kembalian').val('Rp 0');
+                            $('#metode-pembayaran').val($('#metode-pembayaran option:first').val());
+                            $('#search-produk').val('');
+                            $('#filter-kategori').val('');
+                            $('#product-container').empty();
+
+                            // 7. Tutup modal pembayaran dan buka modal struk
+                            window.dispatchEvent(new CustomEvent('close-modal', {
+                                detail: 'example-modal'
+                            }));
+                            window.dispatchEvent(new CustomEvent('open-modal', {
+                                detail: 'struk-modal'
+                            }));
+
+                            // 8. Reload produk
+                            page = 1;
+                            finished = false;
+                            loadProducts();
                         },
+
                         error: function(xhr) {
                             console.error(xhr.responseText);
                             alert('Terjadi kesalahan saat melakukan pembayaran.');

@@ -59,7 +59,7 @@
                 <a class="flex items-center text-gray-700" href="#"
                     @click.prevent="dropdownOpen = ! dropdownOpen">
                     <span class="mr-3 h-11 w-11 overflow-hidden rounded-full">
-                        <img src="{{ asset("tailadmin/build/src/images/user/owner.jpg") }}" alt="User" />
+                        <img src="{{ asset('storage/user/' . Auth::user()->images) }}" alt="User" />
                     </span>
 
                     <span class="text-theme-sm mr-1 block font-medium"> {{ Auth::user()->name }} </span>

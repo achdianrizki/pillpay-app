@@ -9,7 +9,7 @@
         <div class="relative" x-data="{ dropdownOpen: false }" @click.outside="dropdownOpen = false">
             <a class="flex items-center text-gray-700" href="#" @click.prevent="dropdownOpen = ! dropdownOpen">
                 <span class="mr-3 h-11 w-11 overflow-hidden rounded-full">
-                    <img src="{{ asset("tailadmin/build/src/images/user/owner.jpg") }}" alt="User" />
+                    <img src="{{ asset('storage/user/' . Auth::user()->images) }}" alt="User" />
                 </span>
 
                 <span class="text-theme-sm mr-1 block font-medium"> {{ Auth::user()->name }} </span>
@@ -25,7 +25,7 @@
             <div x-show="dropdownOpen"
                 class="shadow-theme-lg absolute right-0 mt-[17px] flex w-[260px] flex-col rounded-2xl border border-gray-200 bg-white p-3">
 
-                <ul class="flex flex-col gap-1 border-b border-gray-200 pt-4 pb-3">
+                <ul class="flex flex-col gap-1 border-gray-200 pt-4 pb-3">
                     <li>
                         <a href="{{ route('profile.edit') }}"
                             class="group text-theme-sm flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700">

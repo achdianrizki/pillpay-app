@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('medicines', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('packaging_id');
             $table->string('name');
             $table->string('code')->unique();
             $table->string('category')->nullable();
@@ -25,6 +27,9 @@ return new class extends Migration
             $table->string('standard_name')->nullable();
             $table->text('description')->nullable();
             $table->string('images')->nullable();
+
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('packaging_id')->references('id')->on('packagings')->onDelete('cascade');
             $table->string('usage_instruction')->nullable();
             $table->timestamps();
         });

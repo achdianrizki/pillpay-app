@@ -1,0 +1,17 @@
+{
+  "packaging_map": {
+    "ampul": 1,
+    "botol": 2,
+    "box": 3,
+    "strip": 4,
+    "tube": 5
+  },
+  
+  "category_map": {
+    "Analgesik": 1,
+    "Antibiotik": 2,
+    "Antihipertensi": 3,
+    "Antihistamin": 4,
+    "Antipiretik": 5
+  }
+}

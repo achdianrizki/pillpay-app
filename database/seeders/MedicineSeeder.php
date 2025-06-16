@@ -63,18 +63,18 @@ class MedicineSeeder extends Seeder
         //     ],
         // ]);
 
-        $json = File::get(database_path('json/data_obat_apotek.json'));
+        $json = File::get(database_path('json/data_obat_apotek_transformed.json'));
         $items = json_decode($json);
 
         foreach ($items as $item) {
             Medicines::create([
                 'name' => $item->name,
                 'code' => $item->code,
-                'category' => $item->category,
+                'category_id' => $item->category_id,
                 'selling_price' => $item->selling_price,
                 'purchase_price' => $item->purchase_price,
                 'stock' => $item->stock,
-                'packaging' => $item->packaging,
+                'packaging_id' => $item->packaging_id,
                 'expiration_date' => $item->expiration_date,
                 'drug_class' => $item->drug_class,
                 'standard_name' => $item->standard_name,
