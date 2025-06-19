@@ -122,10 +122,10 @@
                         <li>
                             <a href="{{ route('admin.sale.index') }}"
                                 class="menu-dropdown-item group {{ request()->routeIs('admin.sale.index') ? 'menu-dropdown-item-active' : 'menu-dropdown-item-inactive' }}">
-                                List
+                                Data Penjualan
                             </a>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a href="task-kanban.html" class="menu-dropdown-item group"
                                 :class="page === 'taskKanban' ? 'menu-dropdown-item-active' : 'menu-dropdown-item-inactive'">
                                 Kanban
@@ -137,14 +137,14 @@
                                     </span>
                                 </span>
                             </a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
             </div>
 
             <div>
                 <h3 class="mb-4 text-xs uppercase leading-[20px] text-gray-400">
-                    <span class="menu-group-title" :class="sidebarToggle ? 'lg:hidden' : ''">Report</span>
+                    <span class="menu-group-title" :class="sidebarToggle ? 'lg:hidden' : ''">Other</span>
                     <svg :class="sidebarToggle ? 'lg:block hidden' : 'hidden'"
                         class="menu-group-icon mx-auto fill-current" width="24" height="24"
                         viewBox="0 0 24 24" fill="none">
