@@ -11,8 +11,8 @@
                             Home
                             <svg class="stroke-current" width="17" height="16" viewBox="0 0 17 16" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6.0765 12.667L10.2432 8.50033L6.0765 4.33366" stroke=""
-                                    stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M6.0765 12.667L10.2432 8.50033L6.0765 4.33366" stroke="" stroke-width="1.2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </a>
                     </li>
@@ -35,45 +35,58 @@
             <div class="rounded-2xl border border-gray-200 bg-white">
                 <div class="p-5 border-t border-gray-100 sm:p-6">
                     @if (session('success'))
-                        <div class="text-green-600">{{ session('success') }}</div>
+                    <div class="text-green-600">{{ session('success') }}</div>
                     @endif
                     <!-- ====== Table Six Start -->
-                    <div class="max-w-full overflow-x-auto">
                         <table class="min-w-full">
                             <thead>
                                 <tr class="border-b border-gray-100 text-left">
                                     <th class="px-5 py-3 sm:px-6">No</th>
                                     <th class="px-5 py-3 sm:px-6">Nama</th>
-                                    <th class="px-5 py-3 sm:px-6" colspan="2">Action</th>
+                                    <th class="px-5 py-3 sm:px-6">Action</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-100">
                                 @foreach ($categories as $item)
-                                    <tr>
-                                        <td class="px-5 py-4 sm:px-6">{{ $loop->iteration }}</td>
-                                        <td class="px-5 py-4 sm:px-6">{{ $item->name }}</td>
-                                        <td class="px-5 py-4 sm:px-6">
-                                            <a href="{{ route('admin.category.edit', $item->id) }}"
-                                                class="text-blue-600 hover:underline">Edit</a>
-                                        </td>
-                                        <td class="px-5 py-4 sm:px-6">
-                                            <form action="{{ route('admin.category.destroy', $item->id) }}" method="POST"
-                                                onsubmit="return confirm('Yakin ingin menghapus kasir ini?');">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit"
-                                                    class="text-red-600 hover:underline">Hapus</button>
-                                            </form>
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td class="px-5 py-4 sm:px-6">{{ $loop->iteration }}</td>
+                                    <td class="px-5 py-4 sm:px-6">{{ $item->name }}</td>
+                                    <td class="px-5 py-4 sm:px-6">
+                                        <div x-data="{ open: false }" class="relative inline-block text-left">
+                                            <button @click="open = !open"
+                                                class="text-gray-500 dark:text-gray-400 focus:outline-none">
+                                                <svg class="fill-current" width="24" height="24" viewBox="0 0 24 24">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                        d="M5.999 10.245c.967 0 1.75.783 1.75 1.75v.01c0 .967-.783 1.75-1.75 1.75-.966 0-1.75-.783-1.75-1.75v-.01c0-.967.784-1.75 1.75-1.75zm12 0c.967 0 1.75.783 1.75 1.75v.01c0 .967-.783 1.75-1.75 1.75-.966 0-1.75-.783-1.75-1.75v-.01c0-.967.784-1.75 1.75-1.75zM13.749 11.995c0-.967-.784-1.75-1.75-1.75-.967 0-1.75.783-1.75 1.75v.01c0 .967.783 1.75 1.75 1.75.966 0 1.75-.783 1.75-1.75v-.01z" />
+                                                </svg>
+                                            </button>
+                                            <div x-show="open" @click.outside="open = false"
+                                                class="absolute z-10 mt-2 w-32 rounded-lg bg-white border border-gray-200 shadow-lg dark:bg-gray-800 dark:border-gray-700"
+                                                x-transition>
+                                                <a href="{{ route('admin.category.edit', $item->id) }}"
+                                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Edit</a>
+                                                <form action="{{ route('admin.category.destroy', $item->id) }}"
+                                                    method="POST"
+                                                    onsubmit="return confirm('Yakin ingin menghapus kategori ini?');">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:text-red-400 dark:hover:bg-gray-700">
+                                                        Hapus
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
                                 @endforeach
                             </tbody>
-
                         </table>
-                    </div>
+
                     <!-- ====== Table Six End -->
                 </div>
             </div>
         </div>
     </div>
+
 </x-app-layout>

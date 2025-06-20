@@ -53,19 +53,32 @@
                                         <td class="px-5 py-4 sm:px-6">{{ $loop->iteration }}</td>
                                         <td class="px-5 py-4 sm:px-6">{{ $item->name }}</td>    
                                         <td class="px-5 py-4 sm:px-6">
-                                            <a href="{{ route('admin.packaging.edit', $item->id) }}"
-                                                class="text-blue-600 hover:underline">Edit</a>
-                                        </td>
-                                        <td class="px-5 py-4 sm:px-6">
-                                            <form action="{{ route('admin.packaging.destroy', $item->id) }}"
-                                                method="POST"
-                                                onsubmit="return confirm('Yakin ingin menghapus kasir ini?');">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit"
-                                                    class="text-red-600 hover:underline">Hapus</button>
-                                            </form>
-                                        </td>
+                                        <div x-data="{ open: false }" class="relative inline-block text-left">
+                                            <button @click="open = !open"
+                                                class="text-gray-500 dark:text-gray-400 focus:outline-none">
+                                                <svg class="fill-current" width="24" height="24" viewBox="0 0 24 24">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                        d="M5.999 10.245c.967 0 1.75.783 1.75 1.75v.01c0 .967-.783 1.75-1.75 1.75-.966 0-1.75-.783-1.75-1.75v-.01c0-.967.784-1.75 1.75-1.75zm12 0c.967 0 1.75.783 1.75 1.75v.01c0 .967-.783 1.75-1.75 1.75-.966 0-1.75-.783-1.75-1.75v-.01c0-.967.784-1.75 1.75-1.75zM13.749 11.995c0-.967-.784-1.75-1.75-1.75-.967 0-1.75.783-1.75 1.75v.01c0 .967.783 1.75 1.75 1.75.966 0 1.75-.783 1.75-1.75v-.01z" />
+                                                </svg>
+                                            </button>
+                                            <div x-show="open" @click.outside="open = false"
+                                                class="absolute z-10 mt-2 w-32 rounded-lg bg-white border border-gray-200 shadow-lg dark:bg-gray-800 dark:border-gray-700"
+                                                x-transition>
+                                                <a href="{{ route('admin.packaging.edit', $item->id) }}"
+                                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Edit</a>
+                                                <form action="{{ route('admin.packaging.destroy', $item->id) }}"
+                                                    method="POST"
+                                                    onsubmit="return confirm('Yakin ingin menghapus kategori ini?');">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:text-red-400 dark:hover:bg-gray-700">
+                                                        Hapus
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </td>
                                     </tr>
                                 @endforeach
                             </tbody>
