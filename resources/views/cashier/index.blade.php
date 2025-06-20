@@ -56,7 +56,7 @@
                             x-on:click="$dispatch('close-modal', 'example-modal')">
                             Tutup
                         </button>
-                        <button class="mt-4 ml-2 px-4 py-2 bg-green-600 text-white rounded" id="konfirmasi-pembayaran">
+                        <button disabled class="mt-4 ml-2 px-4 py-2 bg-green-600 text-white rounded" id="konfirmasi-pembayaran">
                             Konfirmasi Pembayaran
                         </button>
                     </div>
@@ -289,9 +289,10 @@
                 $('#uang-diberikan').on('input', function() {
                     const uang = parseInt($(this).val()) || 0;
                     const total = hitungTotal();
-                    const kembali = uang - total;
+                    const kembali = uang - total;    
 
-                    if (uang < total) {
+                    if (uang <= total) {
+                        $('#konfirmasi-pembayaran').prop('disabled', false);
                         $('#kembalian').val('Uang tidak cukup');
                     } else {
                         $('#kembalian').val(formatRupiah(kembali));
@@ -351,7 +352,6 @@
                             const metode = $('#metode-pembayaran').val();
 
                             // 3. Generate PDF menggunakan jsPDF
-                            // const jsPDF = window.jspdf;
                             const doc = new jsPDF();
 
                             let y = 10;

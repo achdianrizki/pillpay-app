@@ -13,14 +13,13 @@ class SaleController extends Controller
 {
     public function index()
     {
-        $sales = Sale::with('users')->get();
+        $sales = Sale::with(['user'])->get();
         return view('admin.sale.index', compact('sales'));
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'items' => 'required|array|min:1',
             'items.*.nama' => 'required|string|exists:medicines,name',
             'items.*.jumlah' => 'required|integer|min:1',
             'items.*.harga' => 'required|numeric|min:0',
@@ -42,7 +41,6 @@ class SaleController extends Controller
 
             foreach ($validated['items'] as $item) {
                 $medicine = Medicines::where('name', $item['nama'])->firstOrFail();
-
                 SaleDetail::create([
                     'sale_id' => $sale->id,
                     'medicine_id' => $medicine->id,
@@ -62,5 +60,11 @@ class SaleController extends Controller
             DB::rollBack();
             return response()->json(['error' => 'Gagal menyimpan data: ' . $e->getMessage()], 500);
         }
+    }
+
+    public function show(Sale $sale)
+    {
+        $sale_detail = SaleDetail::with('medicine')->where('sale_id', $sale->id)->get();
+        return view('admin.sale.show', compact('sale_detail'));
     }
 }

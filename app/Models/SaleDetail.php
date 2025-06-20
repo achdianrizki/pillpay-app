@@ -33,6 +33,6 @@ class SaleDetail extends Model
      */
     public function medicine()
     {
-        return $this->belongsTo(Medicines::class);
+        return $this->belongsTo(Medicines::class, 'medicine_id');
     }
 }

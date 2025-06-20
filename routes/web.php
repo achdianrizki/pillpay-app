@@ -14,7 +14,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', [AdminController::class, 'index'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'role:admin'])
     ->name('dashboard');
 
 Route::get('/cashier/dashboard', [CashierController::class, 'cashierIndex'])
@@ -63,6 +63,7 @@ Route::middleware('auth')->group(function () {
 
         // Route Admin report & history
         Route::get('/sales', [SaleController::class, 'index'])->name('sale.index');
+        Route::get('/show/{sale}', [SaleController::class, 'show'])->name('sale.show');
     });
 
     // Route Cashier
