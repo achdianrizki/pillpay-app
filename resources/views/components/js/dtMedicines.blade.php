@@ -7,6 +7,65 @@
             currentPage: 1,
             perPage: 10,
             data: [],
+            selectedItems: [],
+            isModalOpen: false,
+            supplierName: '',
+            minDate: '',
+
+            submitForm() {
+                if (this.selectedItems.length === 0 || !this.supplierName) {
+                    alert('Pastikan semua data sudah diisi.');
+                    return;
+                }
+
+                const payload = {
+                    supplier: this.supplierName,
+                    entries: this.selectedItems.map(item => ({
+                        medicine_id: item.id,
+                        quantity: item.jumlah_stok,
+                        expiration_date: item.expiration_date,
+                    })),
+                };
+
+                fetch('/api/stock-entries', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify(payload)
+                })
+                .then(async (res) => {
+                    if (!res.ok) {
+                        const error = new Error('Gagal submit data');
+                        error.response = res;
+                        throw error;
+                    }
+                    return res.json();
+                })
+                .then(data => {
+                    window.notyf?.success('Stok berhasil ditambahkan.');
+                    this.selectedItems = [];
+                    this.supplierName = '';
+                    this.isModalOpen = false;
+                    this.fetchData();
+                })
+                .catch(async (error) => {
+                    if (error.response) {
+                        const errData = await error.response.json();
+                        console.error("Error response:", errData);
+                        let message = errData.message || 'Terjadi kesalahan.';
+                        if (errData.errors) {
+                            message += '\n' + Object.values(errData.errors).flat().join('\n');
+                        }
+                        alert(message);
+                    } else {
+                        console.error("Unexpected error:", error);
+                        alert('Terjadi kesalahan saat menyimpan: ' + error.message);
+                    }
+                });
+            },
 
             async fetchData() {
                 try {
@@ -19,6 +78,9 @@
             },
 
             init() {
+                const today = new Date();
+                today.setDate(today.getDate() + 1);
+                this.minDate = today.toISOString().split('T')[0];
                 this.fetchData();
             },
 

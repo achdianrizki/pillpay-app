@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MedicinesController;
 use App\Http\Controllers\PackagingController;
+use App\Http\Controllers\StockEntriesController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -64,6 +65,7 @@ Route::middleware('auth')->group(function () {
         // Route Admin report & history
         Route::get('/sales', [SaleController::class, 'index'])->name('sale.index');
         Route::get('/show/{sale}', [SaleController::class, 'show'])->name('sale.show');
+        Route::get('/stock', [StockEntriesController::class, 'index'])->name('stock.index');
     });
 
     // Route Cashier
@@ -82,6 +84,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/medicine/data', [MedicinesController::class, 'fecthMedicines'])->name('medicine.fetch');
         Route::get('/load-products', [CashierController::class, 'loadProducts']);
         Route::post('/payment', [SaleController::class, 'store']);
+        Route::post('/stock-entries', [StockEntriesController::class, 'store']);
     });
 });
 

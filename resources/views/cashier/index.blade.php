@@ -291,11 +291,16 @@
                     const total = hitungTotal();
                     const kembali = uang - total;    
 
-                    if (uang <= total) {
+                    if (uang >= total && uang > 0) {
                         $('#konfirmasi-pembayaran').prop('disabled', false);
-                        $('#kembalian').val('Uang tidak cukup');
-                    } else {
                         $('#kembalian').val(formatRupiah(kembali));
+                    } else {
+                        $('#konfirmasi-pembayaran').prop('disabled', true);
+                        if (uang === 0) {
+                            $('#kembalian').val(0);
+                        } else {
+                            $('#kembalian').val('Uang tidak cukup');
+                        }
                     }
                 });
 

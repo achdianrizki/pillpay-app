@@ -33,7 +33,7 @@ class Medicines extends Model
      */
     public function stockEntries()
     {
-        return $this->hasMany(StockEntries::class);
+        return $this->hasMany(StockEntry::class);
     }
 
     /**

@@ -20,7 +20,20 @@
 
     <div class="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
         <!-- Sidebar Menu -->
-        <nav x-data="{ selected: $persist('Dashboard') }">
+        <nav x-data="{ selected: '',
+                initDropdown() {
+                    const currentUrl = window.location.href;
+                    if (
+                        currentUrl.includes('{{ route('admin.sale.index', [], false) }}') ||
+                        currentUrl.includes('{{ route('admin.stock.index', [], false) }}')
+                    ) {
+                        this.selected = 'Task';
+                    } else {
+                        this.selected = '';
+                    }
+                }
+            }" x-init="initDropdown()">
+
 
             <!-- Menu Group -->
             <div>
@@ -95,28 +108,25 @@
                         <path fill-rule="evenodd" clip-rule="evenodd" />
                     </svg>
                 </h3>
-                <a href="#" @click.prevent="selected = (selected === 'Task' ? '':'Task')" class="menu-item group"
-                    :class="(selected === 'Task') || (page === 'taskList' || page === 'taskKanban') ? 'menu-item-active' :
-                    'menu-item-inactive'">
+
+                <a href="#" @click.prevent="selected = (selected === 'Task' ? '' : 'Task')" class="menu-item group"
+                    :class="selected === 'Task' ? 'menu-item-active' : 'menu-item-inactive'">
                     <i class="fas fa-history fa-lg"></i>
                     <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">
                         Report & History
                     </span>
 
-                    <svg class="menu-item-arrow"
-                        :class="[(selected === 'Task') ? 'menu-item-arrow-active' : 'menu-item-arrow-inactive',
-                            sidebarToggle ? 'lg:hidden' : ''
-                        ]"
-                        width="20" height="20" viewBox="0 0 20 20" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
+                    <svg class="menu-item-arrow" :class="[
+                selected === 'Task' ? 'menu-item-arrow-active' : 'menu-item-arrow-inactive',
+                sidebarToggle ? 'lg:hidden' : ''
+            ]" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M4.79175 7.39584L10.0001 12.6042L15.2084 7.39585" stroke="" stroke-width="1.5"
                             stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </a>
 
                 <!-- Dropdown Menu Start -->
-                <div class="translate transform overflow-hidden"
-                    :class="(selected === 'Task') ? 'block' : 'hidden'">
+                <div class="translate transform overflow-hidden" :class="selected === 'Task' ? 'block' : 'hidden'">
                     <ul :class="sidebarToggle ? 'lg:hidden' : 'flex'"
                         class="menu-dropdown mt-2 flex flex-col gap-1 pl-9">
                         <li>
@@ -125,19 +135,12 @@
                                 Data Penjualan
                             </a>
                         </li>
-                        {{-- <li>
-                            <a href="task-kanban.html" class="menu-dropdown-item group"
-                                :class="page === 'taskKanban' ? 'menu-dropdown-item-active' : 'menu-dropdown-item-inactive'">
-                                Kanban
-                                <span class="absolute right-3 flex items-center gap-1">
-                                    <span class="menu-dropdown-badge"
-                                        :class="page === 'taskKanban' ? 'menu-dropdown-badge-active' :
-                                            'menu-dropdown-badge-inactive'">
-                                        Pro
-                                    </span>
-                                </span>
+                        <li>
+                            <a href="{{ route('admin.stock.index') }}"
+                                class="menu-dropdown-item group {{ request()->routeIs('admin.stock.index') ? 'menu-dropdown-item-active' : 'menu-dropdown-item-inactive' }}">
+                                Data Barang Masuk
                             </a>
-                        </li> --}}
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -146,8 +149,8 @@
                 <h3 class="mb-4 text-xs uppercase leading-[20px] text-gray-400">
                     <span class="menu-group-title" :class="sidebarToggle ? 'lg:hidden' : ''">Other</span>
                     <svg :class="sidebarToggle ? 'lg:block hidden' : 'hidden'"
-                        class="menu-group-icon mx-auto fill-current" width="24" height="24"
-                        viewBox="0 0 24 24" fill="none">
+                        class="menu-group-icon mx-auto fill-current" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none">
                         <path fill-rule="evenodd" clip-rule="evenodd" />
                     </svg>
                 </h3>

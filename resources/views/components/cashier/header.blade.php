@@ -26,13 +26,6 @@
                 class="shadow-theme-lg absolute right-0 mt-[17px] flex w-[260px] flex-col rounded-2xl border border-gray-200 bg-white p-3">
 
                 <ul class="flex flex-col gap-1 border-gray-200 pt-4 pb-3">
-                    <li>
-                        <a href="{{ route('profile.edit') }}"
-                            class="group text-theme-sm flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700">
-                            <i class="far fa-user-circle"></i>
-                            Edit profile
-                        </a>
-                    </li>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <li>

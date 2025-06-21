@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Medicines;
+use App\Models\Packaging;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -16,12 +18,14 @@ class MedicinesController extends Controller
 
     public function create()
     {
-        return view('admin.medicine.create');
+        $packagings = Packaging::all();
+        $categories = Category::all();
+        return view('admin.medicine.create', compact('packagings', 'categories'));
     }
 
     public function fecthMedicines(Request $request)
     {
-        $medicine = Medicines::orderBy('created_at', 'desc')->get();
+        $medicine = Medicines::with('packaging')->orderBy('created_at', 'desc')->get();
         return response()->json($medicine);
     }
 
@@ -29,11 +33,10 @@ class MedicinesController extends Controller
     {
         $request->validate([
             'name'              => 'required|string|max:255',
-            'category'          => 'string|max:100',
+            'category_id'       => 'string',
             'selling_price'     => 'required|numeric',
             'purchase_price'    => 'required|numeric',
-            'packaging'         => 'required|string|max:100',
-            'expiration_date'   => 'required|date',
+            'packaging_id'      => 'required',
             'drug_class'        => 'required|string|max:100',
             'standard_name'     => 'nullable|string|max:255',
             'description'       => 'nullable|string',
@@ -42,8 +45,8 @@ class MedicinesController extends Controller
         ]);
 
         $filename = 'default.png';
-        if ($request->hasFile('images') && count($request->file('images')) > 0) {
-            $image = $request->file('images')[0];
+        if ($request->hasFile('images')) {
+            $image = $request->file('images');
             $filename = $image->hashName();
             $image->storeAs('product', $filename, 'public');
         }
@@ -60,12 +63,11 @@ class MedicinesController extends Controller
         Medicines::create([
             'name'              => $request->name,
             'code'              => $code,
-            'category'          => $request->category,
+            'category_id'       => $request->category_id,
             'selling_price'     => $request->selling_price,
             'purchase_price'    => $request->purchase_price,
             'stock'             => 0,
-            'packaging'         => $request->packaging,
-            'expiration_date'   => $request->expiration_date,
+            'packaging_id'      => $request->packaging_id,
             'drug_class'        => $request->drug_class,
             'standard_name'     => $request->standard_name,
             'description'       => $request->description,
@@ -86,18 +88,19 @@ class MedicinesController extends Controller
     public function edit(Medicines $medicine)
     {
         // dd($medicine);
-        return view('admin.medicine.edit', compact('medicine'));
+        $packagings = Packaging::all();
+        $categories = Category::all();
+        return view('admin.medicine.edit', compact('medicine', 'packagings', 'categories'));
     }
 
     public function update(Request $request, Medicines $medicine)
     {
         $request->validate([
             'name'              => 'required|string|max:255',
-            'category'          => 'string|max:100',
+            'category_id'       => 'string',
             'selling_price'     => 'required|numeric',
             'purchase_price'    => 'required|numeric',
-            'packaging'         => 'required|string|max:100',
-            'expiration_date'   => 'required|date',
+            'packaging_id'      => 'required',
             'drug_class'        => 'required|string|max:100',
             'standard_name'     => 'nullable|string|max:255',
             'description'       => 'nullable|string',
@@ -118,11 +121,10 @@ class MedicinesController extends Controller
 
         $medicine->update([
             'name'              => $request->name,
-            'category'          => $request->category,
+            'category_id'       => $request->category_id,
             'selling_price'     => $request->selling_price,
             'purchase_price'    => $request->purchase_price,
-            'packaging'         => $request->packaging,
-            'expiration_date'   => $request->expiration_date,
+            'packaging_id'      => $request->packaging_id,
             'drug_class'        => $request->drug_class,
             'standard_name'     => $request->standard_name,
             'description'       => $request->description,
@@ -136,13 +138,13 @@ class MedicinesController extends Controller
     public function destroy(Medicines $medicine)
     {
         if ($medicine->images) {
-            foreach (json_decode($medicine->images) as $image) {
-                Storage::disk('public')->delete($image);
+            if ($medicine->images !== 'default.png') {
+                Storage::disk('public')->delete('product/' . $medicine->images);
             }
         }
 
         $medicine->delete();
 
-        return redirect()->route('Mediciness.index')->with('success', 'Obat berhasil dihapus.');
+        return redirect()->route('admin.medicine.index')->with('success', 'Obat berhasil dihapus.');
     }
 }

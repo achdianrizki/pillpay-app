@@ -75,7 +75,6 @@ class MedicineSeeder extends Seeder
                 'purchase_price' => $item->purchase_price,
                 'stock' => $item->stock,
                 'packaging_id' => $item->packaging_id,
-                'expiration_date' => $item->expiration_date,
                 'drug_class' => $item->drug_class,
                 'standard_name' => $item->standard_name,
                 'description' => $item->description ?? '-',

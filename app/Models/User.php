@@ -54,9 +54,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(Sale::class);
     }
-
-    public function stockEntries()
-    {
-        return $this->hasMany(StockEntries::class);
-    }
 }

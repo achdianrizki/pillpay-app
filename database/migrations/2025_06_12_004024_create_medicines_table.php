@@ -17,12 +17,9 @@ return new class extends Migration
             $table->unsignedBigInteger('packaging_id');
             $table->string('name');
             $table->string('code')->unique();
-            $table->string('category')->nullable();
             $table->decimal('selling_price', 12, 2);
             $table->decimal('purchase_price', 12, 2);
             $table->integer('stock')->default(0);
-            $table->string('packaging')->nullable();
-            $table->date('expiration_date')->nullable();
             $table->enum('drug_class', ['Over-the-counter', 'Prescription', 'Limited OTC'])->default('Over-the-counter');
             $table->string('standard_name')->nullable();
             $table->text('description')->nullable();

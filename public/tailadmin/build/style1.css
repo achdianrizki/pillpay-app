@@ -1432,6 +1432,9 @@ svg{-ms-touch-action:none;touch-action:none}image,text,.jvm-zoomin,.jvm-zoomout{
   .cursor-pointer {
     cursor: pointer;
   }
+  .cursor-not-allowed {
+    cursor: not-allowed;
+  }
   .list-decimal {
     list-style-type: decimal;
   }
@@ -1445,6 +1448,9 @@ svg{-ms-touch-action:none;touch-action:none}image,text,.jvm-zoomin,.jvm-zoomout{
   }
   .grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
   .grid-cols-11 {
     grid-template-columns: repeat(11, minmax(0, 1fr));
