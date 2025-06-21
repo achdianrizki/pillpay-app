@@ -28,7 +28,7 @@ class CategoryController extends Controller
             'name' => $request->name,
         ]);
 
-        return response()->json($category, 201);
+        return redirect()->route('admin.category.index')->with('success', 'Category berhasil dibuat.');
     }
 
     public function show($id)
@@ -53,7 +53,7 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->save();
 
-        return response()->json($category);
+        return redirect()->route('admin.category.index')->with('success', 'Categoty berhasil diperbarui.');
     }
 
     public function destroy($id)
@@ -61,6 +61,6 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         $category->delete();
 
-        return response()->json(null, 204);
+        return redirect()->route('admin.category.index')->with('success', 'Category berhasil dihapus.');
     }
 }

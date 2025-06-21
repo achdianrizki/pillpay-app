@@ -28,7 +28,7 @@ class PackagingController extends Controller
             'name' => $request->name,
         ]);
 
-        return response()->json($packaging, 201);
+        return redirect()->route('admin.packaging.index')->with('success', 'Packaging berhasil dibuat.');
     }
 
     public function show($id)
@@ -53,7 +53,7 @@ class PackagingController extends Controller
         $packaging->name = $request->name;
         $packaging->save();
 
-        return response()->json($packaging);
+        return redirect()->route('admin.packaging.index')->with('success', 'Packaging berhasil diubah');
     }
 
     public function destroy($id)
@@ -61,6 +61,6 @@ class PackagingController extends Controller
         $packaging = Packaging::findOrFail($id);
         $packaging->delete();
 
-        return response()->json(null, 204);
+        return redirect()->route('admin.packaging.index')->with('success', 'Packaging berhasil dihapus');
     }
 }
