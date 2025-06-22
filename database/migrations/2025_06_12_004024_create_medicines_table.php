@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('medicines', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('packaging_id');
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->unsignedBigInteger('packaging_id')->nullable();
             $table->string('name');
             $table->string('code')->unique();
             $table->decimal('selling_price', 12, 2);
@@ -25,8 +25,8 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('images')->nullable();
 
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->foreign('packaging_id')->references('id')->on('packagings')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
+            $table->foreign('packaging_id')->references('id')->on('packagings')->onDelete('set null');
             $table->string('usage_instruction')->nullable();
             $table->timestamps();
         });

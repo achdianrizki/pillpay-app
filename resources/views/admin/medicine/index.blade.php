@@ -328,7 +328,7 @@
                                             <p class="text-theme-sm text-gray-700 dark:text-gray-400"
                                                 x-text="formatRupiah(product.selling_price)"></p>/
                                             <p class="text-theme-xs ml-2 text-gray-700 dark:text-gray-400"
-                                                x-text="product.packaging.name"></p>
+                                                x-text="product.packaging ? product.packaging.name : '-'"></p>
 
                                         </div>
                                     </div>
@@ -338,7 +338,7 @@
                                         <p class="text-theme-sm text-gray-700 dark:text-gray-400"
                                             x-text="formatRupiah(product.purchase_price)"></p>/
                                         <p class="text-theme-xs ml-2 text-gray-700 dark:text-gray-400"
-                                            x-text="product.packaging.name"></p>
+                                            x-text="product.packaging ? product.packaging.name : '-'"></p>
 
                                     </div>
                                     <div
@@ -350,7 +350,7 @@
                                     <div
                                         class="col-span-1 flex items-center border-r border-gray-100 px-4 py-3 dark:border-gray-800">
                                         <p class="text-theme-sm text-gray-700 dark:text-gray-400"
-                                            x-text="product.expiration_date"></p>
+                                            x-text="product.category.name"></p>
                                     </div>
                                     <div
                                         class="col-span-2 flex items-center border-r border-gray-100 px-4 py-3 dark:border-gray-800">
