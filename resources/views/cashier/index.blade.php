@@ -3,7 +3,7 @@
         <!-- Sidebar Barang Ditambahkan -->
         <div class="col-span-1 bg-white rounded shadow p-4 overflow-y-auto">
             <div class="overflow-y-auto" style="height: calc(90vh - 144px);">
-                <h2 class="text-xl font-bold mb-4">Barang Ditambahkan</h2>
+                <h2 class="text-md lg:text-lg font-bold mb-4">Barang Ditambahkan</h2>
                 <ul class="space-y-2" id="list-barang-ditambahkan">
                     <li class="p-2 bg-gray-100 rounded text-center items-center" id="no-items">
                         <span>Belum ada barang</span>
@@ -56,7 +56,8 @@
                             x-on:click="$dispatch('close-modal', 'example-modal')">
                             Tutup
                         </button>
-                        <button disabled class="mt-4 ml-2 px-4 py-2 bg-green-600 text-white rounded" id="konfirmasi-pembayaran">
+                        <button disabled class="mt-4 ml-2 px-4 py-2 bg-green-600 text-white rounded"
+                            id="konfirmasi-pembayaran">
                             Konfirmasi Pembayaran
                         </button>
                     </div>
@@ -101,7 +102,7 @@
 
             <div class="bg-white p-4 rounded shadow overflow-y-auto" style="height: calc(90vh - 144px);"
                 id="scroll-container">
-                <div class="grid grid-cols-3 gap-4" id="product-container"></div>
+                <div class="grid grid-cols-2 lg:grid-cols-3 gap-4" id="product-container"></div>
                 <div id="loading" class="text-center text-gray-500 mt-4 hidden">Loading...</div>
             </div>
         </div>
@@ -200,8 +201,6 @@
                     reloadProducts
                 }
 
-
-
                 $('#reset-search').on('click', function() {
                     $('#search-produk').val('');
                     $('#filter-kategori').val('');
@@ -216,6 +215,7 @@
                     const parent = $(this).closest('[data-id]');
                     const id = parent.data('id');
                     const harga = parent.data('harga');
+                    const stock = parent.data('stock');
 
                     const list = $('#list-barang-ditambahkan');
                     let existing = list.find(`li[data-id="${id}"]`);
@@ -223,53 +223,103 @@
                     $('#bayar-button').prop('disabled', false);
 
                     if (existing.length > 0) {
-                        let jumlah = parseInt(existing.attr('data-jumlah')) + 1;
+                        let jumlah = parseInt(existing.attr('data-jumlah'));
+                        if (jumlah >= stock) {
+                            window.notyf.error('Stock tidak cukup');
+                            return;
+                        }
+                        jumlah++;
                         existing.attr('data-jumlah', jumlah);
                         existing.find('.jumlah-span').val(jumlah);
+
+                        updateMainButtonState(id, jumlah, stock);
                     } else {
                         list.append(`
-                    <li class="p-2 bg-gray-200 rounded flex justify-between items-center" 
-                        data-id="${id}" 
-                        data-nama="${nama}" 
-                        data-harga="${harga}" 
-                        data-jumlah="1">
-                        <span>${nama}</span>
-                        <div class="flex items-center space-x-2">
-                            <button class="kurangi-barang bg-red-500 text-white px-2 py-1 rounded" data-id="${id}">-</button>
-                            <input class="jumlah-span font-bold w-10 text-center p-1 rounded" value="1">
-                            <button class="tambah-barang-daftar bg-blue-500 text-white px-2 py-1 rounded" data-id="${id}">+</button>
-                        </div>
-                    </li>
-                `);
+                                <li class="p-2 bg-gray-200 rounded flex justify-between items-center" 
+                                    data-id="${id}" 
+                                    data-nama="${nama}" 
+                                    data-harga="${harga}" 
+                                    data-stock="${stock}"
+                                    data-jumlah="1">
+                                    <span class='text-xs lg:text-md'>${nama}</span>
+                                    <div class="flex items-center space-x-2">
+                                        <button class="kurangi-barang bg-red-500 text-white px-2 md:px-1 py-1 md:py-0 rounded" data-id="${id}">-</button>
+                                        <input class="jumlah-span font-bold w-10 md:w-5 text-center p-1 rounded" value="1">
+                                        <button class="tambah-barang-daftar bg-blue-500 text-white px-2 md:px-1 py-1 md:py-0 rounded" data-id="${id}">+</button>
+                                    </div>
+                                </li>
+                            `);
+                        if (stock === 1) {
+                            updateMainButtonState(id, 1, stock);
+                        }
                     }
                 });
 
                 $('#list-barang-ditambahkan').on('click', '.tambah-barang-daftar', function() {
-                    const id = $(this).data('id');
-                    let item = $(`li[data-id="${id}"]`);
-                    let jumlah = parseInt(item.attr('data-jumlah')) + 1;
-                    item.attr('data-jumlah', jumlah);
-                    item.find('.jumlah-span').val(jumlah);
+                    const li = $(this).closest('li');
+                    const id = li.data('id');
+                    const stock = parseInt(li.data('stock'));
+                    let jumlah = parseInt(li.attr('data-jumlah'));
+
+                    if (jumlah >= stock) {
+                        window.notyf.error('Stock tidak cukup');
+                        return;
+                    }
+
+                    jumlah++;
+                    li.attr('data-jumlah', jumlah);
+                    li.find('.jumlah-span').val(jumlah);
+
+                    updateMainButtonState(id, jumlah, stock);
                 });
 
                 $('#list-barang-ditambahkan').on('click', '.kurangi-barang', function() {
-                    const id = $(this).data('id');
-                    let item = $(`li[data-id="${id}"]`);
-                    let jumlah = parseInt(item.attr('data-jumlah')) - 1;
+                    const li = $(this).closest('li');
+                    const id = li.data('id');
+                    let jumlah = parseInt(li.attr('data-jumlah'));
+                    const stock = parseInt(li.data('stock'));
 
-                    if (jumlah <= 0) {
-                        item.remove();
-                        if ($('#list-barang-ditambahkan li').length === 0) {
-                            $('#list-barang-ditambahkan').append(
-                                '<li class="p-2 bg-gray-100 rounded text-center items-center" id="no-items"><span>Belum ada barang</span></li>'
-                            );
-                            $('#bayar-button').prop('disabled', true);
-                        }
-                    } else {
-                        item.attr('data-jumlah', jumlah);
-                        item.find('.jumlah-span').val(jumlah);
+                    if (jumlah > 1) {
+                        jumlah--;
+                        li.attr('data-jumlah', jumlah);
+                        li.find('.jumlah-span').val(jumlah);
                     }
+
+                    updateMainButtonState(id, jumlah, stock);
                 });
+
+                $('#list-barang-ditambahkan').on('input', '.jumlah-span', function() {
+                    const input = $(this);
+                    const li = input.closest('li');
+                    const id = li.data('id');
+                    const stock = parseInt(li.data('stock'));
+                    let jumlah = parseInt(input.val());
+
+                    if (isNaN(jumlah) || jumlah < 1) {
+                        jumlah = 1;
+                    } else if (jumlah > stock) {
+                        jumlah = stock;
+                        window.notyf.error('Jumlah melebihi stok!');
+                    }
+
+                    li.attr('data-jumlah', jumlah);
+                    input.val(jumlah);
+
+                    updateMainButtonState(id, jumlah, stock);
+                });
+
+                function updateMainButtonState(id, jumlah, stock) {
+                    const mainButton = $(`.tambah-barang[data-id="${id}"]`);
+                    if (jumlah >= stock) {
+                        mainButton.prop('disabled', true)
+                            .removeClass('bg-blue-500')
+                            .addClass('bg-gray-400 cursor-not-allowed');
+                    } else {
+                        mainButton.prop('disabled', false)
+                            .removeClass('bg-gray-400 cursor-not-allowed')
+                            .addClass('bg-blue-500');
+                    }
+                }
 
                 $('#bayar-button').on('click', function() {
                     const list = $('#list-product');
@@ -289,7 +339,7 @@
                 $('#uang-diberikan').on('input', function() {
                     const uang = parseInt($(this).val()) || 0;
                     const total = hitungTotal();
-                    const kembali = uang - total;    
+                    const kembali = uang - total;
 
                     if (uang >= total && uang > 0) {
                         $('#konfirmasi-pembayaran').prop('disabled', false);
@@ -394,7 +444,7 @@
                             // 6. Reset UI
                             $('#list-barang-ditambahkan').html(
                                 `<li class="p-2 bg-gray-100 rounded text-center items-center" id="no-items"><span>Belum ada barang</span></li>`
-                                );
+                            );
                             $('#bayar-button').prop('disabled', true);
                             $('#list-product').empty();
                             $('#total-bayar').val('Rp 0');

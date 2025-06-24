@@ -22,7 +22,8 @@ class UserSeeder extends Seeder
             'username' => 'admin12',
             'password' => bcrypt('password'),
             'shift' => 'Tiap Hari ON',
-            'images' => 'default.png'
+            'images' => 'default.png',
+            'status' => 'online'
         ]);
         $admin->assignRole($adminRole);
 

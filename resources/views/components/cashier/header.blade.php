@@ -1,46 +1,50 @@
-<header class="sticky top-0 z-30 flex w-full p-3  border-gray-200 bg-white lg:border-b shadow-sm">
-    <div class="flex grow flex-col items-center justify-between lg:flex-row lg:px-6">
-        <div
-            class="flex w-full items-center justify-between gap-2 border-b border-gray-200 px-1 py-1 sm:gap-4 lg:justify-normal lg:border-b-0 lg:px-0 lg:py-1">
-            <img class="h-6 w-auto" src="{{ asset('tailadmin/build/src/images/logo/logo.svg') }}" alt="Logo" />
-        </div>
+<header 
+    x-data="{ 
+        sidebarToggle: false, 
+        dropdownOpen: false 
+    }" 
+    class="sticky top-0 z-30 flex w-full border-gray-200 bg-white"
+>
+    <div class="flex w-full flex-col items-center justify-between lg:flex-row lg:px-6">
+        <!-- Top Bar -->
+        <div class="flex w-full items-center justify-between border-b border-gray-200 px-3 py-3 lg:border-b-0 lg:px-0 lg:py-4">
 
-        <!-- User Area -->
-        <div class="relative" x-data="{ dropdownOpen: false }" @click.outside="dropdownOpen = false">
-            <a class="flex items-center text-gray-700" href="#" @click.prevent="dropdownOpen = ! dropdownOpen">
-                <span class="mr-3 h-11 w-11 overflow-hidden rounded-full">
-                    <img src="{{ asset('storage/user/' . Auth::user()->images) }}" alt="User" />
-                </span>
-
-                <span class="text-theme-sm mr-1 block font-medium"> {{ Auth::user()->name }} </span>
-
-                <svg :class="dropdownOpen && 'rotate-180'" class="stroke-gray-500" width="18" height="20"
-                    viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4.3125 8.65625L9 13.3437L13.6875 8.65625" stroke="" stroke-width="1.5"
-                        stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
+            <!-- Logo (Mobile) -->
+            <a href="{{ route('dashboard') }}" class="lg:hidden">
+                <img class="h-8 w-auto block " src="{{ asset('tailadmin/build/src/images/logo/logo.svg') }}" alt="Logo">
+                <img class="h-8 w-auto hidden" src="{{ asset('tailadmin/build/src/images/logo/logo-dark.svg') }}" alt="Logo Dark">
             </a>
 
-            <!-- Dropdown Start -->
-            <div x-show="dropdownOpen"
-                class="shadow-theme-lg absolute right-0 mt-[17px] flex w-[260px] flex-col rounded-2xl border border-gray-200 bg-white p-3">
+            <!-- Profile Dropdown -->
+            <div class="relative" @click.outside="dropdownOpen = false">
+                <a href="#" @click.prevent="dropdownOpen = !dropdownOpen" class="flex items-center text-gray-700 ">
+                    <span class="mr-3 h-11 w-11 overflow-hidden rounded-full border">
+                        <img src="{{ asset('storage/user/' . (Auth::user()->images ?? 'default.png')) }}" alt="User" class="object-cover h-full w-full">
+                    </span>
+                    <span class="text-sm font-medium mr-1">{{ Auth::user()->name }}</span>
+                    <svg :class="{ 'rotate-180': dropdownOpen }" class="transition-transform stroke-gray-500 dark:stroke-gray-300" width="18" height="20" viewBox="0 0 18 20">
+                        <path d="M4.31 8.66L9 13.34l4.69-4.69" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
 
-                <ul class="flex flex-col gap-1 border-gray-200 pt-4 pb-3">
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
+                <!-- Dropdown Menu -->
+                <div 
+                    x-show="dropdownOpen" 
+                    x-transition 
+                    class="absolute right-0 mt-4 w-64 rounded-2xl border border-gray-200 bg-white shadow-lg p-3 z-50"
+                >
+                    <ul class="flex flex-col gap-1 border-gray-200 py-3">
                         <li>
-                            <a href="{{ route('logout') }}"
-                                class="group text-theme-sm flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700"
-                                onclick="event.preventDefault(); this.closest('form').submit();">
-                                <i class="far fa-sign-out-alt"></i>
-                                {{ __('Log Out') }}
-                            </a>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="w-full flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-700  hover:bg-gray-100 rounded-lg">
+                                    <i class="far fa-sign-out-alt"></i> {{ __('Log Out') }}
+                                </button>
+                            </form>
                         </li>
-                    </form>
-                </ul>
+                    </ul>
+                </div>
             </div>
-            <!-- Dropdown End -->
         </div>
-        <!-- User Area -->
     </div>
 </header>

@@ -34,6 +34,7 @@ class AuthenticatedSessionController extends Controller
         }
 
         if ($user->hasRole('cashier')) {
+            $user->update(['status' => 'online']);
             return redirect()->route('cashier.dashboard');
         }
     }
@@ -43,10 +44,15 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
+        $user = Auth::user();
+
+        if ($user) {
+            $user->update(['status' => 'offline']);
+        }
+
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
 
         return redirect('/');

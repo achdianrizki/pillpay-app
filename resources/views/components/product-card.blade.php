@@ -1,21 +1,20 @@
- <div class="bg-gray-100 p-4 rounded shadow" data-id="{{ $product->id }}" data-kategori="{{ $product->category_name }}"
-     data-harga="{{ $product->selling_price }}">
-     <img src="{{ asset('storage/product/' . $product->images) }}" alt="{{ $product->name }}"
-         class="w-full h-48 object-cover rounded mb-2">
-     <h3 class="text-lg font-semibold mb-1">{{ $product->name }}</h3>
-     <h4 class="text-md font-medium mb-1">
-         <div class="flex justify-between">
-             <div>
-                 {{ 'Rp ' . number_format($product->selling_price, 0, ',', '.') }}
-                 /<small>{{ $product->packaging_name }}</small>
-             </div>
-
-             <div>
-                 <small>Stock : </small> {{ $product->stock }}
-             </div>
-         </div>
-     </h4>
-     <p class="text-gray-600 mb-2">{{ Str::limit($product->description, 20, '...') }}</p>
+ <div class="bg-gray-100 p-4 md:p-2 rounded shadow" data-id="{{ $product->id }}" data-kategori="{{ $product->category_name }}"
+     data-harga="{{ $product->selling_price }}" data-stock="{{ $product->stock }}">
+    <img src="{{ asset('storage/product/' . $product->images) }}" alt="{{ $product->name }}"
+        class="w-full h-48 md:h-56 lg:h-48 object-cover rounded mb-2">
+     <h3 class="text-lg md:text-md font-semibold mb-1">{{ $product->name }}</h3>
+    <h4 class="text-xs md:text-sm lg:text-base font-medium mb-1">
+        <div class="flex flex-col sm:flex-row sm:justify-between">
+            <div>
+                {{ 'Rp ' . number_format($product->selling_price, 0, ',', '.') }}
+                <span class="text-xs md:text-sm">/<small>{{ $product->packaging_name }}</small></span>
+            </div>
+            <div class="mt-1 sm:mt-0">
+                <small>Stock:</small> <span class="text-xs md:text-sm">{{ $product->stock }}</span>
+            </div>
+        </div>
+    </h4>
+     <p class="text-gray-600 mb-2 text-sm">{{ Str::limit($product->description, 20, '...') }}</p>
      <div class="flex justify-between products-center space-x-2">
         @if($product->stock == 0)
             <button class="h-auto w-32 bg-gray-200 text-white px-2 py-1 rounded cursor-not-allowed" disabled>

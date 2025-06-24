@@ -11,12 +11,58 @@
             isModalOpen: false,
             supplierName: '',
             minDate: '',
+            supplierError: '',
+            itemErrors: [],
 
             submitForm() {
-                if (this.selectedItems.length === 0 || !this.supplierName) {
-                    alert('Pastikan semua data sudah diisi.');
+                this.supplerError = '';
+
+                if (!this.supplierName) {
+                    this.supplierError = 'Nama supplier wajib diisi.';
                     return;
                 }
+
+                if (this.selectedItems.length === 0) {
+                    this.supplierError = 'Pilih setidaknya satu item obat.';
+                    return;
+                }
+
+                this.itemErrors = this.selectedItems.map(() => ({
+                    jumlah_stok: '',
+                    purchase_price: '',
+                    packaging: '',
+                    expiration_date: ''
+                }));
+
+                let hasError = false;
+
+                this.selectedItems.forEach((item, index) => {
+                    if (!item.jumlah_stok) {
+                        this.itemErrors[index].jumlah_stok = 'Jumlah stok wajib diisi.';
+                        hasError = true;
+                    }
+                    if (!item.purchase_price) {
+                        this.itemErrors[index].purchase_price = 'Harga beli wajib diisi.';
+                        hasError = true;
+                    }
+                    if (!item.packaging) {
+                        this.itemErrors[index].packaging = 'Kemasan wajib dipilih.';
+                        hasError = true;
+                    }
+                    if (!item.expiration_date) {
+                        this.itemErrors[index].expiration_date = 'Tanggal expire wajib diisi.';
+                        hasError = true;
+                    }
+                });
+
+                if (!this.supplierName) {
+                    this.supplierError = 'Nama supplier wajib diisi.';
+                    hasError = true;
+                }
+
+                if (hasError) return;
+
+
 
                 const payload = {
                     supplier: this.supplierName,
@@ -24,47 +70,51 @@
                         medicine_id: item.id,
                         quantity: item.jumlah_stok,
                         expiration_date: item.expiration_date,
+                        purchase_price: item.purchase_price,
+                        packaging: item.packaging,
                     })),
+
                 };
 
                 fetch('/api/stock-entries', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                    },
-                    body: JSON.stringify(payload)
-                })
-                .then(async (res) => {
-                    if (!res.ok) {
-                        const error = new Error('Gagal submit data');
-                        error.response = res;
-                        throw error;
-                    }
-                    return res.json();
-                })
-                .then(data => {
-                    window.notyf?.success('Stok berhasil ditambahkan.');
-                    this.selectedItems = [];
-                    this.supplierName = '';
-                    this.isModalOpen = false;
-                    this.fetchData();
-                })
-                .catch(async (error) => {
-                    if (error.response) {
-                        const errData = await error.response.json();
-                        console.error("Error response:", errData);
-                        let message = errData.message || 'Terjadi kesalahan.';
-                        if (errData.errors) {
-                            message += '\n' + Object.values(errData.errors).flat().join('\n');
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                                'content')
+                        },
+                        body: JSON.stringify(payload)
+                    })
+                    .then(async (res) => {
+                        if (!res.ok) {
+                            const error = new Error('Gagal submit data');
+                            error.response = res;
+                            throw error;
                         }
-                        alert(message);
-                    } else {
-                        console.error("Unexpected error:", error);
-                        alert('Terjadi kesalahan saat menyimpan: ' + error.message);
-                    }
-                });
+                        return res.json();
+                    })
+                    .then(data => {
+                        window.notyf?.success('Stok berhasil ditambahkan.');
+                        this.selectedItems = [];
+                        this.supplierName = '';
+                        this.isModalOpen = false;
+                        this.fetchData();
+                    })
+                    .catch(async (error) => {
+                        if (error.response) {
+                            const errData = await error.response.json();
+                            console.error("Error response:", errData);
+                            let message = errData.message || 'Terjadi kesalahan.';
+                            if (errData.errors) {
+                                message += '\n' + Object.values(errData.errors).flat().join('\n');
+                            }
+                            alert(message);
+                        } else {
+                            console.error("Unexpected error:", error);
+                            alert('Terjadi kesalahan saat menyimpan: ' + error.message);
+                        }
+                    });
             },
 
             async fetchData() {

@@ -66,6 +66,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/sales', [SaleController::class, 'index'])->name('sale.index');
         Route::get('/show/{sale}', [SaleController::class, 'show'])->name('sale.show');
         Route::get('/stock', [StockEntriesController::class, 'index'])->name('stock.index');
+        Route::get('/stock/{id}', [StockEntriesController::class, 'show'])->name('stock.show');
     });
 
     // Route Cashier

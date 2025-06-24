@@ -8,11 +8,11 @@
                 <ol class="flex items-center gap-1.5">
                     <li>
                         <a class="inline-flex items-center gap-1.5 text-sm text-gray-500" href="index.html">
-                            Home
+                            Dashboard
                             <svg class="stroke-current" width="17" height="16" viewBox="0 0 17 16" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6.0765 12.667L10.2432 8.50033L6.0765 4.33366" stroke="" stroke-width="1.2"
-                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M6.0765 12.667L10.2432 8.50033L6.0765 4.33366" stroke=""
+                                    stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </a>
                     </li>
@@ -35,23 +35,47 @@
             <div class="rounded-2xl border border-gray-200 bg-white">
                 <div class="p-5 border-t border-gray-100 sm:p-6">
                     @if (session('success'))
-                    <div class="text-green-600">{{ session('success') }}</div>
+                        <div class="text-green-600">{{ session('success') }}</div>
                     @endif
                     <!-- ====== Table Six Start -->
-                    
-                        <table class="min-w-full">
-                            <thead>
-                                <tr class="border-b border-gray-100 text-left">
-                                    <th class="px-5 py-3 sm:px-6">No</th>
-                                    <th class="px-5 py-3 sm:px-6">Foto</th>
-                                    <th class="px-5 py-3 sm:px-6">Nama kasir</th>
-                                    <th class="px-5 py-3 sm:px-6">Shift</th>
-                                    <th class="px-5 py-3 sm:px-6">Status</th>
-                                    <th class="px-5 py-3 sm:px-6">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-gray-100">
-                                @foreach ($cashiers as $index => $cashier)
+
+                    <table class="min-w-full">
+                        <thead>
+                            <tr class="border-b border-gray-100 text-left">
+                                <th class="px-5 py-3 sm:px-6">
+                                    <div class="flex items-center">
+                                        <p class="font-medium text-gray-500 text-theme-xs">No</p>
+                                    </div>
+                                </th>
+                                <th class="px-5 py-3 sm:px-6">
+                                    <div class="flex items-center">
+                                        <p class="font-medium text-gray-500 text-theme-xs">Foto</p>
+                                    </div>
+                                </th>
+                                <th class="px-5 py-3 sm:px-6">
+                                    <div class="flex items-center">
+                                        <p class="font-medium text-gray-500 text-theme-xs">Nana Kasir</p>
+                                    </div>
+                                </th>
+                                <th class="px-5 py-3 sm:px-6">
+                                    <div class="flex items-center">
+                                        <p class="font-medium text-gray-500 text-theme-xs">Shift</p>
+                                    </div>
+                                </th>
+                                <th class="px-5 py-3 sm:px-6">
+                                    <div class="flex items-center">
+                                        <p class="font-medium text-gray-500 text-theme-xs">Status</p>
+                                    </div>
+                                </th>
+                                <th class="px-5 py-3 sm:px-6">
+                                    <div class="flex items-center">
+                                        <p class="font-medium text-gray-500 text-theme-xs">Action</p>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                            @foreach ($cashiers as $index => $cashier)
                                 <tr>
                                     <td class="px-5 py-4 sm:px-6">{{ $index + 1 }}</td>
                                     <td class="px-5 py-4 sm:px-6">
@@ -62,18 +86,19 @@
                                     <td class="px-5 py-4 sm:px-6">{{ $cashier->shift }}</td>
                                     <td class="px-5 py-4 sm:px-6">
                                         @if ($cashier->status == 'online')
-                                        <span
-                                            class="bg-success-500 text-white text-xs font-medium px-2 py-0.5 rounded">Online</span>
+                                            <span
+                                                class="bg-success-500 text-white text-xs font-medium px-2 py-0.5 rounded">Online</span>
                                         @else
-                                        <span
-                                            class="bg-warning-500 text-white text-xs font-medium px-2 py-0.5 rounded">Offline</span>
+                                            <span
+                                                class="bg-warning-500 text-white text-xs font-medium px-2 py-0.5 rounded">Offline</span>
                                         @endif
                                     </td>
                                     <td class="px-5 py-4 sm:px-6">
                                         <div x-data="{ open: false }" class="relative inline-block text-left">
                                             <button @click="open = !open"
                                                 class="text-gray-500 dark:text-gray-400 focus:outline-none">
-                                                <svg class="fill-current" width="24" height="24" viewBox="0 0 24 24">
+                                                <svg class="fill-current" width="24" height="24"
+                                                    viewBox="0 0 24 24">
                                                     <path fill-rule="evenodd" clip-rule="evenodd"
                                                         d="M5.999 10.245c.967 0 1.75.783 1.75 1.75v.01c0 .967-.783 1.75-1.75 1.75-.966 0-1.75-.783-1.75-1.75v-.01c0-.967.784-1.75 1.75-1.75zm12 0c.967 0 1.75.783 1.75 1.75v.01c0 .967-.783 1.75-1.75 1.75-.966 0-1.75-.783-1.75-1.75v-.01c0-.967.784-1.75 1.75-1.75zM13.749 11.995c0-.967-.784-1.75-1.75-1.75-.967 0-1.75.783-1.75 1.75v.01c0 .967.783 1.75 1.75 1.75.966 0 1.75-.783 1.75-1.75v-.01z" />
                                                 </svg>
@@ -97,11 +122,11 @@
                                         </div>
                                     </td>
                                 </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                            @endforeach
+                        </tbody>
+                    </table>
 
-                    
+
                     <!-- ====== Table Six End -->
                 </div>
             </div>

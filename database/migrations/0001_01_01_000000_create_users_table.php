@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('shift');
             $table->string('images');
+            $table->string('status')->default('offline');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -7,13 +7,12 @@
             <nav>
                 <ol class="flex items-center gap-1.5">
                     <li>
-                        <a class="inline-flex items-center gap-1.5 text-sm text-gray-500"
-                            href="{{ route('dashboard') }}">
+                        <a class="inline-flex items-center gap-1.5 text-sm text-gray-500" href="{{ route('dashboard') }}">
                             Dashboard
                             <svg class="stroke-current" width="17" height="16" viewBox="0 0 17 16" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6.0765 12.667L10.2432 8.50033L6.0765 4.33366" stroke="" stroke-width="1.2"
-                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M6.0765 12.667L10.2432 8.50033L6.0765 4.33366" stroke=""
+                                    stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </a>
                     </li>
@@ -25,12 +24,15 @@
     <!-- Breadcrumb End -->
 
     <div class="space-y-5 sm:space-y-6">
-
         <div x-data="dataTableThree()">
             <div class="flex items-center justify-between py-2">
                 {{-- <div x-text="JSON.stringify(selectedItems)"></div> --}}
                 <button @click="isModalOpen = !isModalOpen" :disabled="selectedItems.length === 0"
-                    :class="{ 'bg-brand-500 hover:bg-brand-600 cursor-pointer': selectedItems.length > 0, 'bg-gray-300 cursor-not-allowed': selectedItems.length === 0}"
+                    :class="{
+                        'bg-brand-500 hover:bg-brand-600 cursor-pointer': selectedItems.length >
+                            0,
+                        'bg-gray-300 cursor-not-allowed': selectedItems.length === 0
+                    }"
                     class="px-3 py-2 text-sm font-medium text-white rounded-lg shadow-theme-xs">
                     Tambah Stok
                 </button>
@@ -39,9 +41,10 @@
                     class="fixed inset-0 flex items-center justify-center p-5 overflow-y-auto modal z-99999">
                     <div class="modal-close-btn fixed inset-0 h-full w-full bg-gray-400/50"></div>
                     <div @click.outside="isModalOpen = false"
-                        class="relative w-full max-w-[700px] rounded-3xl bg-white p-6 dark:bg-gray-900 lg:p-10">
+                        class="relative w-full max-w-midhalf h-full rounded-3xl bg-white p-6 dark:bg-gray-900 lg:p-10">
                         <!-- close btn -->
-                        <button @click="isModalOpen = false" class="group absolute right-3 top-3 z-999 flex h-9.5 w-9.5 items-center justify-center
+                        <button @click="isModalOpen = false"
+                            class="group absolute right-3 top-3 z-999 flex h-9.5 w-9.5 items-center justify-center
                             rounded-full bg-gray-200 text-gray-500 transition-colors hover:bg-gray-300 hover:text-gray-500
                             dark:bg-gray-800 dark:hover:bg-gray-700 sm:right-6 sm:top-6 sm:h-11 sm:w-11">
                             <i class="far fa-times"></i>
@@ -59,44 +62,108 @@
                                     Nama Supplier
                                 </label>
                                 <input type="text" x-model="supplierName" placeholder="Nama Supplier"
-                                    class="h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800" />
+                                    @input="supplierError = ''"
+                                    class="h-11 w-full rounded-lg border bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10"
+                                    :class="supplierError ? 'border-error-500' : 'border-gray-300'" />
+
+                                <p x-show="supplierError" x-text="supplierError" class="mt-1 text-sm text-error-600">
+                                </p>
+
+
                             </div>
 
                             <!-- Daftar Obat Terpilih -->
-                            <div class="max-h-[195px] overflow-y-auto">
+                            <div class="max-h-[350px] h-[350px] overflow-y-auto">
                                 <template x-for="(item, index) in selectedItems" :key="item.id">
-                                    {{-- <div x-init="console.log('Selected item:', item.id)"> --}}
-                                        <div class="mb-4 grid grid-cols-3 gap-4">
-                                            <div>
-                                                <label
-                                                    class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-400">
-                                                    Nama Obat
-                                                </label>
-                                                <input type="text" x-model="item.name" readonly
-                                                    class="h-11 w-full rounded-lg border border-gray-300 bg-gray-100 px-4 py-2.5 text-sm text-gray-800 dark:bg-gray-800 dark:text-white/90" />
-                                            </div>
+                                    <div class="mb-4 grid grid-cols-5 gap-4">
 
-                                            <div>
-                                                <label
-                                                    class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-400">
-                                                    Jumlah Stok
-                                                </label>
-                                                <input type="number" x-model="item.jumlah_stok"
-                                                    class="h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800" />
-                                            </div>
+                                        <!-- Nama Obat -->
+                                        <div>
+                                            <label
+                                                class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-400">
+                                                Nama Obat
+                                            </label>
+                                            <input type="text" x-model="item.name" readonly
+                                                class="h-11 w-full rounded-lg border border-gray-300 bg-gray-100 px-4 py-2.5 text-sm text-gray-800 dark:bg-gray-800 dark:text-white/90" />
+                                        </div>
 
-                                            <div>
-                                                <label
-                                                    class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-400">
-                                                    Tanggal Expire
-                                                </label>
-                                                <input type="date" x-model="item.expiration_date" :min="minDate"
-                                                    class="h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
-                                                    onclick="this.showPicker()" />
+                                        <!-- Jumlah Stok -->
+                                        <div>
+                                            <label
+                                                class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-400">
+                                                Jumlah
+                                            </label>
+                                            <input type="number" x-model="item.jumlah_stok"
+                                                @input="if (!itemErrors[index]) itemErrors[index] = {}; itemErrors[index].jumlah_stok = ''"
+                                                :class="itemErrors[index]?.jumlah_stok ? 'border-error-500' :
+                                                    'border-gray-300'"
+                                                class="h-11 w-full rounded-lg border bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10" />
+                                            <p x-show="itemErrors[index]?.jumlah_stok"
+                                                x-text="itemErrors[index]?.jumlah_stok"
+                                                class="mt-1 text-sm text-error-600"></p>
+                                        </div>
+
+                                        <!-- Harga Beli -->
+                                        <div>
+                                            <label
+                                                class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-400">
+                                                Harga Beli
+                                            </label>
+                                            <input type="number" x-model="item.purchase_price"
+                                                @input="if (!itemErrors[index]) itemErrors[index] = {}; itemErrors[index].purchase_price = ''"
+                                                :class="itemErrors[index]?.purchase_price ? 'border-error-500' :
+                                                    'border-gray-300'"
+                                                class="h-11 w-full rounded-lg border bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10" />
+                                            <p x-show="itemErrors[index]?.purchase_price"
+                                                x-text="itemErrors[index]?.purchase_price"
+                                                class="mt-1 text-sm text-error-600"></p>
+                                        </div>
+
+                                        <!-- Kemasan -->
+                                        <div>
+                                            <label
+                                                class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-400">
+                                                Kemasan
+                                            </label>
+                                            <div class="relative z-20 bg-transparent">
+                                                <select x-model="item.packaging"
+                                                    @input="if (!itemErrors[index]) itemErrors[index] = {}; itemErrors[index].packaging = ''"
+                                                    :class="itemErrors[index]?.packaging ? 'border-error-500' :
+                                                        'border-gray-300'"
+                                                    class="shadow-theme-xs h-11 w-full appearance-none rounded-lg border bg-transparent px-4 py-2.5 pr-11 text-sm text-gray-800 placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10">
+                                                    <option value="" disabled>Pilih Kemasan</option>
+                                                    @foreach ($packagings as $packaging)
+                                                        <option value="{{ $packaging->name }}">
+                                                            {{ Str::ucfirst($packaging->name) }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <span
+                                                    class="pointer-events-none absolute top-1/2 right-4 z-30 -translate-y-1/2 text-gray-500 dark:text-gray-400"></span>
+                                                <p x-show="itemErrors[index]?.packaging"
+                                                    x-text="itemErrors[index]?.packaging"
+                                                    class="mt-1 text-sm text-error-600"></p>
                                             </div>
+                                        </div>
+
+                                        <!-- Tanggal Expire -->
+                                        <div>
+                                            <label
+                                                class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-400">
+                                                Tanggal Expire
+                                            </label>
+                                            <input type="date" x-model="item.expiration_date" :min="minDate"
+                                                @input="if (!itemErrors[index]) itemErrors[index] = {}; itemErrors[index].expiration_date = ''"
+                                                :class="itemErrors[index]?.expiration_date ? 'border-error-500' :
+                                                    'border-gray-300'"
+                                                class="h-11 w-full rounded-lg border bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10"
+                                                onclick="this.showPicker()" />
+                                            <p x-show="itemErrors[index]?.expiration_date"
+                                                x-text="itemErrors[index]?.expiration_date"
+                                                class="mt-1 text-sm text-error-600"></p>
                                         </div>
                                     </div>
                                 </template>
+
                             </div>
 
 
@@ -128,7 +195,7 @@
                             <span class="text-gray-500 dark:text-gray-400"> Show </span>
                             <div x-data="{ isOptionSelected: false }" class="relative z-20 bg-transparent">
                                 <select
-                                    class="dark:bg-dark-900 h-9 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none py-2 pl-3 pr-8 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
+                                    class="dark:bg-dark-900 h-9 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none py-2 pl-3 pr-8 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 "
                                     :class="isOptionSelected ? 'text-gray-800' : 'text-gray-500 dark:text-gray-400'"
                                     @change="isOptionSelected = true" @change="perPage = $event.target.value">
                                     <option value="10" class="text-gray-500 dark:bg-gray-900 dark:text-gray-400">
@@ -157,7 +224,7 @@
                                 </button>
 
                                 <input type="text" x-model="search" placeholder="Search..."
-                                    class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent py-2.5 pl-11 pr-4 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800 xl:w-[300px]" />
+                                    class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent py-2.5 pl-11 pr-4 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10  xl:w-[300px]" />
                             </div>
 
                             <button
@@ -172,9 +239,9 @@
                     <div class="max-w-full overflow-x-auto">
                         <div class="min-w-[1102px]">
                             <!-- table header start -->
-                            <div class="grid grid-cols-12 border-t border-gray-200 dark:border-gray-800">
+                            <div class="grid grid-cols-11 border-t border-gray-200 dark:border-gray-800">
                                 <div
-                                    class="col-span-2 flex items-center border-r border-gray-200 px-4 py-3 dark:border-gray-800">
+                                    class="col-span-3 flex items-center border-r border-gray-200 px-4 py-3 dark:border-gray-800">
                                     <div class="flex w-full cursor-pointer items-center justify-between"
                                         @click="sortBy('name')">
                                         <div class="flex items-center gap-3">
@@ -213,18 +280,6 @@
                                     </div>
                                 </div>
                                 <div
-                                    class="col-span-2 flex items-center border-r border-gray-200 px-4 py-3 dark:border-gray-800">
-                                    <div class="flex w-full cursor-pointer items-center justify-between"
-                                        @click="sortBy('purchase_price')">
-                                        <p class="text-theme-xs font-medium text-gray-700 dark:text-gray-400">
-                                            Purchase Price
-                                        </p>
-                                        <span class="flex flex-col gap-0.5">
-                                            <i class="fal fa-sort"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div
                                     class="col-span-1 flex items-center border-r border-gray-200 px-4 py-3 dark:border-gray-800">
                                     <div class="flex w-full cursor-pointer items-center justify-between"
                                         @click="sortBy('stock')">
@@ -239,9 +294,9 @@
                                 <div
                                     class="col-span-1 flex items-center border-r border-gray-200 px-4 py-3 dark:border-gray-800">
                                     <div class="flex w-full cursor-pointer items-center justify-between"
-                                        @click="sortBy('expiration_date')">
+                                        @click="sortBy('category.name')">
                                         <p class="text-theme-xs font-medium text-gray-700 dark:text-gray-400">
-                                            Expiration Date
+                                            Category
                                         </p>
                                         <span class="flex flex-col gap-0.5">
                                             <i class="fal fa-sort"></i>
@@ -283,10 +338,10 @@
                             <template x-for="product in paginatedData" :key="product.id">
                                 <!-- table item -->
                                 <div x-data="{ checkboxToggle: false }"
-                                    class="grid grid-cols-12 border-t border-gray-100 dark:border-gray-800"
+                                    class="grid grid-cols-11 border-t border-gray-100 dark:border-gray-800"
                                     :class="checkboxToggle ? 'bg-gray-50 dark:bg-gray-900' : ''">
                                     <div
-                                        class="col-span-2 flex items-center border-r border-gray-100 px-4 py-3 dark:border-gray-800">
+                                        class="col-span-3 flex items-center border-r border-gray-100 px-4 py-3 dark:border-gray-800">
                                         <div class="flex gap-3">
                                             <div class="mt-1">
                                                 <label
@@ -318,7 +373,8 @@
                                     </div>
                                     <div
                                         class="col-span-1 flex items-center border-r border-gray-100 px-4 py-3 dark:border-gray-800">
-                                        <p class="text-theme-sm text-gray-700 dark:text-gray-400" x-text="product.code">
+                                        <p class="text-theme-sm text-gray-700 dark:text-gray-400"
+                                            x-text="product.code">
                                         </p>
                                     </div>
                                     <div
@@ -331,15 +387,6 @@
                                                 x-text="product.packaging ? product.packaging.name : '-'"></p>
 
                                         </div>
-                                    </div>
-                                    <div
-                                        class="col-span-2 flex items-center border-r border-gray-100 px-4 py-3 dark:border-gray-800">
-                                        <p class="text-theme-sm text-gray-700 dark:text-gray-400">Rp. </p>
-                                        <p class="text-theme-sm text-gray-700 dark:text-gray-400"
-                                            x-text="formatRupiah(product.purchase_price)"></p>/
-                                        <p class="text-theme-xs ml-2 text-gray-700 dark:text-gray-400"
-                                            x-text="product.packaging ? product.packaging.name : '-'"></p>
-
                                     </div>
                                     <div
                                         class="col-span-1 flex items-center border-r border-gray-100 px-4 py-3 dark:border-gray-800">
@@ -355,18 +402,23 @@
                                     <div
                                         class="col-span-2 flex items-center border-r border-gray-100 px-4 py-3 dark:border-gray-800">
                                         <p :class="{
-                                            'bg-success-50 text-success-700': product.drug_class === 'Over-the-counter',
+                                            'bg-success-50 text-success-700': product
+                                                .drug_class === 'Over-the-counter',
                                             'bg-brand-50 text-brand-700': product.drug_class === 'Limited OTC',
                                             'bg-error-50 text-error-700': product.drug_class === 'Prescription'
-                                        }" class="rounded-full px-2 py-0.5 text-theme-xs font-medium"
+                                        }"
+                                            class="rounded-full px-2 py-0.5 text-theme-xs font-medium"
                                             x-text="product.drug_class"></p>
                                     </div>
                                     <div class="col-span-1 flex items-center px-4 py-3">
                                         <div class="flex w-full items-center gap-5">
-                                            <form :action="`/admin/medicine/${product.id}`" method="POST" @submit.prevent="if(confirm('Yakin ingin menghapus obat ini?')) $el.submit()">
+                                            <form :action="`/admin/medicine/${product.id}`" method="POST"
+                                                @submit.prevent="if(confirm('Yakin ingin menghapus obat ini?')) $el.submit()">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="text-error-500 dark:text-gray-400 dark:hover:text-error-500" title="Delete">
+                                                <button type="submit"
+                                                    class="text-error-500 dark:text-gray-400 dark:hover:text-error-500"
+                                                    title="Delete">
                                                     <i class="fal fa-trash fa-lg"></i>
                                                 </button>
                                             </form>
@@ -398,7 +450,8 @@
                                     Previous
                                 </button>
 
-                                <button @click="goToPage(1)" :class="currentPage === 1 ? 'bg-blue-500/[0.08] text-brand-500' :
+                                <button @click="goToPage(1)"
+                                    :class="currentPage === 1 ? 'bg-blue-500/[0.08] text-brand-500' :
                                         'text-gray-700 dark:text-gray-400'"
                                     class="flex h-10 w-10 items-center justify-center rounded-lg text-sm font-medium hover:bg-blue-500/[0.08] hover:text-brand-500 dark:hover:text-brand-500">
                                     1
@@ -410,7 +463,8 @@
                                 </template>
 
                                 <template x-for="page in pagesAroundCurrent" :key="page">
-                                    <button @click="goToPage(page)" :class="currentPage === page ? 'bg-blue-500/[0.08] text-brand-500' :
+                                    <button @click="goToPage(page)"
+                                        :class="currentPage === page ? 'bg-blue-500/[0.08] text-brand-500' :
                                             'text-gray-700 dark:text-gray-400'"
                                         class="flex h-10 w-10 items-center justify-center rounded-lg text-sm font-medium hover:bg-blue-500/[0.08] hover:text-brand-500 dark:hover:text-brand-500">
                                         <span x-text="page"></span>
@@ -437,6 +491,6 @@
     </div>
 
     @push('scripts')
-    @include('components.js.dtMedicines')
+        @include('components.js.dtMedicines')
     @endpush
     </x-app->

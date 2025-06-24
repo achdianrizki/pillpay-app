@@ -988,6 +988,9 @@ svg{-ms-touch-action:none;touch-action:none}image,text,.jvm-zoomin,.jvm-zoomout{
   .h-\[212px\] {
     height: 212px;
   }
+  .h-\[350px\] {
+    height: 350px;
+  }
   .h-\[372px\] {
     height: 372px;
   }
@@ -1019,6 +1022,12 @@ svg{-ms-touch-action:none;touch-action:none}image,text,.jvm-zoomin,.jvm-zoomout{
   }
   .max-h-\[195px\] {
     max-height: 195px;
+  }
+  .max-h-\[400px\] {
+    max-height: 400px;
+  }
+  .max-h-\[350px\] {
+    max-height: 350px;
   }
   .max-h-full {
     max-height: 100%;
@@ -1288,6 +1297,15 @@ svg{-ms-touch-action:none;touch-action:none}image,text,.jvm-zoomin,.jvm-zoomout{
   .max-w-\[700px\] {
     max-width: 700px;
   }
+  .max-w-\[800px\] {
+    max-width: 700px;
+  }
+  .max-w-\[900px\] {
+    max-width: 700px;
+  }
+  .max-w-midhalf{
+    max-width: 80%;
+  }
   .max-w-full {
     max-width: 100%;
   }
@@ -1451,6 +1469,12 @@ svg{-ms-touch-action:none;touch-action:none}image,text,.jvm-zoomin,.jvm-zoomout{
   }
   .grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .grid-cols-5 {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
   .grid-cols-11 {
     grid-template-columns: repeat(11, minmax(0, 1fr));

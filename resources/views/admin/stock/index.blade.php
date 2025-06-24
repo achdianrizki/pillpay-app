@@ -25,53 +25,75 @@
 
 
     <div class="space-y-5 sm:space-y-6">
-        <div class="space-y-5 sm:space-y-6">
-            <div class="flex items-center justify-between">
-                <a href="{{ route('admin.category.create') }}"
-                    class="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-white transition rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600">
-                    Tambah Kategori
-                </a>
-            </div>
-            <div class="rounded-2xl border border-gray-200 bg-white">
-                <div class="p-5 border-t border-gray-100 sm:p-6">
-                    @if (session('success'))
-                        <div class="text-green-600">{{ session('success') }}</div>
-                    @endif
-                    <!-- ====== Table Six Start -->
-                    <div class="max-w-full overflow-x-auto">
-                        <table class="min-w-full">
-                            <thead>
-                                <tr class="border-b border-gray-100 text-left">
-                                    <th class="px-5 py-3 sm:px-6">No</th>
-                                    <th class="px-5 py-3 sm:px-6">Nama Obat</th>
-                                    <th class="px-5 py-3 sm:px-6">Pemasok</th>
-                                    <th class="px-5 py-3 sm:px-6">Jumlah</th>
-                                    <th class="px-5 py-3 sm:px-6">Tanggal Masuk</th>
-                                    <th class="px-5 py-3 sm:px-6">Tanggal Expire</th>
-                                    <th class="px-5 py-3 sm:px-6">Action</th>
+        <div class="rounded-2xl border border-gray-200 bg-white">
+            <div class="p-5 border-t border-gray-100 sm:p-6">
+                <div class="max-w-full overflow-x-auto">
+                    <table class="min-w-full">
+                        <thead>
+                            <tr class="border-b border-gray-100">
+                                <th class="px-5 py-3 sm:px-6">
+                                    <div class="flex items-center">
+                                        <p class="font-medium text-gray-500 text-theme-xs">No</p>
+                                    </div>
+                                </th>
+                                <th class="px-5 py-3 sm:px-6">
+                                    <div class="flex items-center">
+                                        <p class="font-medium text-gray-500 text-theme-xs">Pembeli</p>
+                                    </div>
+                                </th>
+                                <th class="px-5 py-3 sm:px-6">
+                                    <div class="flex items-center">
+                                        <p class="font-medium text-gray-500 text-theme-xs">Pemasok</p>
+                                    </div>
+                                </th>
+                                <th class="px-5 py-3 sm:px-6">
+                                    <div class="flex items-center">
+                                        <p class="font-medium text-gray-500 text-theme-xs">Tanggal Masuk</p>
+                                    </div>
+                                </th>
+                                <th class="px-5 py-3 sm:px-6">
+                                    <div class="flex items-center">
+                                        <p class="font-medium text-gray-500 text-theme-xs">Total Harga</p>
+                                    </div>
+                                </th>
+                                <th class="px-5 py-3 sm:px-6">
+                                    <div class="flex items-center">
+                                        <p class="font-medium text-gray-500 text-theme-xs">Catatan</p>
+                                    </div>
+                                </th>
+                                <th class="px-5 py-3 sm:px-6">
+                                    <div class="flex items-center">
+                                        <p class="font-medium text-gray-500 text-theme-xs">Action</p>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                            @forelse ($purchase as $item)
+                                <tr>
+                                    <td class="px-5 py-4 sm:px-6">{{ $loop->iteration }}</td>
+                                    <td class="px-5 py-4 sm:px-6">{{ $item->user->name }}</td>
+                                    <td class="px-5 py-4 sm:px-6">{{ $item->supplier }}</td>
+                                    <td class="px-5 py-4 sm:px-6">{{ $item->purchase_date }}</td>
+                                    <td class="px-5 py-4 sm:px-6">
+                                        {{ 'Rp ' . number_format($item->total_amount, 0, ',', '.') }}
+                                    </td>
+                                    <td class="px-5 py-4 sm:px-6">{{ $item->notes ?? '-' }}</td>
+                                    <td class="px-5 py-4 sm:px-6">
+                                        <a href="{{ route('admin.stock.show', $item->id) }}"
+                                            class="text-blue-600 hover:underline">show</a>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody class="divide-y divide-gray-100">
-                                @foreach ($stock as $item)
-                                    <tr>
-                                        <td class="px-5 py-4 sm:px-6">{{ $loop->iteration }}</td>
-                                        <td class="px-5 py-4 sm:px-6">{{ $item->medicine->name }}</td>
-                                        <td class="px-5 py-4 sm:px-6">{{ $item->supplier }}</td>
-                                        <td class="px-5 py-4 sm:px-6">{{ $item->quantity }}</td>
-                                        <td class="px-5 py-4 sm:px-6">{{ $item->entry_date }}</td>
-                                        <td class="px-5 py-4 sm:px-6">{{ $item->expiration_date }}</td>
-                                        <td class="px-5 py-4 sm:px-6">
-                                            <a href="{{ route('admin.category.edit', $item->id) }}"
-                                                class="text-blue-600 hover:underline">show</a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
+                            @empty
+                                <tr>
+                                    <td colspan="7" class="px-5 py-4 sm:px-6 text-center text-gray-500">Tidak ada data.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
 
-                        </table>
-                    </div>
-                    <!-- ====== Table Six End -->
+                    </table>
                 </div>
+                <!-- ====== Table Six End -->
             </div>
         </div>
     </div>

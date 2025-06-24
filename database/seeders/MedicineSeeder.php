@@ -72,7 +72,6 @@ class MedicineSeeder extends Seeder
                 'code' => $item->code,
                 'category_id' => $item->category_id,
                 'selling_price' => $item->selling_price,
-                'purchase_price' => $item->purchase_price,
                 'stock' => $item->stock,
                 'packaging_id' => $item->packaging_id,
                 'drug_class' => $item->drug_class,

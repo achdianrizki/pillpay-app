@@ -14,11 +14,14 @@ return new class extends Migration
         Schema::create('stock_entries', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('medicine_id');
-            $table->string('supplier');
+            $table->unsignedBigInteger('purchase_id');
             $table->integer('quantity');
             $table->date('entry_date');
             $table->date('expiration_date');
+            $table->decimal('purchase_price', 10, 2);
+            $table->string('packaging');
 
+            $table->foreign('purchase_id')->references('id')->on('purchases')->onDelete('cascade');
             $table->foreign('medicine_id')->references('id')->on('medicines')->onDelete('cascade');
             $table->timestamps();
         });

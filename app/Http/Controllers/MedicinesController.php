@@ -13,7 +13,8 @@ class MedicinesController extends Controller
     public function index()
     {
         $medicine = Medicines::all();
-        return view('admin.medicine.index', compact('medicine'));
+        $packagings = Packaging::all();
+        return view('admin.medicine.index', compact('medicine', 'packagings'));
     }
 
     public function create()
@@ -25,7 +26,7 @@ class MedicinesController extends Controller
 
     public function fecthMedicines(Request $request)
     {
-        $medicine = Medicines::with('packaging')->orderBy('created_at', 'desc')->get();
+        $medicine = Medicines::with('packaging', 'category')->orderBy('created_at', 'desc')->get();
         return response()->json($medicine);
     }
 

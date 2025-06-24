@@ -72,7 +72,7 @@
                         <a href="{{ route('admin.cashier.index') }}"
                             class="menu-item group {{ request()->routeIs('admin.cashier.*') ? 'menu-item-active' : 'menu-item-inactive' }}">
                             <i class="fad fa-regular fa-users fa-lg"></i>
-                            <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">Kasir</span>
+                            <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">Kelola Kasir</span>
                         </a>
                     </li>
                 </ul>
@@ -93,7 +93,7 @@
                         <a href="{{ route('admin.medicine.index') }}"
                             class="menu-item group {{ request()->routeIs('admin.medicine.*') ? 'menu-item-active' : 'menu-item-inactive' }}">
                             <i class="fas fa-pills fa-lg"></i>
-                            <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">Obat</span>
+                            <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">Kelola Obat</span>
                         </a>
                     </li>
                 </ul>
@@ -113,7 +113,7 @@
                     :class="selected === 'Task' ? 'menu-item-active' : 'menu-item-inactive'">
                     <i class="fas fa-history fa-lg"></i>
                     <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">
-                        Report & History
+                        Laporan & Riwayat
                     </span>
 
                     <svg class="menu-item-arrow" :class="[
@@ -157,16 +157,16 @@
                 <ul class="flex flex-col gap-y-5">
                     <li>
                         <a href="{{ route('admin.packaging.index') }}"
-                            class="menu-item group {{ request()->routeIs('admin.packaging.index') ? 'menu-item-active' : 'menu-item-inactive' }}">
+                            class="menu-item group {{ request()->routeIs('admin.packaging*') ? 'menu-item-active' : 'menu-item-inactive' }}">
                             <i class="far fa-box-alt fa-lg"></i>
-                            <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">Packaging</span>
+                            <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">Kelola Kemasan</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('admin.category.index') }}"
-                            class="menu-item group {{ request()->routeIs('admin.category.index') ? 'menu-item-active' : 'menu-item-inactive' }}">
+                            class="menu-item group {{ request()->routeIs('admin.category*') ? 'menu-item-active' : 'menu-item-inactive' }}">
                             <i class="fal fa-list fa-lg"></i>
-                            <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">Category</span>
+                            <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">Kelola Kategori</span>
                         </a>
                     </li>
                 </ul>
