@@ -7,8 +7,7 @@
             <nav>
                 <ol class="flex items-center gap-1.5">
                     <li>
-                        <a class="inline-flex items-center gap-1.5 text-sm text-gray-500"
-                            href="{{ route('dashboard') }}">
+                        <a class="inline-flex items-center gap-1.5 text-sm text-gray-500" href="{{ route('dashboard') }}">
                             Dashboard
                             <svg class="stroke-current" width="17" height="16" viewBox="0 0 17 16" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -51,6 +50,9 @@
                         <input type="text" name="name" placeholder="Nama"
                             value="{{ old('name', $cashier->name) }}"
                             class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30" />
+                        @error('name')
+                            <span class="text-xs text-red-500">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <!-- Username -->
@@ -61,6 +63,9 @@
                         <input type="text" name="username" placeholder="username"
                             value="{{ old('username', $cashier->username) }}"
                             class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30" />
+                        @error('username')
+                            <span class="text-xs text-red-500">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <!-- Password -->
@@ -72,6 +77,9 @@
                             <input :type="showPassword ? 'text' : 'password'" name="password"
                                 placeholder="Password Baru"
                                 class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 pr-11 pl-4 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30" />
+                            @error('password')
+                                <span class="text-xs text-red-500">{{ $message }}</span>
+                            @enderror
                             <span @click="showPassword = !showPassword"
                                 class="absolute top-1/2 right-4 z-30 -translate-y-1/2 cursor-pointer">
                                 <svg x-show="!showPassword" class="fill-gray-500 dark:fill-gray-400" width="20"
@@ -92,16 +100,19 @@
                     </div>
 
                     <!-- Shift -->
-                    <div class="mt-4">
+                    <div>
                         <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
                             Shift
                         </label>
                         <select name="shift"
-                            class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90">
-                            <option value="">--Pilih Shift--</option>
-                            <option value="siang" {{ $cashier->shift == 'siang' ? 'selected' : '' }}>Siang</option>
-                            <option value="malam" {{ $cashier->shift == 'malam' ? 'selected' : '' }}>Malam</option>
+                            class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90">
+                            <option value="">-- Pilih Shift --</option>
+                            <option value="siang" {{ old('shift') == 'siang' ? 'selected' : '' }}>Siang</option>
+                            <option value="malam" {{ old('shift') == 'malam' ? 'selected' : '' }}>Malam</option>
                         </select>
+                        @error('shift')
+                            <span class="text-error-500 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <div>
@@ -119,6 +130,9 @@
                                 </div>
                             </div>
                         @endif
+                        @error('images')
+                            <span class="text-xs text-red-500">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <div class="mt-6">
