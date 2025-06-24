@@ -34,15 +34,18 @@ class MedicinesController extends Controller
     {
         $request->validate([
             'name'              => 'required|string|max:255',
-            'category_id'       => 'string',
-            'selling_price'     => 'required|numeric',
-            'purchase_price'    => 'required|numeric',
+            'category_id'       => 'required',
+            'selling_price'     => 'required|numeric|min:1',
             'packaging_id'      => 'required',
             'drug_class'        => 'required|string|max:100',
             'standard_name'     => 'nullable|string|max:255',
             'description'       => 'nullable|string',
             'usage_instruction' => 'required|string',
             'images.*'          => 'nullable',
+        ], [
+            'category_id.required'  => 'Kategori harus dipilih.',
+            'packaging_id.required' => 'Kemasan harus dipilih.',
+            'selling_price.min' => 'Harga tidak boleh minus.',
         ]);
 
         $filename = 'default.png';
@@ -66,7 +69,6 @@ class MedicinesController extends Controller
             'code'              => $code,
             'category_id'       => $request->category_id,
             'selling_price'     => $request->selling_price,
-            'purchase_price'    => $request->purchase_price,
             'stock'             => 0,
             'packaging_id'      => $request->packaging_id,
             'drug_class'        => $request->drug_class,
@@ -99,14 +101,17 @@ class MedicinesController extends Controller
         $request->validate([
             'name'              => 'required|string|max:255',
             'category_id'       => 'string',
-            'selling_price'     => 'required|numeric',
-            'purchase_price'    => 'required|numeric',
+            'selling_price'     => 'required|numeric|min:1',
             'packaging_id'      => 'required',
             'drug_class'        => 'required|string|max:100',
             'standard_name'     => 'nullable|string|max:255',
             'description'       => 'nullable|string',
             'usage_instruction' => 'required|string',
             'images.*'          => 'nullable',
+        ], [
+            'category_id.required'  => 'Kategori harus dipilih.',
+            'packaging_id.required' => 'Kemasan harus dipilih.',
+            'selling_price.min' => 'Harga tidak boleh minus.',
         ]);
 
         $filename = 'default.png';
@@ -124,7 +129,6 @@ class MedicinesController extends Controller
             'name'              => $request->name,
             'category_id'       => $request->category_id,
             'selling_price'     => $request->selling_price,
-            'purchase_price'    => $request->purchase_price,
             'packaging_id'      => $request->packaging_id,
             'drug_class'        => $request->drug_class,
             'standard_name'     => $request->standard_name,

@@ -17,7 +17,6 @@ class Medicines extends Model
         'code',
         'category_id',
         'selling_price',
-        'purchase_price',
         'stock',
         'packaging_id',
         'expiration_date',

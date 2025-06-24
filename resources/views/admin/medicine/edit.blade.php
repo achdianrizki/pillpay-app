@@ -35,7 +35,7 @@
         </div>
     </div>
 
-    @if ($errors->any())
+    {{-- @if ($errors->any())
     <div class="mb-4 rounded-lg bg-error-100 border border-error-400 text-error-700 px-4 py-3">
         <ul class="list-disc pl-5">
             @foreach ($errors->all() as $error)
@@ -43,7 +43,7 @@
             @endforeach
         </ul>
     </div>
-    @endif
+    @endif --}}
 
     <form action="{{ route('admin.medicine.update', $medicine->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -63,7 +63,7 @@
 
                     <div>
                         <label for="category" class="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
-                        <select id="filter-kategori" name="category"
+                        <select id="filter-kategori" name="category_id"
                             class="focus:border-brand-300 focus:ring-brand-500/10 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 focus:ring-3 focus:outline-hidden">
                             <option value="" disabled {{ old('category', $medicine->category) ? '' : 'selected' }}>Pilih
                                 Kategori Obat
@@ -142,7 +142,7 @@
                             <select
                                 class="shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 pr-11 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30"
                                 :class="isOptionSelected && 'text-gray-800 dark:text-white/90'"
-                                @change="isOptionSelected = true" name="packaging" id="packaging">
+                                @change="isOptionSelected = true" name="packaging_id" id="packaging">
                                 <option value="" disabled {{ old('packaging', $medicine->packaging) ? '' : 'selected'
                                     }}>Pilih
                                     Kategori Obat

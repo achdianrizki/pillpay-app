@@ -6,13 +6,9 @@
     class="sticky top-0 z-30 flex w-full border-gray-200 bg-white"
 >
     <div class="flex w-full flex-col items-center justify-between lg:flex-row lg:px-6">
-        <!-- Top Bar -->
         <div class="flex w-full items-center justify-between border-b border-gray-200 px-3 py-3 lg:border-b-0 lg:px-0 lg:py-4">
-
-            <!-- Logo (Mobile) -->
-            <a href="{{ route('dashboard') }}" class="lg:hidden">
+            <a href="#">
                 <img class="h-8 w-auto block " src="{{ asset('tailadmin/build/src/images/logo/logo.svg') }}" alt="Logo">
-                <img class="h-8 w-auto hidden" src="{{ asset('tailadmin/build/src/images/logo/logo-dark.svg') }}" alt="Logo Dark">
             </a>
 
             <!-- Profile Dropdown -->

@@ -33,7 +33,7 @@
         </div>
     </div>
 
-    @if ($errors->any())
+    {{-- @if ($errors->any())
     <div class="mb-4 rounded-lg bg-error-100 border border-error-400 text-error-700 px-4 py-3">
         <ul class="list-disc pl-5">
             @foreach ($errors->all() as $error)
@@ -41,7 +41,7 @@
             @endforeach
         </ul>
     </div>
-    @endif
+    @endif --}}
 
     <form action="{{ route('admin.medicine.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -70,7 +70,7 @@
                             </option>
                             @endforeach
                         </select>
-                        @error('category')
+                        @error('category_id')
                         <span class="text-error-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
@@ -154,7 +154,7 @@
                                 </svg>
                             </span>
                         </div>
-                        @error('packaging')
+                        @error('packaging_id')
                         <span class="text-error-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
