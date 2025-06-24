@@ -136,17 +136,6 @@
                     </div>
 
                     <div>
-                        <label for="purchase_price" class="block text-sm font-medium text-gray-700 mb-1">Harga
-                            Beli</label>
-                        <input type="number" name="purchase_price" id="purchase_price" placeholder="Harga Beli"
-                            class="focus:border-brand-300 focus:ring-brand-500/10 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 focus:ring-3 focus:outline-hidden"
-                            value="{{ old('purchase_price', $medicine->purchase_price) }}">
-                        @error('purchase_price')
-                        <span class="text-error-500 text-sm">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div>
                         <label for="packaging" class="block text-sm font-medium text-gray-700 mb-1">Kemasan</label>
                         <div x-data="{ isOptionSelected: {{ old('packaging', $medicine->packaging) ? 'true' : 'false' }} }"
                             class="relative z-20 bg-transparent">
