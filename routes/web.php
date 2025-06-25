@@ -66,7 +66,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/sales', [SaleController::class, 'index'])->name('sale.index');
         Route::get('/show/{sale}', [SaleController::class, 'show'])->name('sale.show');
         Route::get('/stock', [StockEntriesController::class, 'index'])->name('stock.index');
+        
         Route::get('/stock/{id}', [StockEntriesController::class, 'show'])->name('stock.show');
+        Route::get('/stock/{id}/edit', [StockEntriesController::class, 'edit'])->name('stock.edit');
+        Route::put('/stock/{id}/update', [StockEntriesController::class, 'update'])->name('stock.update');
+        Route::delete('/stock/{id}', [StockEntriesController::class, 'destroy'])->name('stock.destroy');
+
+        Route::get('/purchase/{id}/edit', [StockEntriesController::class, 'editPurchase'])->name('purchase.edit');
+        Route::put('/purchase/{id}/update', [StockEntriesController::class, 'updatePurchase'])->name('purchase.update');
+        Route::delete('/purchase/{id}', [StockEntriesController::class, 'destroyPurchase'])->name('purchase.destroy');
     });
 
     // Route Cashier

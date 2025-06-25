@@ -20,19 +20,20 @@
 
     <div class="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
         <!-- Sidebar Menu -->
-        <nav x-data="{ selected: '',
-                initDropdown() {
-                    const currentUrl = window.location.href;
-                    if (
-                        currentUrl.includes('{{ route('admin.sale.index', [], false) }}') ||
-                        currentUrl.includes('{{ route('admin.stock.index', [], false) }}')
-                    ) {
-                        this.selected = 'Task';
-                    } else {
-                        this.selected = '';
-                    }
+        <nav x-data="{
+            selected: '',
+            initDropdown() {
+                const currentUrl = window.location.href;
+                if (
+                    currentUrl.includes('{{ route('admin.sale.index', [], false) }}') ||
+                    currentUrl.includes('{{ route('admin.stock.index', [], false) }}')
+                ) {
+                    this.selected = 'Task';
+                } else {
+                    this.selected = '';
                 }
-            }" x-init="initDropdown()">
+            }
+        }" x-init="initDropdown()">
 
 
             <!-- Menu Group -->
@@ -109,39 +110,44 @@
                     </svg>
                 </h3>
 
-                <a href="#" @click.prevent="selected = (selected === 'Task' ? '' : 'Task')" class="menu-item group"
-                    :class="selected === 'Task' ? 'menu-item-active' : 'menu-item-inactive'">
-                    <i class="fas fa-history fa-lg"></i>
-                    <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">
-                        Laporan & Riwayat
-                    </span>
+                <div x-data="{ selected: '{{ request()->routeIs('admin.sale.index') || request()->routeIs('admin.stock*') || request()->routeIs('admin.purchase*') ? 'report' : '' }}', sidebarToggle: false }">
+                    <a href="#" @click.prevent="selected = (selected === 'report' ? '' : 'report')"
+                        class="menu-item group"
+                        :class="selected === 'report' ? 'menu-item-active' : 'menu-item-inactive'">
+                        <i class="fas fa-history fa-lg"></i>
+                        <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">
+                            Laporan & Riwayat
+                        </span>
+                        <svg class="menu-item-arrow"
+                            :class="[
+                                selected === 'report' ? 'menu-item-arrow-active' : 'menu-item-arrow-inactive',
+                                sidebarToggle ? 'lg:hidden' : ''
+                            ]"
+                            width="20" height="20" viewBox="0 0 20 20" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.79175 7.39584L10.0001 12.6042L15.2084 7.39585" stroke="currentColor"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </a>
 
-                    <svg class="menu-item-arrow" :class="[
-                selected === 'Task' ? 'menu-item-arrow-active' : 'menu-item-arrow-inactive',
-                sidebarToggle ? 'lg:hidden' : ''
-            ]" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4.79175 7.39584L10.0001 12.6042L15.2084 7.39585" stroke="" stroke-width="1.5"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </a>
-
-                <!-- Dropdown Menu Start -->
-                <div class="translate transform overflow-hidden" :class="selected === 'Task' ? 'block' : 'hidden'">
-                    <ul :class="sidebarToggle ? 'lg:hidden' : 'flex'"
-                        class="menu-dropdown mt-2 flex flex-col gap-1 pl-9">
-                        <li>
-                            <a href="{{ route('admin.sale.index') }}"
-                                class="menu-dropdown-item group {{ request()->routeIs('admin.sale.index') ? 'menu-dropdown-item-active' : 'menu-dropdown-item-inactive' }}">
-                                Data Penjualan
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('admin.stock.index') }}"
-                                class="menu-dropdown-item group {{ request()->routeIs('admin.stock.index') ? 'menu-dropdown-item-active' : 'menu-dropdown-item-inactive' }}">
-                                Data Barang Masuk
-                            </a>
-                        </li>
-                    </ul>
+                    <div class="translate transform overflow-hidden"
+                        :class="selected === 'report' ? 'block' : 'hidden'">
+                        <ul :class="sidebarToggle ? 'lg:hidden' : 'flex'"
+                            class="menu-dropdown mt-2 flex flex-col gap-1 pl-9">
+                            <li>
+                                <a href="{{ route('admin.sale.index') }}"
+                                    class="menu-dropdown-item group {{ request()->routeIs('admin.sale.index') ? 'menu-dropdown-item-active' : 'menu-dropdown-item-inactive' }}">
+                                    Data Penjualan
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.stock.index') }}"
+                                    class="menu-dropdown-item group {{ request()->routeIs(['admin.stock*', 'admin.purchase*']) ? 'menu-dropdown-item-active' : 'menu-dropdown-item-inactive' }}">
+                                    Data Barang Masuk
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
@@ -159,14 +165,16 @@
                         <a href="{{ route('admin.packaging.index') }}"
                             class="menu-item group {{ request()->routeIs('admin.packaging*') ? 'menu-item-active' : 'menu-item-inactive' }}">
                             <i class="far fa-box-alt fa-lg"></i>
-                            <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">Kelola Kemasan</span>
+                            <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">Kelola
+                                Kemasan</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('admin.category.index') }}"
                             class="menu-item group {{ request()->routeIs('admin.category*') ? 'menu-item-active' : 'menu-item-inactive' }}">
                             <i class="fal fa-list fa-lg"></i>
-                            <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">Kelola Kategori</span>
+                            <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">Kelola
+                                Kategori</span>
                         </a>
                     </li>
                 </ul>

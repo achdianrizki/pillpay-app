@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Purchase;
 use App\Models\Medicines;
+use App\Models\Packaging;
 use App\Models\StockEntry;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -67,5 +68,94 @@ class StockEntriesController extends Controller
         });
 
         return response()->json(['success' => 'Data pembelian dan stok berhasil disimpan']);
+    }
+
+    public function edit($id)
+    {
+        $stocks = StockEntry::with('medicine')->findOrFail($id);
+        $packagings = Packaging::all();
+        return view('admin.stock.edit', compact('stocks', 'packagings'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'medicine_id' => 'required|exists:medicines,id',
+            'quantity' => 'required|integer|min:1',
+            'expiration_date' => 'required|date|after:today',
+            'purchase_price' => 'required|numeric|min:0',
+            'packaging' => 'nullable|string|max:255',
+        ]);
+
+        $stockEntry = StockEntry::findOrFail($id);
+
+        $oldQuantity = $stockEntry->quantity;
+        $oldPurchasePrice = $stockEntry->purchase_price;
+
+        $stockEntry->update($validated);
+
+        Medicines::where('id', $validated['medicine_id'])
+            ->increment('stock', $validated['quantity'] - $oldQuantity);
+
+        if ($stockEntry->purchase) {
+            $oldTotal = $oldQuantity * $oldPurchasePrice;
+            $newTotal = $validated['quantity'] * $validated['purchase_price'];
+            $difference = $newTotal - $oldTotal;
+
+            $stockEntry->purchase->update([
+                'total_amount' => $stockEntry->purchase->total_amount + $difference,
+            ]);
+        }
+
+        return redirect()->route('admin.stock.show', $stockEntry->purchase_id)
+            ->with('success', 'Stok berhasil diperbarui.');
+    }
+
+
+    public function destroy($id)
+    {
+        $stockEntry = StockEntry::findOrFail($id);
+        $stockEntry->delete();
+
+        Medicines::where('id', $stockEntry->medicine_id)->decrement('stock', $stockEntry->quantity);
+        if ($stockEntry->purchase) {
+            $stockEntry->purchase->update(['total_amount' => $stockEntry->purchase->total_amount - ($stockEntry->quantity * $stockEntry->purchase_price)]);
+        }
+        return redirect()->route('admin.stock.show', $stockEntry->purchase_id)->with('success', 'Stok berhasil dihapus.');
+    }
+
+    public function editPurchase($id)
+    {
+        $purchase = Purchase::findOrFail($id);
+        return view('admin.stock.editPurchase', compact('purchase'));
+    }
+
+    public function updatePurchase(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'supplier' => 'required|string|max:255',
+            'notes' => 'nullable|string',
+        ]);
+
+        $purchase = Purchase::findOrFail($id);
+        $purchase->update($validated);
+
+        return redirect()->route('admin.stock.index')->with('success', 'Pembelian berhasil diperbarui.');
+    }
+
+    public function destroyPurchase(Request $request, $id)
+    {
+        $purchase = Purchase::findOrFail($id);
+
+        $stockEntries = StockEntry::where('purchase_id', $id)->get();
+
+        foreach ($stockEntries as $stockEntry) {
+            Medicines::where('id', $stockEntry->medicine_id)->decrement('stock', $stockEntry->quantity);
+            $stockEntry->delete();
+        }
+
+        $purchase->delete();
+
+        return redirect()->route('admin.stock.index')->with('success', 'Pembelian dan stok terkait berhasil dihapus.');
     }
 }

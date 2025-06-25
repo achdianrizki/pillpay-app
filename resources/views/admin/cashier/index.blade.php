@@ -23,7 +23,6 @@
     </div>
     <!-- Breadcrumb End -->
 
-
     <div class="space-y-5 sm:space-y-6">
         <div class="space-y-5 sm:space-y-6">
             <div class="flex items-center justify-between">
@@ -54,7 +53,7 @@
                                 </th>
                                 <th class="px-5 py-3 sm:px-6">
                                     <div class="flex items-center">
-                                        <p class="font-medium text-gray-500 text-theme-xs">Nana Kasir</p>
+                                        <p class="font-medium text-gray-500 text-theme-xs">Nama Kasir</p>
                                     </div>
                                 </th>
                                 <th class="px-5 py-3 sm:px-6">
