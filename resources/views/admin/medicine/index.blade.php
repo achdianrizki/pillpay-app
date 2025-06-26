@@ -412,16 +412,13 @@
                                     </div>
                                     <div class="col-span-1 flex items-center px-4 py-3">
                                         <div class="flex w-full items-center gap-5">
-                                            <form :action="`/admin/medicine/${product.id}`" method="POST"
-                                                @submit.prevent="if(confirm('Yakin ingin menghapus obat ini?')) $el.submit()">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit"
-                                                    class="text-error-500 dark:text-gray-400 dark:hover:text-error-500"
-                                                    title="Delete">
-                                                    <i class="fal fa-trash fa-lg"></i>
-                                                </button>
-                                            </form>
+                                            <button type="button"
+                                                @click="$dispatch('open-modal', { url: `/admin/medicine/${product.id}` })"
+                                                class="text-error-500 dark:text-gray-400 dark:hover:text-error-500"
+                                                title="Delete">
+                                                <i class="fal fa-trash fa-lg"></i>
+                                            </button>
+
                                             <a :href="`/admin/medicine/${product.id}/edit`"
                                                 class="text-warning-500 dark:text-gray-400 dark:hover:text-white/90">
                                                 <i class="fal fa-pen fa-lg"></i>
@@ -433,6 +430,7 @@
                             <!-- table body end -->
                         </div>
                     </div>
+                    <x-modal-delete />
 
                     <!-- Pagination Controls -->
                     <div class="border-t border-gray-100 py-4 pl-[18px] pr-4 dark:border-gray-800">

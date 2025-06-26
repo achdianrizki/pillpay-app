@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Carbon\Carbon;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Spatie\Permission\Middleware\RoleMiddleware;
@@ -29,5 +30,7 @@ class AppServiceProvider extends ServiceProvider
 
         Carbon::setLocale('id');
         setlocale(LC_TIME, 'id_ID.UTF-8');
+
+        // Paginator::useBootstrap();
     }
 }

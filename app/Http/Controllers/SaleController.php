@@ -13,9 +13,10 @@ class SaleController extends Controller
 {
     public function index()
     {
-        $sales = Sale::with(['user'])->get();
+        $sales = Sale::with('user')->paginate(10);
         return view('admin.sale.index', compact('sales'));
     }
+
 
     public function store(Request $request)
     {

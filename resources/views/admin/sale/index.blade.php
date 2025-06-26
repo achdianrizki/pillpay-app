@@ -64,7 +64,7 @@
                         <tbody class="divide-y divide-gray-100">
                             @forelse ($sales as $item)
                                 <tr>
-                                    <td class="px-5 py-4 sm:px-6">{{ $loop->iteration }}</td>
+                                    <td class="px-5 py-4 sm:px-6">{{ $sales->firstItem() + $loop->index }}</td>
                                     <td class="px-5 py-4 sm:px-6">{{ $item->user->name }}</td>
                                     <td class="px-5 py-4 sm:px-6">
                                         Rp. {{ number_format($item->total_price, 0, ',', '.') }}
@@ -75,16 +75,50 @@
                                     <td class="px-5 py-4 sm:px-6">{{ $item->payment_method }}</td>
                                     <td class="px-5 py-4 sm:px-6">{{ $item->created_at }}</td>
                                     <td>
-                                        <a href="{{ route('admin.sale.show', $item->id) }}" class="text-white p-2 rounded-lg hover:bg-brand-100 bg-brand-500">Show</a>
+                                        <a href="{{ route('admin.sale.show', $item->id) }}"
+                                            class="text-white p-2 rounded-lg hover:bg-brand-100 bg-brand-500">Show</a>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="7" class="text-center py-4 text-gray-500">Tidak ada data penjualan.</td>
+                                    <td colspan="7" class="text-center py-4 text-gray-500">Tidak ada data penjualan.
+                                    </td>
                                 </tr>
                             @endforelse
                         </tbody>
                     </table>
+                    <div class="flex justify-end mt-4">
+                        @if ($sales->hasPages())
+                            <nav class="inline-flex items-center -space-x-px text-sm gap-1 ">
+                                @if ($sales->onFirstPage())
+                                    <span
+                                        class="px-3 py-2 text-gray-400 bg-gray-100 border border-gray-300 rounded-l-md">Prev</span>
+                                @else
+                                    <a href="{{ $sales->previousPageUrl() }}"
+                                        class="px-3 py-2 text-gray-700 bg-white border border-gray-300 hover:bg-gray-200 rounded-l-md">Prev</a>
+                                @endif
+
+                                @foreach ($sales->getUrlRange(1, $sales->lastPage()) as $page => $url)
+                                    @if ($page == $sales->currentPage())
+                                        <span
+                                            class="px-3 py-2 text-white bg-brand-500 border border-brand-500">{{ $page }}</span>
+                                    @else
+                                        <a href="{{ $url }}"
+                                            class="px-3 py-2 text-gray-700 bg-white border border-gray-300 hover:bg-gray-200">{{ $page }}</a>
+                                    @endif
+                                @endforeach
+
+                                @if ($sales->hasMorePages())
+                                    <a href="{{ $sales->nextPageUrl() }}"
+                                        class="px-3 py-2 text-gray-700 bg-white border border-gray-300 hover:bg-gray-200 rounded-r-md">Next</a>
+                                @else
+                                    <span
+                                        class="px-3 py-2 text-gray-400 bg-gray-100 border border-gray-300 rounded-r-md">Next</span>
+                                @endif
+                            </nav>
+                        @endif
+                    </div>
+
                 </div>
             </div>
         </div>

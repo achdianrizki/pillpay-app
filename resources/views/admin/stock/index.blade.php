@@ -95,16 +95,12 @@
                                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Edit</a>
                                                 <a href="{{ route('admin.stock.show', $item->id) }}"
                                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Show</a>
-                                                <form action="{{ route('admin.purchase.destroy', $item->id) }}"
-                                                    method="POST"
-                                                    onsubmit="return confirm('Yakin ingin menghapus kategori ini?');">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit"
-                                                        class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100">
-                                                        Hapus
-                                                    </button>
-                                                </form>
+                                                <button type="button"
+                                                    @click="$dispatch('open-modal', { url: '{{ route('admin.purchase.destroy', $item->id) }}' })"
+                                                    class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100">
+                                                    Hapus
+                                                </button>
+
                                             </div>
                                         </div>
                                     </td>
@@ -120,6 +116,8 @@
                     </table>
                 </div>
                 <!-- ====== Table Six End -->
+                <x-modal-delete />
+
             </div>
         </div>
     </div>
