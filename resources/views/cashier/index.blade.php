@@ -406,35 +406,55 @@
                             const kembalian = uang - total;
                             const metode = $('#metode-pembayaran').val();
 
-                            // 3. Generate PDF menggunakan jsPDF
-                            const doc = new jsPDF();
-
-                            let y = 10;
-                            doc.setFontSize(14);
-                            doc.text("Struk Pembayaran", 80, y);
-                            y += 10;
-
-                            doc.setFontSize(10);
-                            items.forEach(item => {
-                                doc.text(
-                                    `${item.nama} x ${item.jumlah} = Rp ${(item.harga * item.jumlah).toLocaleString('id-ID')}`,
-                                    10, y);
-                                y += 6;
+                            const doc = new jsPDF({
+                                unit: 'mm',
+                                format: [80, 200],
                             });
 
-                            y += 4;
-                            doc.text(`Total: Rp ${total.toLocaleString('id-ID')}`, 10, y);
-                            y += 6;
-                            doc.text(`Uang Diberikan: Rp ${uang.toLocaleString('id-ID')}`, 10, y);
-                            y += 6;
-                            doc.text(`Kembalian: Rp ${kembalian.toLocaleString('id-ID')}`, 10, y);
-                            y += 6;
-                            doc.text(`Metode: ${metode}`, 10, y);
+                            let y = 5;
+                            doc.setFont('courier', 'normal');
+                            doc.setFontSize(10);
 
-                            // 4. Buat blob URL dan tampilkan di modal
+                            doc.text("PILL PAY", 20, y);
+                            y += 5;
+                            doc.text("Jl. Contoh No. 123", 20, y);
+                            y += 5;
+                            doc.text("------------------------------", 5, y);
+                            y += 5;
+
+                            items.forEach(item => {
+                                const line =
+                                    `${item.nama.substring(0, 15)} x${item.jumlah} @${item.harga.toLocaleString('id-ID')}`;
+                                const line2 =
+                                    `Rp ${(item.harga * item.jumlah).toLocaleString('id-ID')}`;
+                                doc.text(line, 5, y);
+                                y += 4;
+                                doc.text(line2, 5, y);
+                                y += 5;
+                            });
+
+                            doc.text("------------------------------", 5, y);
+                            y += 5;
+
+                            doc.text(`Total        : Rp ${total.toLocaleString('id-ID')}`, 5, y);
+                            y += 5;
+                            doc.text(`Uang Diberikan : Rp ${uang.toLocaleString('id-ID')}`, 5, y);
+                            y += 5;
+                            doc.text(`Kembalian     : Rp ${kembalian.toLocaleString('id-ID')}`, 5,
+                                y);
+                            y += 5;
+                            doc.text(`Metode Bayar  : ${metode}`, 5, y);
+                            y += 7;
+
+                            doc.text("Terima Kasih!", 20, y);
+                            y += 5;
+                            doc.text("------------------------------", 5, y);
+
+                            // Generate preview
                             const pdfBlob = doc.output('blob');
                             const pdfUrl = URL.createObjectURL(pdfBlob);
                             $('#pdf-preview').attr('src', pdfUrl);
+
 
                             // 5. Simpan untuk download
                             $('#download-struk').off('click').on('click', function() {
